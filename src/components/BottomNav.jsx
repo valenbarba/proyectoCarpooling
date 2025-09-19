@@ -1,5 +1,5 @@
 import { NavLink } from "react-router-dom";
-import { FaHome, FaBell, FaCar, FaPlus } from "react-icons/fa";
+import { FaHome, FaCar, FaPlus } from "react-icons/fa";
 import "./BottomNav.css"; // o usá Tailwind si preferís
 
 function BottomNav() {
