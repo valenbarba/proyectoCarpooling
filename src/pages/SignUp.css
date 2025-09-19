@@ -11,17 +11,13 @@
   border-radius: 8px;
 }
 
-.label-signup{
-
-width: 299px;
-height: 22px;
-
-font-family: 'Roboto';
-font-style: normal;
-font-weight: 400;
-font-size: 16px;
-line-height: 140%;
-color: #FF5841;
+.label-signup {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 140%;
+  color: #FF5841;
 }
 
 .mensajeExito {
