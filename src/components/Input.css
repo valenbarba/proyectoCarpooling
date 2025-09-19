@@ -4,7 +4,10 @@
 
 .input-label {
   display: block;
+  width: 100%;
   margin-bottom: 4px;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }
 
 .input-field {
