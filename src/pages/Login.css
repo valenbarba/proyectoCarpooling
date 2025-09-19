@@ -5,9 +5,9 @@
 }
 
 .divSecundario {
-  max-width: 300px;
+  width: min(100% - 2rem, 360px);
   margin: 0 auto;
-  padding: 2rem;
+  padding: clamp(1.25rem, 5vw, 2rem);
   border-radius: 8px;
 }
 

@@ -1,7 +1,7 @@
 .form-container {
-  max-width: 320px;
+  width: min(100% - 2rem, 360px);
   margin: 20px auto auto;
-  padding: 1.5rem 2rem; /* padding vertical y horizontal igual */
+  padding: clamp(1rem, 4vw, 1.5rem) clamp(1.25rem, 5vw, 2rem);
   border: 1px solid #ddd;
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
