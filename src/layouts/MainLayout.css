@@ -1,0 +1,30 @@
+
+.main-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Toda la altura de la pantalla */
+  overflow: hidden;
+}
+
+.layout-header-wrapper {
+  flex-shrink: 0; /* Header no colapsa */
+}
+
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding-bottom: 6rem; /* espacio por si BottomNav se superpone */
+  background-color: #f9f9f9;
+}
+
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: white;
+  border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px 0;
+  z-index: 1000;
+}

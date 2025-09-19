@@ -1,0 +1,59 @@
+/* src/styles/HeaderInicio.css */
+
+.header-inicio {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.4rem 0.8rem;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.header-iconos {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.header-notificacion-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+
+.header-notificacion-icon {
+  font-size: 24px;
+  color: #FF5841; 
+}
+
+.header-notificacion-icon.activo {
+  color: #C53678; 
+}
+
+.header-titulo {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #272626;
+}
+
+.header-avatar-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.header-avatar-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+  object-fit: cover;
+}
+
+.header-chevron {
+  font-size: 0.75rem;
+  color: #6b7280; /* gris neutro */
+}

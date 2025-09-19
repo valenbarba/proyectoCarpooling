@@ -1,0 +1,28 @@
+.login-title {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  
+}
+
+.divSecundario {
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+
+
+.label-login{
+
+width: 299px;
+height: 22px;
+
+font-family: 'Roboto';
+font-style: normal;
+font-weight: 400;
+font-size: 16px;
+line-height: 140%;
+color: #7F0168;
+
+}

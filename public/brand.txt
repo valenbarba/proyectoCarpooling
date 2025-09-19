@@ -1,0 +1,9 @@
+Colores utilizados: 
+
+    blanco (#FFFFFF)
+    naranja ocaso (#FF5841)
+    rojo-violeta (#C53678)
+
+Fuentes:
+    Títulos: poppins, roboto
+    Textos: sans-serif

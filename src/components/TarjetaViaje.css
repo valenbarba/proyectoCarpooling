@@ -1,0 +1,60 @@
+.tarjeta-trayecto {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f0fa;
+  border-radius: 12px;
+  padding: 12px 16px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+}
+
+.trayecto-izq {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.avatar-trayecto {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: #f4e2ea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: #C53678;
+}
+
+.trayecto-textos {
+  display: flex;
+  flex-direction: column;
+}
+
+.trayecto-titulo {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.trayecto-detalle {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.trayecto-acciones {
+  display: flex;
+  gap: 8px;
+}
+
+.icono-btn {
+  border: none;
+  background: transparent;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.icono-primario {
+  color: #C53678;
+  font-weight: bold;
+}

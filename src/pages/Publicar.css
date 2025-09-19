@@ -1,0 +1,40 @@
+.form-publicar {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.radio-viaje {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.radio-viaje label {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+
+.campo-direccion {
+  margin-top: 1rem;
+}
+
+.campo-fecha-hora {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+@media (min-width: 600px) {
+  .campo-fecha-hora {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+input[type="radio"] {
+  accent-color: #C53678;
+}

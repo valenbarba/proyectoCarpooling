@@ -1,0 +1,22 @@
+.input-group {
+  margin-bottom: 0.50rem;
+}
+
+.input-label {
+  display: block;
+  margin-bottom: 4px;
+}
+
+.input-field {
+  padding: 0.5rem;
+  width: 100%;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 1px;
+  
+}
+
+.input-field:focus {
+  border-color: #FF5841;
+}
+

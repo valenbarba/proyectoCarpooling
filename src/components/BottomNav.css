@@ -1,0 +1,29 @@
+.bottom-nav {
+  position: sticky;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  background: rgb(240, 233, 233);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 1px solid #ddd;
+  z-index: 1000;
+}
+
+.nav-item {
+  text-decoration: none;
+  color: #FF5841;
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.nav-item svg {
+  font-size: 30px;
+}
+
+.nav-item.active {
+  color: #C53678; /* color activo */
+}
