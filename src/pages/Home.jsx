@@ -6,7 +6,6 @@ import Button from "../components/Button";
 import TarjetaViaje from "../components/TarjetaViaje";
 
 function Home() {
-  
   let usuario = null;
   const usuarioGuardado = localStorage.getItem("usuario");
   if (usuarioGuardado) {
@@ -19,7 +18,7 @@ function Home() {
   }
 
   // === nuevo estado UI Home ===
-const nombreBarrio = usuario?.barrio?.nombre || "Mi barrio";
+  const nombreBarrio = usuario?.barrio?.nombre || "Mi barrio";
   const [modoViaje, setModoViaje] = useState("hacia"); // "hacia" | "desde"
   const [lugar, setLugar] = useState(null); // Google Place
 
@@ -38,18 +37,41 @@ const nombreBarrio = usuario?.barrio?.nombre || "Mi barrio";
     setMostrarTrayectos(true);
   };
 
-  return (
-    
-      <FormContainer>
+  const trayectosEjemplo = [
+    {
+      id: 1,
+      nombre: "Martín",
+      sigla: "M",
+      destino: "Plaza Italia",
+      fecha: "25 de abr. 14:00",
+      precio: "$2000 / asiento",
+    },
+    {
+      id: 2,
+      nombre: "Ana",
+      sigla: "A",
+      destino: "USAL Pilar",
+      fecha: "Lunes a Viernes · 08:00",
+      precio: "$1800 / asiento",
+    },
+    {
+      id: 3,
+      nombre: "Valentina",
+      sigla: "V",
+      destino: "Escobar centro",
+      fecha: "Martes · 16:00",
+      precio: "$1500 / asiento",
+    },
+  ];
 
+  return (
+    <FormContainer>
       <LoadScript
         googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         libraries={["places"]}
       >
-
-      <form onSubmit={handleSubmit} className="form-buscar">
-
-        {/* Buscador de direcciones*/}
+        <form onSubmit={handleSubmit} className="form-buscar">
+          {/* Buscador de direcciones*/}
           <div className="campo-direccion">
             {modoViaje === "hacia" ? (
               <AutocompleteInput
@@ -68,62 +90,54 @@ const nombreBarrio = usuario?.barrio?.nombre || "Mi barrio";
             )}
           </div>
 
-        {/* Contenedor con las mismas clases que en Publicar.jsx */}
-        <div className="input-group" style={{ marginTop: 8 }}>
-          {/* Selector de dirección (reutiliza .radio-viaje) */}
-          <div className="radio-viaje">
-            <label>
-              <input
-                type="radio"
-                value="hacia"
-                checked={modoViaje === "hacia"}
-                onChange={() => setModoViaje("hacia")}
-              />
-              Viajo hacia {nombreBarrio}
-            </label>
-            <label>
-              <input
-                type="radio"
-                value="desde"
-                checked={modoViaje === "desde"}
-                onChange={() => setModoViaje("desde")}
-              />
-              Viajo desde {nombreBarrio}
-            </label>
+          {/* Contenedor con las mismas clases que en Publicar.jsx */}
+          <div className="input-group" style={{ marginTop: 8 }}>
+            {/* Selector de dirección (reutiliza .radio-viaje) */}
+            <div className="radio-viaje">
+              <label>
+                <input
+                  type="radio"
+                  value="hacia"
+                  checked={modoViaje === "hacia"}
+                  onChange={() => setModoViaje("hacia")}
+                />
+                Viajo hacia {nombreBarrio}
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  value="desde"
+                  checked={modoViaje === "desde"}
+                  onChange={() => setModoViaje("desde")}
+                />
+                Viajo desde {nombreBarrio}
+              </label>
+            </div>
           </div>
-          
-        </div>
 
-        <Button type="submit" className="botonPrimario">Buscar</Button>
-      
-      </form>
-
+          <Button type="submit" className="botonPrimario">Buscar</Button>
+        </form>
       </LoadScript>
 
       {mostrarTrayectos && (
         <section ref={resultadosRef} className="seccion-trayectos">
           <h3 className="seccion-titulo">Trayectos disponibles</h3>
 
-          {[
-            { id: 1, sigla: "A", titulo: "USAL Pilar", detalle: "Lunes a Viernes 8:00 hrs" },
-            { id: 2, sigla: "V", titulo: "Escobar centro", detalle: "Martes 16:00 hrs" },
-            { id: 3, sigla: "F", titulo: "Plaza Italia", detalle: "Lunes y Miércoles 8:00 hrs" },
-          ].map((t) => (
+          {trayectosEjemplo.map((t) => (
             <TarjetaViaje
               key={t.id}
               sigla={t.sigla}
-              titulo={t.titulo}
-              detalle={t.detalle}
-              onAgregar={() => console.log("Agregar", t)}
-              onOpciones={() => console.log("Opciones de", t)}
+              nombre={t.nombre}
+              destino={t.destino}
+              fecha={t.fecha}
+              precio={t.precio}
+              onSumarse={() => console.log("Sumarse", t)}
+              onVerMas={() => console.log("Ver más de", t)}
             />
           ))}
         </section>
-        )}
-
-      </FormContainer>
-
-      
+      )}
+    </FormContainer>
   );
 }
 

@@ -1,60 +1,125 @@
-.tarjeta-trayecto {
+.tarjeta-viaje {
+  background: #ffffff;
+  border-radius: 16px;
+  padding: 20px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: #f7f0fa;
-  border-radius: 12px;
-  padding: 12px 16px;
-  margin-bottom: 12px;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.08);
+  flex-direction: column;
+  gap: 18px;
+  box-shadow: 0 12px 30px rgba(31, 24, 54, 0.08);
+  border: 1px solid rgba(197, 54, 120, 0.08);
 }
 
-.trayecto-izq {
+.tarjeta-viaje__contenido {
+  display: flex;
+  gap: 16px;
+}
+
+.tarjeta-viaje__avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #f1e4fb, #f9d9eb);
+  color: #a12a63;
+  font-weight: 600;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.tarjeta-viaje__texto {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.tarjeta-viaje__nombre {
+  font-weight: 600;
+  font-size: 1rem;
+  color: #1f1f1f;
+}
+
+.tarjeta-viaje__fila-principal {
   display: flex;
   align-items: center;
   gap: 12px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
-.avatar-trayecto {
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: #f4e2ea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  color: #C53678;
-}
-
-.trayecto-textos {
-  display: flex;
-  flex-direction: column;
-}
-
-.trayecto-titulo {
+.tarjeta-viaje__destino {
+  font-size: 1.05rem;
   font-weight: 600;
-  font-size: 0.95rem;
+  color: #27272a;
 }
 
-.trayecto-detalle {
-  font-size: 0.85rem;
-  color: #555;
+.tarjeta-viaje__precio {
+  background: rgba(197, 54, 120, 0.12);
+  color: #a12a63;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 0.9rem;
+  white-space: nowrap;
 }
 
-.trayecto-acciones {
+.tarjeta-viaje__fecha {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.tarjeta-viaje__acciones {
   display: flex;
-  gap: 8px;
+  gap: 12px;
+  flex-wrap: wrap;
 }
 
-.icono-btn {
-  border: none;
-  background: transparent;
-  font-size: 1.2rem;
+.tarjeta-viaje__btn {
+  flex: 1 1 140px;
+  border-radius: 999px;
+  border: 2px solid transparent;
+  padding: 10px 18px;
+  font-weight: 600;
   cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,
+    color 0.2s ease;
 }
 
-.icono-primario {
-  color: #C53678;
-  font-weight: bold;
+.tarjeta-viaje__btn--primario {
+  background-color: #c53678;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(197, 54, 120, 0.25);
+}
+
+.tarjeta-viaje__btn--primario:hover {
+  background-color: #a12a63;
+  transform: translateY(-1px);
+}
+
+.tarjeta-viaje__btn--secundario {
+  background-color: #ffffff;
+  color: #c53678;
+  border-color: rgba(197, 54, 120, 0.4);
+}
+
+.tarjeta-viaje__btn--secundario:hover {
+  background-color: rgba(197, 54, 120, 0.08);
+  transform: translateY(-1px);
+}
+
+@media (max-width: 480px) {
+  .tarjeta-viaje {
+    padding: 16px;
+  }
+
+  .tarjeta-viaje__precio {
+    width: 100%;
+    text-align: center;
+  }
+
+  .tarjeta-viaje__btn {
+    flex: 1 1 100%;
+  }
 }

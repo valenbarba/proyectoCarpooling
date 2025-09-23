@@ -1,36 +1,60 @@
 // src/components/TarjetaViaje.jsx
 import "./TarjetaViaje.css";
 
-function TarjetaViaje({ sigla, titulo, detalle, onAgregar, onOpciones }) {
+function TarjetaViaje({
+  sigla,
+  nombre,
+  destino,
+  fecha,
+  precio,
+  onSumarse,
+  onVerMas,
+  titulo,
+  detalle,
+  onAgregar,
+  onOpciones,
+}) {
+  const inicial = (sigla || nombre?.[0] || titulo?.[0] || destino?.[0] || "?").toUpperCase();
+  const nombreMostrar = nombre || titulo || destino || "Conductor";
+  const destinoMostrar = destino || titulo || nombre || "Punto de encuentro";
+  const fechaMostrar = fecha || detalle || "";
+  const precioMostrar = precio || "Consultar";
+  const handleSumarse = onSumarse || onAgregar;
+  const handleVerMas = onVerMas || onOpciones;
+
   return (
-    <div className="tarjeta-trayecto">
-      <div className="trayecto-izq">
-        <div className="avatar-trayecto">{sigla}</div>
-        <div className="trayecto-textos">
-          <div className="trayecto-titulo">{titulo}</div>
-          <div className="trayecto-detalle">{detalle}</div>
+    <article className="tarjeta-viaje">
+      <div className="tarjeta-viaje__contenido">
+        <div className="tarjeta-viaje__avatar" aria-hidden="true">
+          {inicial}
+        </div>
+        <div className="tarjeta-viaje__texto">
+          <span className="tarjeta-viaje__nombre">{nombreMostrar}</span>
+          <div className="tarjeta-viaje__fila-principal">
+            <span className="tarjeta-viaje__destino">{destinoMostrar}</span>
+            <span className="tarjeta-viaje__precio">{precioMostrar}</span>
+          </div>
+          {fechaMostrar && <span className="tarjeta-viaje__fecha">{fechaMostrar}</span>}
         </div>
       </div>
 
-      <div className="trayecto-acciones">
+      <div className="tarjeta-viaje__acciones">
         <button
           type="button"
-          className="icono-btn"
-          aria-label="Más opciones"
-          onClick={onOpciones}
+          className="tarjeta-viaje__btn tarjeta-viaje__btn--primario"
+          onClick={() => handleSumarse?.()}
         >
-          ⋮
+          Sumarse
         </button>
         <button
           type="button"
-          className="icono-btn icono-primario"
-          aria-label="Agregar trayecto"
-          onClick={onAgregar}
+          className="tarjeta-viaje__btn tarjeta-viaje__btn--secundario"
+          onClick={() => handleVerMas?.()}
         >
-          +
+          Ver más
         </button>
       </div>
-    </div>
+    </article>
   );
 }
 
