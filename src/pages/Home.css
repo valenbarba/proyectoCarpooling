@@ -3,6 +3,8 @@
   flex-direction: column;
   gap: 0.75rem;
   margin-bottom: 1.5rem;
+  background-color: #f9f8f8;
+  border-radius: 8px;
 }
 
 .buscador-resumen {
@@ -19,8 +21,7 @@
 
 .buscador-resumen:focus-within,
 .buscador-resumen--abierto {
-  border-color: #c53678;
-  box-shadow: 0 0 0 3px rgba(197, 54, 120, 0.15);
+  box-shadow: 0 0 0 3px rgba(217, 213, 215, 0.15);
   outline: none;
 }
 

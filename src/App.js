@@ -18,7 +18,7 @@ function AppRoutes() {
       <Route path="/login" element={<Login />} />
 
       {/* Redirección por defecto cuando la ruta base no coincide con ninguna pantalla */}
-      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/" element={<Navigate to="/home" />} />
 
       {/* Ruta para el formulario de registro */}
       <Route path="/registro" element={<SignUp />} />
