@@ -14,7 +14,7 @@ function Publicar() {
 
   const usuario = JSON.parse(localStorage.getItem("usuario"));
   const lugarBarrioUsuario = usuario.barrio?.lugar;
-  const nombreBarrio = usuario.barrio?.nombre;
+  const nombreBarrio = "Haras Santa María";
 
 
   //maneja el estado del formulario "hacia barrio o desde el barrio"
@@ -199,7 +199,7 @@ function Publicar() {
           </div>
 
         <div className="campo-fecha-hora">
-            <SelectAsientos value={asientos} onChange={(e) => setAsientos(e.target.value)} />
+        <SelectAsientos value={asientos} onChange={(e) => setAsientos(e.target.value)} />
         
         <Input
             type="number"

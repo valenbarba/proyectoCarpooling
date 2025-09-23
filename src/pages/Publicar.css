@@ -1,7 +1,7 @@
-.form-publicar {
+.form-publicar{
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 20px;
 }
 
 .radio-viaje {
@@ -27,6 +27,7 @@
   flex-direction: column;
   gap: 1rem;
 }
+
 
 @media (min-width: 600px) {
   .campo-fecha-hora {

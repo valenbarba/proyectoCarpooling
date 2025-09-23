@@ -20,7 +20,7 @@ function Home() {
   }
 
   // === nuevo estado UI Home ===
-  const nombreBarrio = usuario?.barrio?.nombre || "Mi barrio";
+  const nombreBarrio = "Haras Santa Maria";
   const [modoViaje, setModoViaje] = useState("desde"); // "hacia" | "desde"
   const [lugar, setLugar] = useState(null); // Google Place
   const [buscadorExpandido, setBuscadorExpandido] = useState(false);
@@ -74,6 +74,9 @@ function Home() {
 
   return (
     <FormContainer>
+
+       <h2 className="seccion-titulo">Viajes Disponibles</h2>
+
       <LoadScript
         googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         libraries={["places"]}
@@ -152,10 +155,8 @@ function Home() {
         </form>
       </LoadScript>
 
-      
         <section ref={resultadosRef} className="seccion-trayectos">
-          <h3 className="seccion-titulo">Trayectos disponibles</h3>
-
+         
           {trayectosEjemplo.map((t) => (
             <TarjetaViaje
               key={t.id}
