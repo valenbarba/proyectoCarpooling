@@ -106,7 +106,8 @@ input[type="radio"] {
 }
 
 .radio-viaje label {
-  font-weight: 500;
+  font-weight: 300;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;

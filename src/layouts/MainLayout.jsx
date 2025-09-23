@@ -13,7 +13,7 @@ const MainLayout = () => {
 
   //diccionario que asocia rutas a titulos
   const titulosPorRuta = {
-    "/home": "Inicio",
+    "/home": "Viajes",
     "/mis-viajes": "Mis viajes",
     "/publicar": "Publicar Viaje",
     "/notificaciones": "Notificaciones"

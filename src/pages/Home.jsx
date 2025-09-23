@@ -21,7 +21,7 @@ function Home() {
 
   // === nuevo estado UI Home ===
   const nombreBarrio = usuario?.barrio?.nombre || "Mi barrio";
-  const [modoViaje, setModoViaje] = useState("hacia"); // "hacia" | "desde"
+  const [modoViaje, setModoViaje] = useState("desde"); // "hacia" | "desde"
   const [lugar, setLugar] = useState(null); // Google Place
   const [buscadorExpandido, setBuscadorExpandido] = useState(false);
 
@@ -87,7 +87,7 @@ function Home() {
             >
               <FaSearch className="buscador-resumen__icono" aria-hidden="true" />
               <AutocompleteInput
-                label={modoViaje === "hacia" ? "Desde" : "Hacia"}
+                label={modoViaje === "hacia" ? "Buscar un origen" : "Buscar un destino"}
                 placeholder={
                   modoViaje === "hacia"
                     ? "Ingrese dirección de origen"
@@ -150,7 +150,7 @@ function Home() {
         </form>
       </LoadScript>
 
-      {mostrarTrayectos && (
+      
         <section ref={resultadosRef} className="seccion-trayectos">
           <h3 className="seccion-titulo">Trayectos disponibles</h3>
 
@@ -167,7 +167,7 @@ function Home() {
             />
           ))}
         </section>
-      )}
+     
     </FormContainer>
   );
 }
