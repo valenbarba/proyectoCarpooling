@@ -39,19 +39,21 @@ function TarjetaViaje({
       </div>
 
       <div className="tarjeta-viaje__acciones">
-        <button
-          type="button"
-          className="tarjeta-viaje__btn tarjeta-viaje__btn--primario"
-          onClick={() => handleSumarse?.()}
-        >
-          Sumarse
-        </button>
+        
         <button
           type="button"
           className="tarjeta-viaje__btn tarjeta-viaje__btn--secundario"
           onClick={() => handleVerMas?.()}
         >
           Ver más
+        </button>
+
+        <button
+          type="button"
+          className="tarjeta-viaje__btn tarjeta-viaje__btn--primario"
+          onClick={() => handleSumarse?.()}
+        >
+          Sumarse
         </button>
       </div>
     </article>

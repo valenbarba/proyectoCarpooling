@@ -27,6 +27,7 @@ function Publicar() {
   const [fecha, setFecha] = useState("");
   const [hora, setHora] = useState("");
   const [asientos, setAsientos] = useState("");
+  const [precioPorAsiento, setPrecio] = useState("");
 
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
@@ -197,9 +198,19 @@ function Publicar() {
             )}
           </div>
 
-            
-        <SelectAsientos value={asientos} onChange={(e) => setAsientos(e.target.value)} />
-
+        <div className="campo-fecha-hora">
+            <SelectAsientos value={asientos} onChange={(e) => setAsientos(e.target.value)} />
+        
+        <Input
+            type="number"
+            label="Precio por asiento"
+            value={precioPorAsiento}
+            onChange={(e) => {setPrecio(e.target.value)
+              setError("");
+            }}
+          />
+        </div>
+        
 
         <div className="campo-fecha-hora">
           <Input
@@ -221,7 +232,11 @@ function Publicar() {
             }}
        
           />
+
+          
         </div>
+
+        
       </div>
        
 

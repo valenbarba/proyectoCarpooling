@@ -43,7 +43,7 @@ function Home() {
       nombre: "Martín",
       sigla: "M",
       destino: "Plaza Italia",
-      fecha: "25 de abr. 14:00",
+      fecha: "Martes 25 de octubre. 14:00",
       precio: "$2000 / asiento",
     },
     {
@@ -51,15 +51,15 @@ function Home() {
       nombre: "Ana",
       sigla: "A",
       destino: "USAL Pilar",
-      fecha: "Lunes a Viernes · 08:00",
-      precio: "$1800 / asiento",
+      fecha: "Lunes 7 de octubre · 08:00",
+      precio: "Sin tarifa",
     },
     {
       id: 3,
       nombre: "Valentina",
       sigla: "V",
       destino: "Escobar centro",
-      fecha: "Martes · 16:00",
+      fecha: "Sábado 30 de septiembre · 16:00",
       precio: "$1500 / asiento",
     },
   ];
