@@ -21,18 +21,24 @@ function Home() {
 
   // === nuevo estado UI Home ===
   const nombreBarrio = usuario?.barrio?.nombre || "Mi barrio";
-  const [modoViaje, setModoViaje] = useState("hacia"); // "hacia" | "desde"
+  const [modoViaje, setModoViaje] = useState("desde"); // "hacia" | "desde"
   const [lugar, setLugar] = useState(null); // Google Place
   const [buscadorExpandido, setBuscadorExpandido] = useState(false);
 
+  const [mostrarTrayectos, setMostrarTrayectos] = useState(false);
   const resultadosRef = useRef(null);
   const buscadorContentId = useId();
 
+  useEffect(() => {
+    if (mostrarTrayectos && resultadosRef.current) {
+      resultadosRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+  }, [mostrarTrayectos]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // activamos los trayectos de ejemplo
-    
+    setMostrarTrayectos(true);
   };
 
   const toggleBuscador = () => {
@@ -45,7 +51,7 @@ function Home() {
       nombre: "Martín",
       sigla: "M",
       destino: "Plaza Italia",
-      fecha: "Martes 25 de octubre. 14:00",
+      fecha: "25 de abr. 14:00",
       precio: "$2000 / asiento",
     },
     {
@@ -53,74 +59,66 @@ function Home() {
       nombre: "Ana",
       sigla: "A",
       destino: "USAL Pilar",
-      fecha: "Lunes 7 de octubre · 08:00",
-      precio: "Sin tarifa",
+      fecha: "Lunes a Viernes · 08:00",
+      precio: "$1800 / asiento",
     },
     {
       id: 3,
       nombre: "Valentina",
       sigla: "V",
       destino: "Escobar centro",
-      fecha: "Sábado 30 de septiembre · 16:00",
+      fecha: "Martes · 16:00",
       precio: "$1500 / asiento",
     },
   ];
 
   return (
     <FormContainer>
-      <div className="buscador-colapsable">
-        <button
-          type="button"
-          className="buscador-resumen"
-          onClick={toggleBuscador}
-          aria-expanded={buscadorExpandido}
-          aria-controls={buscadorContentId}
-        >
-          <FaSearch className="buscador-resumen__icono" aria-hidden="true" />
-          <span
-            className={`buscador-placeholder${
-              lugar ? " buscador-placeholder--activo" : ""
-            }`}
-          >
-            {lugar?.formatted_address || "Buscar trayectos"}
-          </span>
-          <FaChevronDown
-            className={`buscador-icon${
-              buscadorExpandido ? " buscador-icon--abierto" : ""
-            }`}
-            aria-hidden="true"
-          />
-        </button>
-
-        {buscadorExpandido && (
-          <div id={buscadorContentId} className="buscador-contenido">
-            <LoadScript
-              googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
-              libraries={["places"]}
+      <LoadScript
+        googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
+        libraries={["places"]}
+      >
+        <form onSubmit={handleSubmit} className="form-buscar">
+          <div className="buscador-colapsable">
+            <div
+              className={`buscador-resumen${
+                buscadorExpandido ? " buscador-resumen--abierto" : ""
+              }`}
             >
-              <form onSubmit={handleSubmit} className="form-buscar">
-                {/* Buscador de direcciones*/}
-                <div className="campo-direccion">
-                  {modoViaje === "hacia" ? (
-                    <AutocompleteInput
-                      label="Desde"
-                      placeholder="Ingrese dirección de origen"
-                      value={lugar?.formatted_address || ""}
-                      onPlaceSelected={(place) => setLugar(place)}
-                    />
-                  ) : (
-                    <AutocompleteInput
-                      label="Hacia"
-                      placeholder="Ingrese dirección de destino"
-                      value={lugar?.formatted_address || ""}
-                      onPlaceSelected={(place) => setLugar(place)}
-                    />
-                  )}
-                </div>
+              <FaSearch className="buscador-resumen__icono" aria-hidden="true" />
+              <AutocompleteInput
+                label={modoViaje === "hacia" ? "Buscar un origen" : "Buscar un destino"}
+                placeholder={
+                  modoViaje === "hacia"
+                    ? "Ingrese dirección de origen"
+                    : "Ingrese dirección de destino"
+                }
+                value={lugar?.formatted_address || ""}
+                onPlaceSelected={(place) => setLugar(place)}
+                containerClassName="buscador-resumen__input-group"
+                inputClassName="buscador-resumen__input"
+                inputProps={{ onFocus: () => setBuscadorExpandido(true) }}
+              />
+              <button
+                type="button"
+                className="buscador-toggle"
+                onClick={toggleBuscador}
+                aria-expanded={buscadorExpandido}
+                aria-controls={buscadorContentId}
+                aria-label="Mostrar opciones del buscador"
+              >
+                <FaChevronDown
+                  className={`buscador-icon${
+                    buscadorExpandido ? " buscador-icon--abierto" : ""
+                  }`}
+                  aria-hidden="true"
+                />
+              </button>
+            </div>
 
-                {/* Contenedor con las mismas clases que en Publicar.jsx */}
+            {buscadorExpandido && (
+              <div id={buscadorContentId} className="buscador-contenido">
                 <div className="input-group" style={{ marginTop: 8 }}>
-                  {/* Selector de dirección (reutiliza .radio-viaje) */}
                   <div className="radio-viaje">
                     <label>
                       <input
@@ -146,13 +144,13 @@ function Home() {
                 <Button type="submit" className="botonPrimario">
                   Buscar
                 </Button>
-              </form>
-            </LoadScript>
+              </div>
+            )}
           </div>
-        )}
-      </div>
+        </form>
+      </LoadScript>
 
-     
+      
         <section ref={resultadosRef} className="seccion-trayectos">
           <h3 className="seccion-titulo">Trayectos disponibles</h3>
 
@@ -169,7 +167,7 @@ function Home() {
             />
           ))}
         </section>
-      
+     
     </FormContainer>
   );
 }

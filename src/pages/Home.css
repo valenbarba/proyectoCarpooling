@@ -14,15 +14,11 @@
   border: 1px solid #ddd;
   border-radius: 12px;
   background-color: #fff;
-  cursor: pointer;
-  text-align: left;
-  font: inherit;
-  color: inherit;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.buscador-resumen:hover,
-.buscador-resumen:focus-visible {
+.buscador-resumen:focus-within,
+.buscador-resumen--abierto {
   border-color: #c53678;
   box-shadow: 0 0 0 3px rgba(197, 54, 120, 0.15);
   outline: none;
@@ -32,18 +28,6 @@
   color: #c53678;
   font-size: 1rem;
   flex-shrink: 0;
-}
-
-.buscador-placeholder {
-  flex: 1;
-  color: #8c8c8c;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.buscador-placeholder--activo {
-  color: #1f1f1f;
 }
 
 .buscador-icon {
@@ -58,6 +42,36 @@
 
 .buscador-contenido {
   animation: fadeDown 0.2s ease;
+}
+
+.buscador-resumen__input-group {
+  flex: 1;
+  margin: 0;
+  min-width: 0;
+}
+
+.buscador-resumen__input {
+  border: none;
+  background-color: transparent;
+  padding: 0;
+  margin-bottom: 0;
+  box-shadow: none;
+}
+
+.buscador-toggle {
+  background: transparent;
+  border: none;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  cursor: pointer;
+}
+
+.buscador-toggle:focus-visible {
+  outline: 2px solid #c53678;
+  outline-offset: 2px;
 }
 
 @keyframes fadeDown {
@@ -92,7 +106,8 @@ input[type="radio"] {
 }
 
 .radio-viaje label {
-  font-weight: 500;
+  font-weight: 300;
+  font-size: 0.95rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
