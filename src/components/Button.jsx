@@ -2,10 +2,11 @@ import React from "react";
 import "./Button.css";
 
 /*
-  children: lo que va adentro del boton
-  type: submit o button
-  onclick funcion a ejecutar al hacer click (luego se define)
-  
+ * Botón reutilizable que centraliza estilos y comportamientos comunes.
+ * - children: contenido a renderizar dentro del botón (texto o iconos).
+ * - onClick: función a ejecutar cuando se presiona.
+ * - type: tipo de botón HTML (por defecto "button").
+ * - rest: permite inyectar atributos adicionales como className o disabled.
  */
 const Button = ({ children, onClick, type = "button", ...rest }) => {
   return (

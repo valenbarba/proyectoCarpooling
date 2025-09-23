@@ -2,8 +2,10 @@ import React, { useRef } from "react";
 import { Autocomplete } from "@react-google-maps/api";
 import "./Input.css";
 
-//onPlaceSelected funcion que se llama cuando el usuario elije un lugar
-
+/*
+ * Campo de texto conectado al Autocomplete de Google Maps.
+ * El componente padre recibe el Place seleccionado mediante onPlaceSelected.
+ */
 const AutocompleteInput = ({
   value,
   onPlaceSelected,
@@ -15,9 +17,10 @@ const AutocompleteInput = ({
 }) => {
   const autocompleteRef = useRef(null);
 
-  // Se ejecuta cuando el usuario elige una sugerencia; getPlace devuelve el lugar seleccionado
+  // Se ejecuta cuando el usuario elige una sugerencia y notifica al padre
+  // con la información completa del lugar.
   const handlePlaceChanged = () => {
-    const place = autocompleteRef.current.getPlace();
+    const place = autocompleteRef.current?.getPlace();
     if (place && place.formatted_address) {
       onPlaceSelected(place);
     }
@@ -25,13 +28,13 @@ const AutocompleteInput = ({
 
   return (
     <div
-      className={`input-group${
-        containerClassName ? ` ${containerClassName}` : ""
-      }`}
+      className={`input-group${containerClassName ? ` ${containerClassName}` : ""}`}
     >
       {label && <label className="input-label">{label}</label>}
       <Autocomplete
-        onLoad={(autocomplete) => (autocompleteRef.current = autocomplete)}
+        onLoad={(autocomplete) => {
+          autocompleteRef.current = autocomplete;
+        }}
         onPlaceChanged={handlePlaceChanged}
       >
         <input

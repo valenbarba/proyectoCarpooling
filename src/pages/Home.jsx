@@ -8,21 +8,10 @@ import { FaSearch, FaChevronDown } from "react-icons/fa";
 import "./Home.css";
 
 function Home() {
-  let usuario = null;
-  const usuarioGuardado = localStorage.getItem("usuario");
-  if (usuarioGuardado) {
-    try {
-      usuario = JSON.parse(usuarioGuardado);
-    } catch (e) {
-      console.error("Error al parsear usuario:", e);
-      usuario = null;
-    }
-  }
-
-  // === nuevo estado UI Home ===
+  // === Estados para controlar el buscador de viajes ===
   const nombreBarrio = "Haras Santa Maria";
   const [modoViaje, setModoViaje] = useState("desde"); // "hacia" | "desde"
-  const [lugar, setLugar] = useState(null); // Google Place
+  const [lugar, setLugar] = useState(null); // Google Place seleccionado
   const [buscadorExpandido, setBuscadorExpandido] = useState(false);
 
   const [mostrarTrayectos, setMostrarTrayectos] = useState(false);
@@ -37,7 +26,7 @@ function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // activamos los trayectos de ejemplo
+    // Activa la visualización de los trayectos de ejemplo.
     setMostrarTrayectos(true);
   };
 
@@ -74,8 +63,7 @@ function Home() {
 
   return (
     <FormContainer>
-
-       <h2 className="seccion-titulo">Viajes Disponibles</h2>
+      <h2 className="seccion-titulo">Viajes Disponibles</h2>
 
       <LoadScript
         googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
@@ -123,7 +111,6 @@ function Home() {
               <div id={buscadorContentId} className="buscador-contenido">
                 <div className="input-group" style={{ marginTop: 8 }}>
                   <div className="radio-viaje">
-                    
                     <label>
                       <input
                         type="radio"
@@ -155,22 +142,20 @@ function Home() {
         </form>
       </LoadScript>
 
-        <section ref={resultadosRef} className="seccion-trayectos">
-         
-          {trayectosEjemplo.map((t) => (
-            <TarjetaViaje
-              key={t.id}
-              sigla={t.sigla}
-              nombre={t.nombre}
-              destino={t.destino}
-              fecha={t.fecha}
-              precio={t.precio}
-              onSumarse={() => console.log("Sumarse", t)}
-              onVerMas={() => console.log("Ver más de", t)}
-            />
-          ))}
-        </section>
-     
+      <section ref={resultadosRef} className="seccion-trayectos">
+        {trayectosEjemplo.map((t) => (
+          <TarjetaViaje
+            key={t.id}
+            sigla={t.sigla}
+            nombre={t.nombre}
+            destino={t.destino}
+            fecha={t.fecha}
+            precio={t.precio}
+            onSumarse={() => console.log("Sumarse", t)}
+            onVerMas={() => console.log("Ver más de", t)}
+          />
+        ))}
+      </section>
     </FormContainer>
   );
 }

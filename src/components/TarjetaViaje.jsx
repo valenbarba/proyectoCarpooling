@@ -1,6 +1,10 @@
-// src/components/TarjetaViaje.jsx
 import "./TarjetaViaje.css";
 
+/*
+ * Tarjeta reutilizable para listar viajes disponibles.
+ * Recibe múltiples props opcionales para adaptarse a diferentes fuentes de datos
+ * y expone callbacks para los botones de acción.
+ */
 function TarjetaViaje({
   sigla,
   nombre,
@@ -14,11 +18,14 @@ function TarjetaViaje({
   onAgregar,
   onOpciones,
 }) {
+  // Calculamos una inicial de respaldo para mostrar en el avatar cuando falte información.
   const inicial = (sigla || nombre?.[0] || titulo?.[0] || destino?.[0] || "?").toUpperCase();
   const nombreMostrar = nombre || titulo || destino || "Conductor";
   const destinoMostrar = destino || titulo || nombre || "Punto de encuentro";
   const fechaMostrar = fecha || detalle || "";
   const precioMostrar = precio || "Consultar";
+
+  // Se permiten nombres alternativos para los handlers para facilitar la reutilización.
   const handleSumarse = onSumarse || onAgregar;
   const handleVerMas = onVerMas || onOpciones;
 
@@ -39,7 +46,6 @@ function TarjetaViaje({
       </div>
 
       <div className="tarjeta-viaje__acciones">
-        
         <button
           type="button"
           className="tarjeta-viaje__btn tarjeta-viaje__btn--secundario"

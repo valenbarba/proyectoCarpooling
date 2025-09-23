@@ -1,13 +1,17 @@
 import { FaUsers } from "react-icons/fa";
-import "./SelectAsientos.css"; // agregamos estilos
+import "./SelectAsientos.css";
 
-
+/*
+ * Selector con ícono para elegir la cantidad de asientos disponibles en un viaje.
+ */
 const SelectAsientos = ({ value, onChange }) => {
   return (
     <div className="input-with-icon">
-      <label htmlFor="asientos" className="input-label">Asientos disponibles</label>
+      <label htmlFor="asientos" className="input-label">
+        Asientos disponibles
+      </label>
       <div className="select-wrapper">
-        <FaUsers className="input-icon" />
+        <FaUsers className="input-icon" aria-hidden="true" />
         <select
           id="asientos"
           name="asientos"
@@ -17,7 +21,9 @@ const SelectAsientos = ({ value, onChange }) => {
         >
           <option value="">Seleccionar</option>
           {[1, 2, 3, 4, 5].map((num) => (
-            <option key={num} value={num}>{num}</option>
+            <option key={num} value={num}>
+              {num}
+            </option>
           ))}
         </select>
       </div>

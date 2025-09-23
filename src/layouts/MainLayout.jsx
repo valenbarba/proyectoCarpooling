@@ -3,34 +3,31 @@ import HeaderInicio from "../components/HeaderInicio";
 import { Outlet, useLocation } from "react-router-dom";
 import BottomNav from "../components/BottomNav";
 import DropdownMenu from "../components/DropdownMenu";
-import "./MainLayout.css"
+import "./MainLayout.css";
 
+/*
+ * Layout principal que comparte encabezado y navegación inferior entre varias páginas.
+ * Se oculta automáticamente en pantallas públicas como login y registro.
+ */
 const MainLayout = () => {
-
-  //hook para ubicacion actual
   const location = useLocation();
   const [menuVisible, setMenuVisible] = useState(false);
 
-  //diccionario que asocia rutas a titulos
+  // Diccionario que asocia cada ruta con el título que debe mostrarse en el header.
   const titulosPorRuta = {
     "/home": "Carpooling HSM",
     "/mis-viajes": "Mis viajes",
     "/publicar": "Publicar Viaje",
-    "/notificaciones": "Notificaciones"
-    // podés seguir agregando rutas acá
+    "/notificaciones": "Notificaciones",
   };
 
-  //busca titulo en el diccionario segun la ruta
-  //si no existe, no pone nada
   const tituloHeader = titulosPorRuta[location.pathname] || "";
 
-  //funcion llamada al abrir menu lateral alternando entre abierto y cerrado
   const abrirMenuLateral = () => {
     setMenuVisible((prev) => !prev);
   };
 
-
-  //determina si hay que mostrar o no este layout segun la ruta
+  // Determina si corresponde mostrar el layout completo o una pantalla pública.
   const mostrarLayout =
     location.pathname !== "/login" && location.pathname !== "/registro";
 
@@ -38,10 +35,7 @@ const MainLayout = () => {
     <div className="main-layout">
       {mostrarLayout && (
         <div className="layout-header-wrapper">
-          <HeaderInicio
-            titulo={tituloHeader}
-            onAvatarClick={abrirMenuLateral}
-          />
+          <HeaderInicio titulo={tituloHeader} onAvatarClick={abrirMenuLateral} />
 
           {menuVisible && <DropdownMenu onClose={() => setMenuVisible(false)} />}
         </div>

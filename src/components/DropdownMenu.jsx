@@ -1,14 +1,17 @@
 import React, { useRef, useEffect } from "react";
 import "./DropdownMenu.css";
 
+/*
+ * Menú lateral que se muestra al presionar el avatar. Se cierra automáticamente
+ * cuando el usuario hace clic fuera del contenedor.
+ */
 const DropdownMenu = ({ onClose }) => {
   const menuRef = useRef(null);
 
-  // Cierra si se hace clic fuera
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
-        onClose(); // Llama al cierre desde el padre
+        onClose();
       }
     };
 

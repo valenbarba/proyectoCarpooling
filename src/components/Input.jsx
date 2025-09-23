@@ -1,21 +1,20 @@
 import React from "react";
-import "./Input.css"; // importamos la hoja de estilo de este componente
+import "./Input.css"; // Importamos la hoja de estilo compartida entre inputs y selects.
 
-// campo reutilizable para formulario 
 /*
-  label: etiqueta que aparece sobre el input
-  type: tipo
-  value: lo que hay dentro del input, lo trae el estado
-  name: para identificar el campo
-  onChange: funcion que actualiza el estado cuando se escribe
-  ...rest permite pasar otros atributos como required, minLength, etc.
-*/
-
-const Input = ({ label, type, value, onChange, name, labelClassName="", ...rest }) => {
+ * Campo de texto reutilizable para formularios.
+ * Recibe una etiqueta y todas las propiedades típicas de un <input> HTML, además
+ * de una clase opcional para personalizar el estilo de la etiqueta.
+ */
+const Input = ({ label, type, value, onChange, name, labelClassName = "", ...rest }) => {
   return (
     <div className="input-group">
-      <label className={`input-label ${labelClassName}`}>{label}</label>
+      {/* Etiqueta descriptiva que se muestra encima del campo */}
+      <label className={`input-label ${labelClassName}`.trim()} htmlFor={name}>
+        {label}
+      </label>
       <input
+        id={name}
         type={type}
         name={name}
         value={value}
