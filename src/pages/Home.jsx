@@ -25,20 +25,14 @@ function Home() {
   const [lugar, setLugar] = useState(null); // Google Place
   const [buscadorExpandido, setBuscadorExpandido] = useState(false);
 
-  const [mostrarTrayectos, setMostrarTrayectos] = useState(false);
   const resultadosRef = useRef(null);
   const buscadorContentId = useId();
 
-  useEffect(() => {
-    if (mostrarTrayectos && resultadosRef.current) {
-      resultadosRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [mostrarTrayectos]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     // activamos los trayectos de ejemplo
-    setMostrarTrayectos(true);
+    
   };
 
   const toggleBuscador = () => {
@@ -158,7 +152,7 @@ function Home() {
         )}
       </div>
 
-      {mostrarTrayectos && (
+     
         <section ref={resultadosRef} className="seccion-trayectos">
           <h3 className="seccion-titulo">Trayectos disponibles</h3>
 
@@ -175,7 +169,7 @@ function Home() {
             />
           ))}
         </section>
-      )}
+      
     </FormContainer>
   );
 }
