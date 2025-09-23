@@ -96,7 +96,7 @@
 .tarjeta-viaje__btn--primario {
   background-color: #C53678;
   color: #ffffff;
-  box-shadow: 0 8px 18px rgba(197, 54, 120, 0.25);
+  box-shadow: 0 0 5px rgba(197, 54, 120, 0.25);
 }
 
 .tarjeta-viaje__btn--primario:hover {

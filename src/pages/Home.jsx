@@ -133,7 +133,7 @@ function Home() {
                   </div>
                 </div>
 
-                <Button type="submit" className="botonPrimario">
+                <Button type="submit" className="botonBuscar">
                   Buscar
                 </Button>
               </div>
