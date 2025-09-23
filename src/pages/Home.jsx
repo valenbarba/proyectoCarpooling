@@ -87,7 +87,7 @@ function Home() {
             >
               <FaSearch className="buscador-resumen__icono" aria-hidden="true" />
               <AutocompleteInput
-                label={modoViaje === "hacia" ? "Buscar un origen" : "Buscar un destino"}
+                label="Buscar un Viaje"
                 placeholder={
                   modoViaje === "hacia"
                     ? "Ingrese dirección de origen"
@@ -120,15 +120,7 @@ function Home() {
               <div id={buscadorContentId} className="buscador-contenido">
                 <div className="input-group" style={{ marginTop: 8 }}>
                   <div className="radio-viaje">
-                    <label>
-                      <input
-                        type="radio"
-                        value="hacia"
-                        checked={modoViaje === "hacia"}
-                        onChange={() => setModoViaje("hacia")}
-                      />
-                      Viajo hacia {nombreBarrio}
-                    </label>
+                    
                     <label>
                       <input
                         type="radio"
@@ -137,6 +129,16 @@ function Home() {
                         onChange={() => setModoViaje("desde")}
                       />
                       Viajo desde {nombreBarrio}
+                    </label>
+
+                    <label>
+                      <input
+                        type="radio"
+                        value="hacia"
+                        checked={modoViaje === "hacia"}
+                        onChange={() => setModoViaje("hacia")}
+                      />
+                      Viajo hacia {nombreBarrio}
                     </label>
                   </div>
                 </div>
