@@ -209,7 +209,7 @@ function Publicar() {
               )}
             </div>
 
-            <div className="campo-fecha-hora">
+           
               <SelectAsientos value={asientos} onChange={(e) => setAsientos(e.target.value)} />
 
               <Input
@@ -223,7 +223,7 @@ function Publicar() {
                   setError("");
                 }}
               />
-            </div>
+            
 
             <div className="campo-fecha-hora">
               <Input

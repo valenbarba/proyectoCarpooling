@@ -17,23 +17,39 @@
   gap: 0.5rem;
 }
 
-
 .campo-direccion {
   margin-top: 1rem;
 }
 
 .campo-fecha-hora {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-columns: 1fr; /* móvil: apilado si querés */
   gap: 1rem;
+  width: 100%;
 }
 
+input[type="date"],
+input[type="time"] {
+  height: 35px;           /* alto cómodo táctil */
+  font-size: 14px;        /* evita zoom de iOS */
+  line-height: 44px;
+}
 
-@media (min-width: 600px) {
+@media (min-width: 360px) {
   .campo-fecha-hora {
-    flex-direction: row;
-    justify-content: space-between;
-  }
+    grid-template-columns: 1fr 1fr;
+    width: 95%;
+  } 
+}
+
+.campo-fecha-hora > * {
+  min-width: 0;
+}
+
+.campo-fecha-hora input,
+.campo-fecha-hora select {
+  width: 100%;
+  box-sizing: border-box;
 }
 
 input[type="radio"] {
