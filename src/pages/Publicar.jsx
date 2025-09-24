@@ -211,18 +211,6 @@ function Publicar() {
 
            
               <SelectAsientos value={asientos} onChange={(e) => setAsientos(e.target.value)} />
-
-              <Input
-                type="number"
-                label="Precio por asiento"
-                value={precioPorAsiento}
-                min="0"
-                step="100"
-                onChange={(e) => {
-                  setPrecio(e.target.value);
-                  setError("");
-                }}
-              />
             
 
             <div className="campo-fecha-hora">
