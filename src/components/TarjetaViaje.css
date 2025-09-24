@@ -36,7 +36,7 @@
 }
 
 .tarjeta-viaje__nombre {
-  font-weight: 600;
+  font-weight: 300;
   font-size: 0.9rem;
   color: #8e8c8c;
 }
@@ -74,6 +74,7 @@
 .tarjeta-viaje__fecha {
   font-size: 0.95rem;
   color: #6b7280;
+  font-weight: bold;
 }
 
 .tarjeta-viaje__acciones {

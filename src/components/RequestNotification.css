@@ -1,0 +1,39 @@
+.notificacion-card__acciones {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.notificacion-card__btn {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.notificacion-card__btn--reject {
+  background-color: #ffffff;
+  color: #c53678;
+  border-color: rgba(197, 54, 120, 0.4);
+}
+
+.notificacion-card__btn--reject:hover {
+  background-color: rgba(197, 54, 120, 0.08);
+  transform: translateY(-1px);
+}
+
+.notificacion-card__btn--accept {
+  background-color: #C53678;
+  color: #ffffff;
+  box-shadow: 0 0 5px rgba(197, 54, 120, 0.25);
+}
+
+.notificacion-card__btn--accept:hover {
+  background-color: #a12a63;
+  transform: translateY(-1px);
+}
