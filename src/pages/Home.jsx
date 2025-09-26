@@ -4,6 +4,7 @@ import { LoadScript } from "@react-google-maps/api";
 import FormContainer from "../components/FormContainer";
 import Button from "../components/Button";
 import TarjetaViaje from "../components/TarjetaViaje";
+import ModalViaje from "../components/ModalViaje";
 import { FaSearch, FaChevronDown } from "react-icons/fa";
 import "./Home.css";
 
@@ -13,6 +14,7 @@ function Home() {
   const [modoViaje, setModoViaje] = useState("desde"); // "hacia" | "desde"
   const [lugar, setLugar] = useState(null); // Google Place seleccionado
   const [buscadorExpandido, setBuscadorExpandido] = useState(false);
+  const [viajeSeleccionado, setViajeSeleccionado] = useState(null);
 
   const [mostrarTrayectos, setMostrarTrayectos] = useState(false);
   const resultadosRef = useRef(null);
@@ -42,6 +44,9 @@ function Home() {
       destino: "Plaza Italia",
       fecha: "25 de Octubre. 14:00",
       precio: "$2000 / asiento",
+      comentario: "Punto de encuentro en la entrada principal del barrio.",
+      rating: 4.8,
+      reviewsCount: 26,
     },
     {
       id: 2,
@@ -50,6 +55,9 @@ function Home() {
       destino: "USAL Pilar",
       fecha: "7 de Octubre. · 08:00",
       precio: "$1800 / asiento",
+      comentario: "Nos encontramos en el lote 1260 a las 8:15 en punto.",
+      rating: 4.6,
+      reviewsCount: 18,
     },
     {
       id: 3,
@@ -58,8 +66,19 @@ function Home() {
       destino: "Escobar centro",
       fecha: "10 de Octubre. 16:00",
       precio: "$1500 / asiento",
+      comentario: "Puedo pasar por la garita norte si les queda cómodo.",
+      rating: 5,
+      reviewsCount: 32,
     },
   ];
+
+  const abrirModalViaje = (trayecto) => {
+    setViajeSeleccionado(trayecto);
+  };
+
+  const cerrarModalViaje = () => {
+    setViajeSeleccionado(null);
+  };
 
   return (
     <FormContainer>
@@ -152,10 +171,17 @@ function Home() {
             fecha={t.fecha}
             precio={t.precio}
             onSumarse={() => console.log("Sumarse", t)}
-            onVerMas={() => console.log("Ver más de", t)}
+            onVerMas={() => abrirModalViaje(t)}
           />
         ))}
       </section>
+
+      <ModalViaje
+        isOpen={Boolean(viajeSeleccionado)}
+        viaje={viajeSeleccionado}
+        onClose={cerrarModalViaje}
+        onVerPerfil={() => console.log("Ver perfil de", viajeSeleccionado)}
+      />
     </FormContainer>
   );
 }
