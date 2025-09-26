@@ -14,52 +14,44 @@
   max-width: 680px;
 }
 
-.mis-viajes__titulo {
-  font-size: 1.75rem;
-  color: #2f2a2d;
-  font-weight: 600;
-  margin: 0;
-}
-
-.mis-viajes__descripcion {
-  margin: 0;
-  color: #6d6568;
-  font-size: 0.95rem;
-  line-height: 1.5;
-}
 
 .mis-viajes__tabs {
   display: inline-flex;
   align-self: flex-start;
   background-color: #ece7ec;
-  border-radius: 999px;
+  border-radius: 12px;
   padding: 0.25rem;
   gap: 0.25rem;
+  width: 100%;
 }
 
 .mis-viajes__tab {
   border: none;
   background: transparent;
   color: #6d6568;
-  font-weight: 500;
   padding: 0.5rem 1.25rem;
-  border-radius: 999px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
   cursor: pointer;
+  width: 50%;
   transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .mis-viajes__tab:hover,
 .mis-viajes__tab:focus-visible {
-  color: #2f2a2d;
+  color: rgb(222, 218, 220);
+  font-weight: bold;
+  font-size: 14px;
 }
 
 .mis-viajes__tab:focus-visible {
-  outline: 2px solid #c53678;
+  outline: 2px solid #C53678;
   outline-offset: 2px;
 }
 
 .mis-viajes__tab--activa {
-  background: linear-gradient(135deg, #c53678, #eb638b);
+  background-color: #C53678;
   color: #fff;
   box-shadow: 0 6px 16px rgba(197, 54, 120, 0.25);
 }
@@ -113,121 +105,6 @@
   font-size: 0.95rem;
 }
 
-.viaje-card {
-  background: #fff;
-  border-radius: 16px;
-  border: 1px solid #e4dee3;
-  padding: 1rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.85rem;
-  box-shadow: 0 10px 20px rgba(47, 42, 45, 0.04);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.viaje-card:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(47, 42, 45, 0.08);
-}
-
-.viaje-card--finalizado {
-  background: linear-gradient(180deg, rgba(247, 245, 247, 0.9), rgba(255, 255, 255, 0.95));
-  border-color: rgba(197, 54, 120, 0.2);
-}
-
-.viaje-card__header {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-}
-
-.viaje-card__avatar {
-  width: 42px;
-  height: 42px;
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(135deg, #c53678, #eb638b);
-  color: #fff;
-  font-weight: 600;
-  font-size: 1.1rem;
-}
-
-.viaje-card__encabezado {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.viaje-card__titulo {
-  margin: 0;
-  font-size: 1.1rem;
-  color: #2f2a2d;
-  font-weight: 600;
-}
-
-.viaje-card__meta {
-  margin: 0;
-  color: #857a80;
-  font-size: 0.85rem;
-  text-transform: capitalize;
-}
-
-.viaje-card__detalles {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  gap: 0.5rem;
-}
-
-.viaje-card__detalles li {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-
-.viaje-card__label {
-  font-size: 0.75rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #9b9096;
-  font-weight: 600;
-}
-
-.viaje-card__valor {
-  color: #443c41;
-  font-size: 0.95rem;
-  line-height: 1.4;
-}
-
-.viaje-card__nota {
-  border-left: 3px solid rgba(197, 54, 120, 0.3);
-  padding-left: 0.75rem;
-}
-
-.viaje-card__acciones {
-  display: flex;
-  justify-content: flex-end;
-}
-
-.viaje-card__boton {
-  background: linear-gradient(135deg, #c53678, #eb638b);
-  border: none;
-  border-radius: 999px;
-  padding: 0.45rem 1.25rem;
-  color: #fff;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.viaje-card__boton:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 10px 20px rgba(197, 54, 120, 0.25);
-}
-
 @media (max-width: 768px) {
   .mis-viajes {
     padding: 1rem;
@@ -241,9 +118,5 @@
   .mis-viajes__tab {
     flex: 1;
     text-align: center;
-  }
-
-  .viaje-card {
-    padding: 1rem;
   }
 }

@@ -1,5 +1,5 @@
 .form-container {
-  width: min(100% - 2rem, 360px);
+  width: min(100% - 2rem, 580px);
   margin: 20px auto auto;
   padding: clamp(1rem, 4vw, 1.5rem) clamp(1.25rem, 5vw, 2rem);
   border: 1px solid #ddd;

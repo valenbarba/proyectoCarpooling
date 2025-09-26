@@ -1,25 +1,6 @@
 import { useMemo, useState } from "react";
+import TarjetaMiViaje from "../components/TarjetaMiViaje";
 import "./MisViajes.css";
-
-const formatFecha = (fechaISO) => {
-  const fecha = new Date(fechaISO);
-  return new Intl.DateTimeFormat("es-AR", {
-    weekday: "short",
-    day: "numeric",
-    month: "long",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(fecha);
-};
-
-const obtenerIniciales = (texto) => {
-  if (!texto) return "?";
-  const partes = texto.trim().split(/\s+/);
-  if (partes.length === 1) {
-    return partes[0][0]?.toUpperCase() || "?";
-  }
-  return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
-};
 
 const agruparPorEstado = (viajes) => {
   const ahora = new Date();
@@ -35,77 +16,8 @@ const agruparPorEstado = (viajes) => {
   return { pendientes, finalizados };
 };
 
-const ViajeCard = ({ viaje, tipo, estado }) => {
-  const esPropio = tipo === "propio";
-  const avatarTexto = esPropio
-    ? viaje.destino?.[0] || viaje.puntoEncuentro?.[0] || "?"
-    : obtenerIniciales(viaje.conductor);
-
-  const accion = (() => {
-    if (estado !== "finalizado") return null;
-    if (esPropio) return "Puntuar pasajero";
-    return "Puntuar conductor";
-  })();
-
-  return (
-    <article
-      className={`viaje-card${estado === "finalizado" ? " viaje-card--finalizado" : ""}`}
-    >
-      <header className="viaje-card__header">
-        <div className="viaje-card__avatar" aria-hidden="true">
-          {avatarTexto}
-        </div>
-        <div className="viaje-card__encabezado">
-          <h4 className="viaje-card__titulo">{viaje.destino}</h4>
-          <p className="viaje-card__meta">Salida {formatFecha(viaje.fecha)}</p>
-        </div>
-      </header>
-
-      <ul className="viaje-card__detalles">
-        <li>
-          <span className="viaje-card__label">Punto de encuentro</span>
-          <span className="viaje-card__valor">{viaje.puntoEncuentro}</span>
-        </li>
-        {esPropio ? (
-          <li>
-            <span className="viaje-card__label">Pasajeros confirmados</span>
-            <span className="viaje-card__valor">
-              {viaje.pasajerosConfirmados} de {viaje.capacidadTotal}
-            </span>
-          </li>
-        ) : (
-          <li>
-            <span className="viaje-card__label">Conductor</span>
-            <span className="viaje-card__valor">{viaje.conductor}</span>
-          </li>
-        )}
-        {!esPropio && (
-          <li>
-            <span className="viaje-card__label">Asiento reservado</span>
-            <span className="viaje-card__valor">{viaje.asientoReservado}</span>
-          </li>
-        )}
-        {viaje.notas && (
-          <li className="viaje-card__nota">
-            <span className="viaje-card__label">Notas</span>
-            <span className="viaje-card__valor">{viaje.notas}</span>
-          </li>
-        )}
-      </ul>
-
-      {accion && (
-        <div className="viaje-card__acciones">
-          <button type="button" className="viaje-card__boton">
-            {accion}
-          </button>
-        </div>
-      )}
-    </article>
-  );
-};
-
 function MisViajes() {
-  const [pestaniaActiva, setPestaniaActiva] = useState("propios");
+const [pestaniaActiva, setPestaniaActiva] = useState("propios");
 
   const viajesPropios = useMemo(() => {
     const hoy = new Date();
@@ -200,13 +112,6 @@ function MisViajes() {
 
   return (
     <main className="mis-viajes">
-      <header className="mis-viajes__encabezado">
-        <h1 className="mis-viajes__titulo">Mis viajes</h1>
-        <p className="mis-viajes__descripcion">
-          Consultá rápidamente tus trayectos publicados y los que reservaste, separados
-          por estado para que encuentres lo que necesitás en segundos.
-        </p>
-      </header>
 
       <div className="mis-viajes__tabs" role="tablist" aria-label="Mis viajes">
         <button
@@ -243,7 +148,7 @@ function MisViajes() {
           <div className="mis-viajes__lista">
             {datosActivos.pendientes.length > 0 ? (
               datosActivos.pendientes.map((viaje) => (
-                <ViajeCard
+                <TarjetaMiViaje
                   key={viaje.id}
                   viaje={viaje}
                   tipo={tipoActual}
@@ -263,7 +168,7 @@ function MisViajes() {
           <div className="mis-viajes__lista">
             {datosActivos.finalizados.length > 0 ? (
               datosActivos.finalizados.map((viaje) => (
-                <ViajeCard
+                <TarjetaMiViaje
                   key={viaje.id}
                   viaje={viaje}
                   tipo={tipoActual}
