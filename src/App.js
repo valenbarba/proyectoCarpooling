@@ -99,6 +99,7 @@ const DATOS_DEMOSTRACION = {
       conductor: "Martín Fernández",
       asientoReservado: "Asiento 2 de 3",
       notas: "El viaje incluye peaje, llevar SUBE si quieren combinar.",
+      whatsapp: "+54 9 11 2345-6789",
     },
     {
       id: "aj-2",
@@ -108,6 +109,7 @@ const DATOS_DEMOSTRACION = {
       conductor: "Valentina Ruiz",
       asientoReservado: "Asiento 1 de 4",
       notas: "Gran viaje, conducción muy segura.",
+      whatsapp: "+54 9 11 9876-5432",
     },
     {
       id: "aj-3",
@@ -117,6 +119,7 @@ const DATOS_DEMOSTRACION = {
       conductor: "Ignacio Paredes",
       asientoReservado: "Asiento 3 de 3",
       notas: "Sale música tranquila durante el viaje.",
+      whatsapp: "+54 9 11 5555-1122",
     },
   ],
   notificaciones: [

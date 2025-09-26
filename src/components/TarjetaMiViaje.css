@@ -10,6 +10,7 @@
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
+
 .viaje-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 16px 32px rgba(47, 42, 45, 0.08);
@@ -74,6 +75,20 @@
   gap: 0.25rem;
 }
 
+.viaje-card__dato {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.viaje-card__dato .viaje-card__valor {
+  flex: 1;
+}
+
+.viaje-card__dato--conductor {
+  align-items: center;
+}
+
 .viaje-card__label {
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -114,6 +129,46 @@
 .viaje-card__boton:hover {
   background-color: #a12a63;
   transform: translateY(-1px);
+}
+
+.viaje-card__whatsapp {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, #23c25e, #1a9f4a);
+  color: #fff;
+  font-size: 0.9rem;
+  box-shadow: 0 4px 12px rgba(35, 194, 94, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.viaje-card__whatsapp:hover,
+.viaje-card__whatsapp:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 18px rgba(35, 194, 94, 0.4);
+  filter: brightness(1.05);
+  outline: none;
+}
+
+.viaje-card__whatsapp svg {
+  width: 1.05rem;
+  height: 1.05rem;
+}
+
+.viaje-card__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  clip-path: inset(50%);
+  border: 0;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {
