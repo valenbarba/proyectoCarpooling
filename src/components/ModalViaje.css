@@ -12,7 +12,7 @@
 .modal-viaje__contenedor {
   position: relative;
   background: #ffffff;
-  border-radius: 16px;
+  border-radius: 12px;
   padding: 2rem 1.5rem 1.5rem;
   max-width: 480px;
   width: 100%;
@@ -47,7 +47,7 @@
   width: 56px;
   height: 56px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  background: linear-gradient(135deg, #FF5841, #f99a8d);
   display: grid;
   place-items: center;
   color: #ffffff;
@@ -121,6 +121,7 @@
 .modal-viaje__comentario p {
   margin: 0;
   line-height: 1.5;
+  font-size: 14px;
 }
 
 .modal-viaje__acciones {
@@ -132,18 +133,18 @@
 
 .modal-viaje__btn {
   border: none;
-  background: #4f46e5;
+  background: #FF5841;
   color: #ffffff;
   font-weight: 600;
   padding: 0.6rem 1.2rem;
-  border-radius: 999px;
+  border-radius: 10px;
   cursor: pointer;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .modal-viaje__btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 10px 15px rgba(79, 70, 229, 0.25);
+  box-shadow: 0 5px 5px #C53678;
 }
 
 .modal-viaje__btn--secundario {
@@ -152,7 +153,7 @@
   box-shadow: none;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 520px) {
   .modal-viaje__contenedor {
     padding: 1.5rem 1.25rem 1.25rem;
   }
