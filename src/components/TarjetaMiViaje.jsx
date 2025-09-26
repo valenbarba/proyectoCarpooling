@@ -91,7 +91,19 @@ function TarjetaMiViaje({ viaje, tipo, estado }) {
       {tipo === "ajeno" && (
         <div className="viaje-card__conductor">
           <div className="viaje-card__conductor-datos">
-            <span className="viaje-card__label">Conductor</span>
+            <span
+              className="viaje-card__label viaje-card__label-icon"
+              role="img"
+              aria-label="Conductor"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                aria-hidden="true"
+              >
+                <path d="M5.5 11a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zm13 0a2.5 2.5 0 1 1 0-5 2.5 2.5 0 0 1 0 5zM3 14.25C3 12.455 4.455 11 6.25 11h11.5C19.545 11 21 12.455 21 14.25v2.5c0 .414-.336.75-.75.75h-.75a2.25 2.25 0 0 1-4.5 0H9.75a2.25 2.25 0 0 1-4.5 0H4.5a.75.75 0 0 1-.75-.75v-2.5zm3.75-.75C5.784 13.5 5 14.284 5 15.25V16.5h1.076a2.25 2.25 0 0 1 3.848 0h9.576V15.25c0-.966-.784-1.75-1.75-1.75H6.75z" />
+              </svg>
+            </span>
             <div className="viaje-card__conductor-identidad">
               <span className="viaje-card__conductor-nombre">
                 {viaje.conductor || "Por confirmar"}
