@@ -79,22 +79,7 @@ function TarjetaMiViaje({ viaje, tipo, estado }) {
         </div>
       </header>
 
-      <div className="viaje-card__resumen">
-        <div className="viaje-card__resumen-item">
-          <span className="viaje-card__resumen-label">Fecha</span>
-          <span className="viaje-card__resumen-value">{fechaTexto}</span>
-        </div>
-        <div className="viaje-card__resumen-item">
-          <span className="viaje-card__resumen-label">Horario</span>
-          <span className="viaje-card__resumen-value">{horaTexto}</span>
-        </div>
-      </div>
-
       <ul className="viaje-card__detalles">
-        <li>
-          <span className="viaje-card__label">Punto de encuentro</span>
-          <span className="viaje-card__valor">{viaje.puntoEncuentro}</span>
-        </li>
         {viaje.notas && (
           <li className="viaje-card__nota">
             <span className="viaje-card__label">Notas</span>
