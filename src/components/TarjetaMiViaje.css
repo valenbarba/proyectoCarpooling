@@ -1,37 +1,37 @@
 .viaje-card {
   background: #fff;
-  border-radius: 16px;
-  border: 1px solid #e4dee3;
+  border-radius: 18px;
+  border: 1px solid rgba(222, 216, 225, 0.9);
   padding: 1rem 1.25rem;
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
-  box-shadow: 0 10px 20px rgba(47, 42, 45, 0.04);
+  gap: 1rem;
+  box-shadow: 0 10px 24px rgba(43, 34, 42, 0.05);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .viaje-card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 16px 32px rgba(47, 42, 45, 0.08);
+  box-shadow: 0 18px 36px rgba(43, 34, 42, 0.08);
 }
 
 .viaje-card--finalizado {
-  background: linear-gradient(180deg, rgba(247, 245, 247, 0.9), rgba(255, 255, 255, 0.95));
-  border-color: rgba(197, 54, 120, 0.2);
+  border-color: rgba(193, 62, 120, 0.25);
+  background: linear-gradient(180deg, rgba(251, 247, 252, 0.9), rgba(255, 255, 255, 0.95));
 }
 
 .viaje-card__header {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  align-items: flex-start;
+  gap: 0.9rem;
 }
 
 .viaje-card__avatar {
-    width: 48px;
+  width: 48px;
   height: 48px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f1e4fb, #f9d9eb);
-  color: #a12a63;
+  border-radius: 16px;
+  background: linear-gradient(135deg, #f2e8ff, #ffd9ef);
+  color: #b0286a;
   font-weight: 600;
   font-size: 1.1rem;
   display: flex;
@@ -41,6 +41,7 @@
 }
 
 .viaje-card__encabezado {
+  flex: 1;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
@@ -48,49 +49,107 @@
 
 .viaje-card__titulo {
   margin: 0;
-  font-size: 1.1rem;
-  color: #2f2a2d;
+  font-size: 1.05rem;
   font-weight: 600;
+  color: #2f2330;
 }
 
-.viaje-card__meta {
+.viaje-card__direccion {
   margin: 0;
-  color: #857a80;
+  font-size: 0.9rem;
+  color: #5e5360;
+}
+
+.viaje-card__fecha {
+  margin: 0;
   font-size: 0.85rem;
+  color: #8a7d8c;
   text-transform: capitalize;
 }
 
-.viaje-card__detalles {
-  list-style: none;
-  margin: 0;
-  padding: 0;
+.viaje-card__info {
   display: grid;
-  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.75rem;
 }
 
-.viaje-card__detalles li {
+.viaje-card__dato {
+  background: rgba(243, 239, 245, 0.6);
+  border-radius: 12px;
+  padding: 0.65rem 0.75rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 0.2rem;
+  color: #3d3240;
 }
 
-.viaje-card__label {
+.viaje-card__dato-label {
   font-size: 0.75rem;
+  font-weight: 600;
+  color: #9a8ca0;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: #9b9096;
+}
+
+.viaje-card__dato-valor {
+  font-size: 0.95rem;
   font-weight: 600;
 }
 
-.viaje-card__valor {
-  color: #443c41;
-  font-size: 0.95rem;
-  line-height: 1.4;
+.viaje-card__dato--conductor {
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
 }
 
-.viaje-card__nota {
-  border-left: 3px solid rgba(197, 54, 120, 0.3);
-  padding-left: 0.75rem;
+.viaje-card__dato--conductor > div {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.viaje-card__whatsapp {
+  width: 36px;
+  height: 36px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: #25d366;
+  color: #fff;
+  font-size: 1.2rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.viaje-card__whatsapp:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 6px 12px rgba(37, 211, 102, 0.4);
+}
+
+.viaje-card__notas {
+  background: rgba(193, 62, 120, 0.08);
+  border: 1px solid rgba(193, 62, 120, 0.18);
+  border-radius: 12px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.viaje-card__notas-titulo {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #a02d67;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.viaje-card__notas-texto {
+  margin: 0;
+  font-size: 0.9rem;
+  color: #4a3d47;
+  line-height: 1.4;
 }
 
 .viaje-card__acciones {
@@ -99,7 +158,7 @@
 }
 
 .viaje-card__boton {
-  background-color: #C53678;
+  background-color: #c53678;
   border: none;
   border-radius: 12px;
   padding: 0.45rem 1.25rem;
@@ -118,6 +177,21 @@
 
 @media (max-width: 768px) {
   .viaje-card {
-    padding: 1rem;
+    padding: 0.9rem 1rem;
+    gap: 0.85rem;
+  }
+
+  .viaje-card__info {
+    grid-template-columns: 1fr;
+  }
+
+  .viaje-card__dato--conductor {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .viaje-card__whatsapp {
+    width: 100%;
+    height: 40px;
   }
 }
