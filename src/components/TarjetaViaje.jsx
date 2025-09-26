@@ -39,7 +39,11 @@ function TarjetaViaje({
           <span className="tarjeta-viaje__nombre">{nombreMostrar}</span>
           <div className="tarjeta-viaje__fila-principal">
             <span className="tarjeta-viaje__destino">{destinoMostrar}</span>
-            
+            {/* Mostramos el precio si existe para el viaje. */}
+            {precioMostrar && (
+              <span className="tarjeta-viaje__precio">{precioMostrar}</span>
+            )}
+
           </div>
           {fechaMostrar && <span className="tarjeta-viaje__fecha">{fechaMostrar}</span>}
         </div>

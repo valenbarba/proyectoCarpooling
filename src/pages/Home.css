@@ -118,3 +118,11 @@ input[type="radio"] {
   gap: 0.5rem;
   color: #4b4a4a;
 }
+
+/* Mensaje para indicar que la búsqueda no devolvió resultados. */
+.seccion-trayectos__mensaje-vacio {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #6b6a6a;
+  font-size: 0.95rem;
+}

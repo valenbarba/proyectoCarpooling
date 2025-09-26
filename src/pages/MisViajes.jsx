@@ -4,9 +4,7 @@ import "./MisViajes.css";
 
 const agruparPorEstado = (viajes) => {
   const ahora = new Date();
-  const ordenados = [...viajes].sort(
-    (a, b) => new Date(a.fecha) - new Date(b.fecha)
-  );
+  const ordenados = [...viajes].sort((a, b) => new Date(a.fecha) - new Date(b.fecha));
 
   const pendientes = ordenados.filter((viaje) => new Date(viaje.fecha) >= ahora);
   const finalizados = ordenados
@@ -16,91 +14,10 @@ const agruparPorEstado = (viajes) => {
   return { pendientes, finalizados };
 };
 
-function MisViajes() {
-const [pestaniaActiva, setPestaniaActiva] = useState("propios");
+function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "propios" }) {
+  const [pestaniaActiva, setPestaniaActiva] = useState(pestaniaInicial);
 
-  const viajesPropios = useMemo(() => {
-    const hoy = new Date();
-    hoy.setHours(0, 0, 0, 0);
-    const crearFecha = (diasDesdeHoy, horas, minutos) => {
-      const fecha = new Date(hoy);
-      fecha.setDate(hoy.getDate() + diasDesdeHoy);
-      fecha.setHours(horas, minutos, 0, 0);
-      return fecha.toISOString();
-    };
-
-    return [
-      {
-        id: "prop-1",
-        destino: "USAL Pilar",
-        fecha: crearFecha(2, 8, 15),
-        puntoEncuentro: "Garita Norte - Lote 1260",
-        pasajerosConfirmados: 2,
-        capacidadTotal: 3,
-        notas: "Salgo puntual, llevar cambio si necesitan pagar en efectivo.",
-      },
-      {
-        id: "prop-2",
-        destino: "Centro de Escobar",
-        fecha: crearFecha(-4, 17, 30),
-        puntoEncuentro: "Club House - Estacionamiento",
-        pasajerosConfirmados: 3,
-        capacidadTotal: 4,
-        notas: "Gracias por avisar si se retrasan. Tengo lugar para equipaje chico.",
-      },
-      {
-        id: "prop-3",
-        destino: "Universidad Di Tella",
-        fecha: crearFecha(6, 6, 45),
-        puntoEncuentro: "Entrada principal - Portón Sur",
-        pasajerosConfirmados: 1,
-        capacidadTotal: 3,
-        notas: "Puedo desviar hasta la colectora si alguien lo necesita.",
-      },
-    ];
-  }, []);
-
-  const viajesAjenos = useMemo(() => {
-    const hoy = new Date();
-    hoy.setHours(0, 0, 0, 0);
-    const crearFecha = (diasDesdeHoy, horas, minutos) => {
-      const fecha = new Date(hoy);
-      fecha.setDate(hoy.getDate() + diasDesdeHoy);
-      fecha.setHours(horas, minutos, 0, 0);
-      return fecha.toISOString();
-    };
-
-    return [
-      {
-        id: "aj-1",
-        destino: "CABA - Obelisco",
-        fecha: crearFecha(1, 7, 0),
-        puntoEncuentro: "Rotonda Principal",
-        conductor: "Martín Fernández",
-        asientoReservado: "Asiento 2 de 3",
-        notas: "El viaje incluye peaje, llevar SUBE si quieren combinar.",
-      },
-      {
-        id: "aj-2",
-        destino: "Pilar Centro",
-        fecha: crearFecha(-2, 19, 10),
-        puntoEncuentro: "Garita Sur",
-        conductor: "Valentina Ruiz",
-        asientoReservado: "Asiento 1 de 4",
-        notas: "Gran viaje, conducción muy segura.",
-      },
-      {
-        id: "aj-3",
-        destino: "Colegio St. John",
-        fecha: crearFecha(4, 7, 30),
-        puntoEncuentro: "Playón Deportivo",
-        conductor: "Ignacio Paredes",
-        asientoReservado: "Asiento 3 de 3",
-        notas: "Sale música tranquila durante el viaje.",
-      },
-    ];
-  }, []);
-
+  // Agrupamos los viajes recibidos según si son próximos o ya finalizaron.
   const datosPropios = useMemo(
     () => agruparPorEstado(viajesPropios),
     [viajesPropios]

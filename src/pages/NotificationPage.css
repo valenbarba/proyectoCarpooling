@@ -1,0 +1,7 @@
+/* Estilo para el mensaje mostrado cuando no existen notificaciones para el usuario. */
+.notificaciones-vacias {
+  text-align: center;
+  color: #6b6a6a;
+  padding: 1.25rem 0;
+  font-size: 0.95rem;
+}

@@ -8,17 +8,30 @@ import ModalViaje from "../components/ModalViaje";
 import { FaSearch, FaChevronDown } from "react-icons/fa";
 import "./Home.css";
 
-function Home() {
+function Home({
+  nombreBarrio,
+  viajesDisponibles = [],
+  onBuscarViajes,
+  onSumarseViaje,
+  onVerDetalleViaje,
+  onVerPerfilConductor,
+}) {
   // === Estados para controlar el buscador de viajes ===
-  const nombreBarrio = "Haras Santa Maria";
   const [modoViaje, setModoViaje] = useState("desde"); // "hacia" | "desde"
   const [lugar, setLugar] = useState(null); // Google Place seleccionado
   const [buscadorExpandido, setBuscadorExpandido] = useState(false);
   const [viajeSeleccionado, setViajeSeleccionado] = useState(null);
-
-  const [mostrarTrayectos, setMostrarTrayectos] = useState(false);
+  const [mostrarTrayectos, setMostrarTrayectos] = useState(viajesDisponibles.length > 0);
+  const [seRealizoBusqueda, setSeRealizoBusqueda] = useState(false);
   const resultadosRef = useRef(null);
   const buscadorContentId = useId();
+
+  useEffect(() => {
+    // Al recibir nuevos viajes (por ejemplo, desde el backend) se muestran automáticamente.
+    if (viajesDisponibles.length > 0) {
+      setMostrarTrayectos(true);
+    }
+  }, [viajesDisponibles]);
 
   useEffect(() => {
     if (mostrarTrayectos && resultadosRef.current) {
@@ -28,56 +41,34 @@ function Home() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Activa la visualización de los trayectos de ejemplo.
+    setSeRealizoBusqueda(true);
     setMostrarTrayectos(true);
+
+    // Se envían los filtros seleccionados para que el componente padre pueda consultar al backend.
+    onBuscarViajes?.({ modo: modoViaje, lugarSeleccionado: lugar });
   };
 
   const toggleBuscador = () => {
     setBuscadorExpandido((prev) => !prev);
   };
 
-  const trayectosEjemplo = [
-    {
-      id: 1,
-      nombre: "Martín",
-      sigla: "M",
-      destino: "Plaza Italia",
-      fecha: "25 de Octubre. 14:00",
-      precio: "$2000 / asiento",
-      comentario: "Punto de encuentro en la entrada principal del barrio.",
-      rating: 4.8,
-      reviewsCount: 26,
-    },
-    {
-      id: 2,
-      nombre: "Ana",
-      sigla: "A",
-      destino: "USAL Pilar",
-      fecha: "7 de Octubre. · 08:00",
-      precio: "$1800 / asiento",
-      comentario: "Nos encontramos en el lote 1260 a las 8:15 en punto.",
-      rating: 4.6,
-      reviewsCount: 18,
-    },
-    {
-      id: 3,
-      nombre: "Valentina",
-      sigla: "V",
-      destino: "Escobar centro",
-      fecha: "10 de Octubre. 16:00",
-      precio: "$1500 / asiento",
-      comentario: "Puedo pasar por la garita norte si les queda cómodo.",
-      rating: 5,
-      reviewsCount: 32,
-    },
-  ];
-
   const abrirModalViaje = (trayecto) => {
     setViajeSeleccionado(trayecto);
+    onVerDetalleViaje?.(trayecto);
   };
 
   const cerrarModalViaje = () => {
     setViajeSeleccionado(null);
+  };
+
+  const handleSumarse = (trayecto) => {
+    onSumarseViaje?.(trayecto);
+  };
+
+  const handleVerPerfil = () => {
+    if (viajeSeleccionado) {
+      onVerPerfilConductor?.(viajeSeleccionado);
+    }
   };
 
   return (
@@ -162,25 +153,32 @@ function Home() {
       </LoadScript>
 
       <section ref={resultadosRef} className="seccion-trayectos">
-        {trayectosEjemplo.map((t) => (
-          <TarjetaViaje
-            key={t.id}
-            sigla={t.sigla}
-            nombre={t.nombre}
-            destino={t.destino}
-            fecha={t.fecha}
-            precio={t.precio}
-            onSumarse={() => console.log("Sumarse", t)}
-            onVerMas={() => abrirModalViaje(t)}
-          />
-        ))}
+        {mostrarTrayectos && viajesDisponibles.length > 0 &&
+          viajesDisponibles.map((viaje) => (
+            <TarjetaViaje
+              key={viaje.id}
+              sigla={viaje.sigla}
+              nombre={viaje.nombre}
+              destino={viaje.destino}
+              fecha={viaje.fecha}
+              precio={viaje.precio}
+              onSumarse={() => handleSumarse(viaje)}
+              onVerMas={() => abrirModalViaje(viaje)}
+            />
+          ))}
+
+        {mostrarTrayectos && viajesDisponibles.length === 0 && seRealizoBusqueda && (
+          <p className="seccion-trayectos__mensaje-vacio">
+            No encontramos viajes con los filtros seleccionados. Probá con otros criterios.
+          </p>
+        )}
       </section>
 
       <ModalViaje
         isOpen={Boolean(viajeSeleccionado)}
         viaje={viajeSeleccionado}
         onClose={cerrarModalViaje}
-        onVerPerfil={() => console.log("Ver perfil de", viajeSeleccionado)}
+        onVerPerfil={handleVerPerfil}
       />
     </FormContainer>
   );

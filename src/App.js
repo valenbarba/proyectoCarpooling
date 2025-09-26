@@ -1,5 +1,6 @@
 import "./App.css";
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { FiBell, FiCalendar, FiCheckCircle, FiUsers } from "react-icons/fi";
 
 import Login from "./pages/Login";
 import SignUp from "./pages/SignUp";
@@ -9,9 +10,165 @@ import Publicar from "./pages/Publicar";
 import NotificationPage from "./pages/NotificationPage";
 import MisViajes from "./pages/MisViajes";
 
+// ==== Datos de demostración ====
+// Se definen fuera de los componentes para que puedan reemplazarse fácilmente
+// por los datos reales provenientes de la API cuando esté disponible.
+const crearFechaRelativa = (diasDesdeHoy, horas, minutos) => {
+  const hoy = new Date();
+  hoy.setHours(0, 0, 0, 0);
+  const fecha = new Date(hoy);
+  fecha.setDate(hoy.getDate() + diasDesdeHoy);
+  fecha.setHours(horas, minutos, 0, 0);
+  return fecha.toISOString();
+};
+
+const DATOS_DEMOSTRACION = {
+  barrio: {
+    nombre: "Haras Santa María",
+  },
+  viajesDisponibles: [
+    {
+      id: 1,
+      nombre: "Martín",
+      sigla: "M",
+      destino: "Plaza Italia",
+      fecha: "25 de Octubre · 14:00",
+      precio: "$2000 / asiento",
+      comentario: "Punto de encuentro en la entrada principal del barrio.",
+      rating: 4.8,
+      reviewsCount: 26,
+    },
+    {
+      id: 2,
+      nombre: "Ana",
+      sigla: "A",
+      destino: "USAL Pilar",
+      fecha: "7 de Octubre · 08:00",
+      precio: "$1800 / asiento",
+      comentario: "Nos encontramos en el lote 1260 a las 8:15 en punto.",
+      rating: 4.6,
+      reviewsCount: 18,
+    },
+    {
+      id: 3,
+      nombre: "Valentina",
+      sigla: "V",
+      destino: "Escobar centro",
+      fecha: "10 de Octubre · 16:00",
+      precio: "$1500 / asiento",
+      comentario: "Puedo pasar por la garita norte si les queda cómodo.",
+      rating: 5,
+      reviewsCount: 32,
+    },
+  ],
+  viajesPropios: [
+    {
+      id: "prop-1",
+      destino: "USAL Pilar",
+      fecha: crearFechaRelativa(2, 8, 15),
+      puntoEncuentro: "Garita Norte - Lote 1260",
+      pasajerosConfirmados: 2,
+      capacidadTotal: 3,
+      notas: "Salgo puntual, llevar cambio si necesitan pagar en efectivo.",
+    },
+    {
+      id: "prop-2",
+      destino: "Centro de Escobar",
+      fecha: crearFechaRelativa(-4, 17, 30),
+      puntoEncuentro: "Club House - Estacionamiento",
+      pasajerosConfirmados: 3,
+      capacidadTotal: 4,
+      notas: "Gracias por avisar si se retrasan. Tengo lugar para equipaje chico.",
+    },
+    {
+      id: "prop-3",
+      destino: "Universidad Di Tella",
+      fecha: crearFechaRelativa(6, 6, 45),
+      puntoEncuentro: "Entrada principal - Portón Sur",
+      pasajerosConfirmados: 1,
+      capacidadTotal: 3,
+      notas: "Puedo desviar hasta la colectora si alguien lo necesita.",
+    },
+  ],
+  viajesAjenos: [
+    {
+      id: "aj-1",
+      destino: "CABA - Obelisco",
+      fecha: crearFechaRelativa(1, 7, 0),
+      puntoEncuentro: "Rotonda Principal",
+      conductor: "Martín Fernández",
+      asientoReservado: "Asiento 2 de 3",
+      notas: "El viaje incluye peaje, llevar SUBE si quieren combinar.",
+    },
+    {
+      id: "aj-2",
+      destino: "Pilar Centro",
+      fecha: crearFechaRelativa(-2, 19, 10),
+      puntoEncuentro: "Garita Sur",
+      conductor: "Valentina Ruiz",
+      asientoReservado: "Asiento 1 de 4",
+      notas: "Gran viaje, conducción muy segura.",
+    },
+    {
+      id: "aj-3",
+      destino: "Colegio St. John",
+      fecha: crearFechaRelativa(4, 7, 30),
+      puntoEncuentro: "Playón Deportivo",
+      conductor: "Ignacio Paredes",
+      asientoReservado: "Asiento 3 de 3",
+      notas: "Sale música tranquila durante el viaje.",
+    },
+  ],
+  notificaciones: [
+    {
+      id: 1,
+      titulo: "Reserva confirmada",
+      descripcion:
+        "Sofía confirmó tu reserva para el viaje hacia Nordelta del 28 de mayo a las 18:30 hs.",
+      icono: FiCheckCircle,
+    },
+    {
+      id: 2,
+      titulo: "Nuevo viaje cerca tuyo",
+      descripcion:
+        "Martín publicó un viaje desde Haras Santa María hacia Capital Federal mañana a las 07:15 hs.",
+      icono: FiCalendar,
+    },
+    {
+      id: 3,
+      titulo: "Recordatorio de salida",
+      descripcion:
+        "Tu viaje compartido con Laura hacia USAL Pilar parte hoy a las 16:45 hs. Recordá ser puntual.",
+      icono: FiBell,
+    },
+  ],
+  solicitudes: [
+    {
+      id: "sol-1",
+      titulo: "Solicitud de grupo",
+      descripcion:
+        "Valentina solicitó unirse a tu viaje hacia USAL Pilar el 7 de Octubre a las 18:00 hrs.",
+      icono: FiUsers,
+    },
+  ],
+};
+
 // Componente interno que contiene la definición de todas las rutas de la aplicación.
-// Se separa para mantener App más legible y favorecer las pruebas unitarias si se agregaran.
-function AppRoutes() {
+// Recibe los datos y callbacks como props para que App los pueda reemplazar
+// con información proveniente de un backend en el futuro.
+function AppRoutes({
+  nombreBarrio,
+  viajesDisponibles,
+  viajesPropios,
+  viajesAjenos,
+  notificaciones,
+  solicitudes,
+  onBuscarViajes,
+  onSumarseViaje,
+  onVerDetalleViaje,
+  onAceptarSolicitud,
+  onRechazarSolicitud,
+}) {
   return (
     <Routes>
       {/* Pantalla de inicio de sesión */}
@@ -25,10 +182,39 @@ function AppRoutes() {
 
       {/* Rutas protegidas por el layout principal, que comparte encabezado y navegación inferior */}
       <Route element={<MainLayout />}>
-        <Route path="/home" element={<Home />} />
+        <Route
+          path="/home"
+          element={
+            <Home
+              nombreBarrio={nombreBarrio}
+              viajesDisponibles={viajesDisponibles}
+              onBuscarViajes={onBuscarViajes}
+              onSumarseViaje={onSumarseViaje}
+              onVerDetalleViaje={onVerDetalleViaje}
+            />
+          }
+        />
         <Route path="/publicar" element={<Publicar />} />
-        <Route path="/mis-viajes" element={<MisViajes />} />
-        <Route path="/notificaciones" element={<NotificationPage />} />
+        <Route
+          path="/mis-viajes"
+          element={
+            <MisViajes
+              viajesPropios={viajesPropios}
+              viajesAjenos={viajesAjenos}
+            />
+          }
+        />
+        <Route
+          path="/notificaciones"
+          element={
+            <NotificationPage
+              solicitudes={solicitudes}
+              notificaciones={notificaciones}
+              onAcceptSolicitud={onAceptarSolicitud}
+              onRejectSolicitud={onRechazarSolicitud}
+            />
+          }
+        />
         {/* Agregar nuevas rutas públicas dentro de este layout según sea necesario */}
       </Route>
     </Routes>
@@ -36,11 +222,31 @@ function AppRoutes() {
 }
 
 // Punto de entrada principal del front-end. Envuelve las rutas con el BrowserRouter
-// para habilitar la navegación mediante la API de historial del navegador.
+// y prepara los datos que se enviarán como props. En una integración real,
+// estos datos se obtendrían desde un backend mediante fetch/axios u otra librería.
 function App() {
+  // Handlers de ejemplo para dejar listo el flujo de datos desde el backend.
+  const manejarBusquedaViajes = () => {};
+  const manejarSumarseViaje = () => {};
+  const manejarVerDetalleViaje = () => {};
+  const manejarAceptarSolicitud = () => {};
+  const manejarRechazarSolicitud = () => {};
+
   return (
     <Router>
-      <AppRoutes />
+      <AppRoutes
+        nombreBarrio={DATOS_DEMOSTRACION.barrio.nombre}
+        viajesDisponibles={DATOS_DEMOSTRACION.viajesDisponibles}
+        viajesPropios={DATOS_DEMOSTRACION.viajesPropios}
+        viajesAjenos={DATOS_DEMOSTRACION.viajesAjenos}
+        notificaciones={DATOS_DEMOSTRACION.notificaciones}
+        solicitudes={DATOS_DEMOSTRACION.solicitudes}
+        onBuscarViajes={manejarBusquedaViajes}
+        onSumarseViaje={manejarSumarseViaje}
+        onVerDetalleViaje={manejarVerDetalleViaje}
+        onAceptarSolicitud={manejarAceptarSolicitud}
+        onRechazarSolicitud={manejarRechazarSolicitud}
+      />
     </Router>
   );
 }
