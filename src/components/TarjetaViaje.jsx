@@ -23,7 +23,6 @@ function TarjetaViaje({
   const nombreMostrar = nombre || titulo || destino || "Conductor";
   const destinoMostrar = destino || titulo || nombre || "Punto de encuentro";
   const fechaMostrar = fecha || detalle || "";
-  const precioMostrar = precio || "Consultar";
 
   // Se permiten nombres alternativos para los handlers para facilitar la reutilización.
   const handleSumarse = onSumarse || onAgregar;
@@ -39,10 +38,6 @@ function TarjetaViaje({
           <span className="tarjeta-viaje__nombre">{nombreMostrar}</span>
           <div className="tarjeta-viaje__fila-principal">
             <span className="tarjeta-viaje__destino">{destinoMostrar}</span>
-            {/* Mostramos el precio si existe para el viaje. */}
-            {precioMostrar && (
-              <span className="tarjeta-viaje__precio">{precioMostrar}</span>
-            )}
 
           </div>
           {fechaMostrar && <span className="tarjeta-viaje__fecha">{fechaMostrar}</span>}
