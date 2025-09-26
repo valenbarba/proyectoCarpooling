@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import "./TarjetaMiViaje.css";
+import { FaCar } from "react-icons/fa";
 
 const formatFecha = (fechaISO, opciones) => {
   const fecha = new Date(fechaISO);
@@ -49,15 +50,23 @@ function TarjetaMiViaje({ viaje, tipo, estado }) {
   const whatsappHref = whatsappNumero ? `https://wa.me/${whatsappNumero}` : null;
 
   const acciones = [];
+
+  if (esPropio && estado === "pendiente") {
+    acciones.push({ id: "editar-viaje", etiqueta: "Editar viaje"})
+  }
   if (esPropio) {
-    acciones.push({ id: "ver-pasajeros", etiqueta: "Ver pasajeros" });
+    acciones.push({ id: "ver-pasajeros", etiqueta: "Ver pasajeros" }); 
   }
   if (estado === "finalizado") {
     acciones.push({
       id: "puntuar",
-      etiqueta: esPropio ? "Puntuar pasajero" : "Puntuar conductor",
+      etiqueta: esPropio ? "Puntuar pasajeros" : "Puntuar conductor",
     });
   }
+  if (!esPropio && estado === "pendiente"){
+    acciones.push({ id: "cancelar-asistencia", etiqueta: "Cancelar" }); 
+  }
+  
 
   return (
     <article
@@ -79,20 +88,20 @@ function TarjetaMiViaje({ viaje, tipo, estado }) {
         </div>
       </header>
 
-      <ul className="viaje-card__detalles">
-        {viaje.notas && (
-          <li className="viaje-card__nota">
-            <span className="viaje-card__label">Notas</span>
-            <span className="viaje-card__valor">{viaje.notas}</span>
-          </li>
-        )}
-      </ul>
-
-      {tipo === "ajeno" && (
+    {tipo === "ajeno" && (
         <div className="viaje-card__conductor">
           <div className="viaje-card__conductor-datos">
-            <span className="viaje-card__label">Conductor</span>
+            
             <div className="viaje-card__conductor-identidad">
+
+              <span
+                className="viaje-card__label viaje-card__label-icon"
+                role="img"
+                aria-label="Conductor"
+              >
+                <FaCar aria-hidden="true" />
+              </span>
+
               <span className="viaje-card__conductor-nombre">
                 {viaje.conductor || "Por confirmar"}
               </span>
@@ -118,11 +127,23 @@ function TarjetaMiViaje({ viaje, tipo, estado }) {
           </div>
         </div>
       )}
+      
+      {tipo === "ajeno" && (
+      <ul className="viaje-card__detalles">
+        {viaje.notas && (
+          <li className="viaje-card__nota">
+            <span className="viaje-card__label">Notas</span>
+            <span className="viaje-card__valor">{viaje.notas}</span>
+          </li>
+        )}
+      </ul>
+      )}
+      
 
       {acciones.length > 0 && (
         <div className="viaje-card__acciones">
           {acciones.map((accion) => (
-            <button key={accion.id} type="button" className="viaje-card__boton">
+            <button key={accion.id} type="button" id={accion.id} className="viaje-card__boton">
               {accion.etiqueta}
             </button>
           ))}
