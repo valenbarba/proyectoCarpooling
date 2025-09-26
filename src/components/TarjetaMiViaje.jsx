@@ -1,15 +1,9 @@
 import PropTypes from "prop-types";
 import "./TarjetaMiViaje.css";
 
-const formatFecha = (fechaISO) => {
+const formatFecha = (fechaISO, opciones) => {
   const fecha = new Date(fechaISO);
-  return new Intl.DateTimeFormat("es-AR", {
-    weekday: "short",
-    day: "numeric",
-    month: "long",
-    hour: "2-digit",
-    minute: "2-digit",
-  }).format(fecha);
+  return new Intl.DateTimeFormat("es-AR", opciones).format(fecha);
 };
 
 const obtenerIniciales = (texto) => {
@@ -27,40 +21,72 @@ function TarjetaMiViaje({ viaje, tipo, estado }) {
     ? viaje.destino?.[0] || viaje.puntoEncuentro?.[0] || "?"
     : obtenerIniciales(viaje.conductor);
   const direccionTexto = viaje.direccion?.trim() || "Dirección no especificada";
-  const horarioTexto = viaje.fecha ? formatFecha(viaje.fecha) : "Horario no disponible";
+  const fechaTexto = viaje.fecha
+    ? formatFecha(viaje.fecha, {
+        weekday: "short",
+        day: "numeric",
+        month: "long",
+      })
+    : "Fecha no disponible";
+  const horaTexto = viaje.fecha
+    ? formatFecha(viaje.fecha, {
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    : "Horario no disponible";
+  const horarioTexto = viaje.fecha
+    ? formatFecha(viaje.fecha, {
+        weekday: "short",
+        day: "numeric",
+        month: "long",
+        hour: "2-digit",
+        minute: "2-digit",
+      })
+    : "Horario no disponible";
   const whatsappNumero = viaje.contactoConductor
     ? viaje.contactoConductor.replace(/[^\d]/g, "")
     : "";
   const whatsappHref = whatsappNumero ? `https://wa.me/${whatsappNumero}` : null;
 
-  const accion = (() => {
-    if (estado !== "finalizado") return null;
-    if (esPropio) return "Puntuar pasajero";
-    return "Puntuar conductor";
-  })();
+  const acciones = [];
+  if (esPropio) {
+    acciones.push({ id: "ver-pasajeros", etiqueta: "Ver pasajeros" });
+  }
+  if (estado === "finalizado") {
+    acciones.push({
+      id: "puntuar",
+      etiqueta: esPropio ? "Puntuar pasajero" : "Puntuar conductor",
+    });
+  }
 
   return (
     <article
       className={`viaje-card${estado === "finalizado" ? " viaje-card--finalizado" : ""}`}
     >
       <header className="viaje-card__header">
-        <div className="viaje-card__avatar" aria-hidden="true">
-          {avatarTexto}
+        <div className="viaje-card__header-principal">
+          <div className="viaje-card__avatar" aria-hidden="true">
+            {avatarTexto}
+          </div>
+          <div className="viaje-card__encabezado">
+            <h4 className="viaje-card__titulo">{viaje.destino}</h4>
+            <p className="viaje-card__direccion">{direccionTexto}</p>
+          </div>
         </div>
-        <div className="viaje-card__encabezado">
-          <h4 className="viaje-card__titulo">{viaje.destino}</h4>
-          <p className="viaje-card__meta">Salida {horarioTexto}</p>
+        <div className="viaje-card__horario" aria-label={`Salida ${horarioTexto}`}>
+          <span className="viaje-card__horario-fecha">{fechaTexto}</span>
+          <span className="viaje-card__horario-hora">{horaTexto}</span>
         </div>
       </header>
 
       <div className="viaje-card__resumen">
         <div className="viaje-card__resumen-item">
-          <span className="viaje-card__resumen-label">Dirección</span>
-          <span className="viaje-card__resumen-value">{direccionTexto}</span>
+          <span className="viaje-card__resumen-label">Fecha</span>
+          <span className="viaje-card__resumen-value">{fechaTexto}</span>
         </div>
         <div className="viaje-card__resumen-item">
           <span className="viaje-card__resumen-label">Horario</span>
-          <span className="viaje-card__resumen-value">{horarioTexto}</span>
+          <span className="viaje-card__resumen-value">{horaTexto}</span>
         </div>
       </div>
 
@@ -81,26 +107,40 @@ function TarjetaMiViaje({ viaje, tipo, estado }) {
         <div className="viaje-card__conductor">
           <div className="viaje-card__conductor-datos">
             <span className="viaje-card__label">Conductor</span>
-            <span className="viaje-card__valor">{viaje.conductor || "Por confirmar"}</span>
+            <div className="viaje-card__conductor-identidad">
+              <span className="viaje-card__conductor-nombre">
+                {viaje.conductor || "Por confirmar"}
+              </span>
+              {whatsappHref && (
+                <a
+                  className="viaje-card__whatsapp-enlace"
+                  href={whatsappHref}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Contactar por WhatsApp"
+                >
+                  <svg
+                    className="viaje-card__whatsapp-icon"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 32 32"
+                    aria-hidden="true"
+                  >
+                    <path d="M16 3C9.373 3 4 8.373 4 15c0 2.325.623 4.49 1.71 6.36L4 29l7.832-1.655C13.562 28.424 14.748 28.7 16 28.7c6.627 0 12-5.373 12-12S22.627 3 16 3zm0 22.8c-1.05 0-2.083-.212-3.044-.627l-.215-.093-4.65.983.988-4.526-.105-.214C8.282 20.142 7.9 18.596 7.9 17c0-4.47 3.63-8.1 8.1-8.1s8.1 3.63 8.1 8.1-3.63 8.1-8.1 8.1zm4.373-5.657c-.237-.118-1.403-.692-1.62-.77-.217-.079-.376-.118-.536.118-.158.237-.615.77-.753.928-.139.158-.277.178-.514.059-.237-.118-1.003-.369-1.91-1.176-.707-.63-1.184-1.409-1.322-1.646-.138-.237-.014-.365.104-.483.107-.107.237-.277.355-.415.118-.139.158-.237.237-.395.079-.158.04-.296-.02-.414-.059-.118-.536-1.293-.734-1.771-.193-.464-.39-.401-.536-.409l-.456-.008c-.158 0-.415.06-.633.296-.217.237-.827.808-.827 1.97 0 1.162.848 2.285.965 2.442.118.158 1.668 2.548 4.047 3.572.566.244 1.008.39 1.352.499.568.181 1.084.156 1.493.095.455-.068 1.403-.574 1.601-1.13.197-.556.197-1.032.138-1.13-.059-.098-.217-.158-.455-.276z" />
+                  </svg>
+                </a>
+              )}
+            </div>
           </div>
-          {whatsappHref && (
-            <a
-              className="viaje-card__whatsapp"
-              href={whatsappHref}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              Contactar
-            </a>
-          )}
         </div>
       )}
 
-      {accion && (
+      {acciones.length > 0 && (
         <div className="viaje-card__acciones">
-          <button type="button" className="viaje-card__boton">
-            {accion}
-          </button>
+          {acciones.map((accion) => (
+            <button key={accion.id} type="button" className="viaje-card__boton">
+              {accion.etiqueta}
+            </button>
+          ))}
         </div>
       )}
     </article>
