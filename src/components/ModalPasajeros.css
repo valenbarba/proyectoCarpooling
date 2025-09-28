@@ -95,6 +95,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  
 }
 
 .modal-pasajeros__avatar-boton:focus-visible {
@@ -111,8 +112,8 @@
 }
 
 .modal-pasajeros__avatar--placeholder {
-  background: #eceff1;
-  color: #455a64;
+  background: linear-gradient(135deg, #f1e4fb, #f9d9eb);
+  color: #a12a63;
   display: inline-flex;
   align-items: center;
   justify-content: center;

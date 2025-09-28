@@ -121,7 +121,6 @@ const DATOS_DEMOSTRACION = {
           id: "prop-1-p3",
           nombre: "Carla",
           apellido: "Nuñez",
-          avatar: "https://i.pravatar.cc/120?img=45",
           estado: "pendiente",
           barrio: "Haras Santa María",
           lote: "1275",

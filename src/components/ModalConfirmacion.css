@@ -61,14 +61,17 @@
 }
 
 .modal-confirmacion__btn--primario:hover {
+  background-color: #9d4034;
   transform: translateY(-1px);
-  box-shadow: 0 15px 20px -15px #fb604c;
+  box-shadow: 0 15px 20px -15px rgba(82, 96, 109, 0.3);
+
 }
 
 .modal-confirmacion__btn--secundario {
-  background: #f5f7fa;
-  color: #52606d;
-  border: 1px solid #d2d6dc;
+  background-color: #e6dfdd;
+  color: #7f7777;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .modal-confirmacion__btn--secundario:hover {

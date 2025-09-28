@@ -160,14 +160,6 @@ function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
           </section>
         )}
 
-        <footer className="modal-viaje__acciones">
-          <button type="button" className="modal-viaje__btn" onClick={manejarVerPerfil}>
-            Ver perfil del conductor
-          </button>
-          <button type="button" className="modal-viaje__btn modal-viaje__btn--secundario" onClick={onClose}>
-            Cerrar
-          </button>
-        </footer>
       </div>
     </div>
   );

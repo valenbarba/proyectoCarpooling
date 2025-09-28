@@ -241,7 +241,7 @@
 .viaje-card__boton {
   background-color: #C53678;
   border: none;
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 0.5rem 1.35rem;
   color: #fff;
   font-weight: 600;
@@ -276,15 +276,15 @@
 }
 
 #editar-viaje {
-  background-color: #e6dfdd;
-  border: none;
-  border-radius: 12px;
-  padding: 0.5rem 1.35rem;
-  color: #7f7777;
-  border-color: #C53678;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, background-color 0.2s ease,
-    color 0.2s ease;
+   background-color: #ffffff;
+  color: #c53678;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  border-color: rgba(197, 54, 120, 0.4);
+  
+}
+
+#editar-viaje:hover{
+  background-color: rgba(197, 54, 120, 0.08);
+  transform: translateY(-1px);
 }
