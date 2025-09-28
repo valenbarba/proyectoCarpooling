@@ -16,7 +16,7 @@ const obtenerIniciales = (texto) => {
   return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
 };
 
-function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros }) {
+function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros, onPuntuar }) {
   const esPropio = tipo === "propio";
   const avatarTexto = esPropio
     ? viaje.destino?.[0] || viaje.puntoEncuentro?.[0] || "?"
@@ -65,6 +65,9 @@ function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros }) {
     acciones.push({
       id: "puntuar",
       etiqueta: esPropio ? "Puntuar pasajeros" : "Puntuar conductor",
+      onClick: onPuntuar
+        ? () => onPuntuar(viaje, esPropio ? "propio" : "ajeno")
+        : undefined,
     });
   }
   if (!esPropio && estado === "pendiente") {
@@ -92,12 +95,10 @@ function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros }) {
         </div>
       </header>
 
-    {tipo === "ajeno" && (
+      {tipo === "ajeno" && (
         <div className="viaje-card__conductor">
           <div className="viaje-card__conductor-datos">
-            
             <div className="viaje-card__conductor-identidad">
-
               <span
                 className="viaje-card__label viaje-card__label-icon"
                 role="img"
@@ -105,7 +106,6 @@ function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros }) {
               >
                 <FaCar aria-hidden="true" />
               </span>
-
               <span className="viaje-card__conductor-nombre">
                 {viaje.conductor || "Por confirmar"}
               </span>
@@ -131,16 +131,16 @@ function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros }) {
           </div>
         </div>
       )}
-      
+
       {tipo === "ajeno" && (
-      <ul className="viaje-card__detalles">
-        {viaje.notas && (
-          <li className="viaje-card__nota">
-            <span className="viaje-card__label">Notas</span>
-            <span className="viaje-card__valor">{viaje.notas}</span>
-          </li>
-        )}
-      </ul>
+        <ul className="viaje-card__detalles">
+          {viaje.notas && (
+            <li className="viaje-card__nota">
+              <span className="viaje-card__label">Notas</span>
+              <span className="viaje-card__valor">{viaje.notas}</span>
+            </li>
+          )}
+        </ul>
       )}
       
 
@@ -180,10 +180,12 @@ TarjetaMiViaje.propTypes = {
   tipo: PropTypes.oneOf(["propio", "ajeno"]).isRequired,
   estado: PropTypes.oneOf(["pendiente", "finalizado"]).isRequired,
   onVerPasajeros: PropTypes.func,
+  onPuntuar: PropTypes.func,
 };
 
 TarjetaMiViaje.defaultProps = {
   onVerPasajeros: undefined,
+  onPuntuar: undefined,
 };
 
 export default TarjetaMiViaje;

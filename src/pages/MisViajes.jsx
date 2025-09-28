@@ -2,6 +2,7 @@ import { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import TarjetaMiViaje from "../components/TarjetaMiViaje";
 import ModalPasajeros from "../components/ModalPasajeros";
+import ModalPuntuacion from "../components/ModalPuntuacion";
 import "./MisViajes.css";
 
 const agruparPorEstado = (viajes) => {
@@ -16,11 +17,21 @@ const agruparPorEstado = (viajes) => {
   return { pendientes, finalizados };
 };
 
-function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "propios" }) {
+function MisViajes({
+  viajesPropios = [],
+  viajesAjenos = [],
+  pestaniaInicial = "propios",
+  onEnviarPuntuacion,
+}) {
   const [pestaniaActiva, setPestaniaActiva] = useState(pestaniaInicial);
   const [viajesPropiosEstado, setViajesPropiosEstado] = useState(viajesPropios);
   const [viajeSeleccionado, setViajeSeleccionado] = useState(null);
   const [modalPasajerosAbierto, setModalPasajerosAbierto] = useState(false);
+  const [modalPuntuacion, setModalPuntuacion] = useState({
+    abierto: false,
+    tipo: null,
+    viaje: null,
+  });
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -65,6 +76,22 @@ function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "p
   const handleCerrarModalPasajeros = () => {
     setModalPasajerosAbierto(false);
     setViajeSeleccionado(null);
+  };
+
+  const handleAbrirModalPuntuacion = (viaje, tipo) => {
+    setModalPuntuacion({ abierto: true, tipo, viaje });
+  };
+
+  const handleCerrarModalPuntuacion = () => {
+    setModalPuntuacion({ abierto: false, tipo: null, viaje: null });
+  };
+
+  const handleConfirmarPuntuacion = (datos) => {
+    if (typeof onEnviarPuntuacion === "function") {
+      onEnviarPuntuacion(datos);
+    }
+
+    handleCerrarModalPuntuacion();
   };
 
   const actualizarEstadoPasajero = (pasajeroId, nuevoEstado) => {
@@ -186,6 +213,7 @@ function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "p
                       ? () => handleVerPasajeros(viaje.id)
                       : undefined
                   }
+                  onPuntuar={handleAbrirModalPuntuacion}
                 />
               ))
             ) : (
@@ -208,6 +236,13 @@ function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "p
           viajeId={viajeSeleccionado.id}
         />
       )}
+      <ModalPuntuacion
+        abierto={modalPuntuacion.abierto}
+        tipo={modalPuntuacion.tipo}
+        viaje={modalPuntuacion.viaje}
+        onCerrar={handleCerrarModalPuntuacion}
+        onConfirmar={handleConfirmarPuntuacion}
+      />
     </main>
   );
 }
