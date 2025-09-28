@@ -68,8 +68,8 @@
 
 .modal-pasajeros__subtitulo {
   margin: 0 0 12px;
-  font-size: 1.1rem;
-  color: #333;
+  font-size: 16px;
+  color: #5a5656;
 }
 
 .modal-pasajeros__lista {
@@ -166,7 +166,7 @@
   font-size: 0.95rem;
 }
 
-@media (max-width: 480px) {
+@media (max-width: 360px) {
   .modal-pasajeros__contenedor {
     padding: 20px 16px;
     width: calc(100% - 24px);

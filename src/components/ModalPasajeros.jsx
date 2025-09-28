@@ -139,14 +139,7 @@ function ModalPasajeros({
                     {pasajero.nombre} {pasajero.apellido}
                   </span>
                   <div className="modal-pasajeros__acciones">
-                    <button
-                      type="button"
-                      className="modal-pasajeros__accion modal-pasajeros__accion--aceptar"
-                      onClick={() => onAceptarPasajero(pasajero.id)}
-                      aria-label={`Aceptar a ${pasajero.nombre} ${pasajero.apellido}`}
-                    >
-                      <FiCheck aria-hidden="true" />
-                    </button>
+                    
                     <button
                       type="button"
                       className="modal-pasajeros__accion modal-pasajeros__accion--rechazar"
@@ -154,6 +147,15 @@ function ModalPasajeros({
                       aria-label={`Rechazar a ${pasajero.nombre} ${pasajero.apellido}`}
                     >
                       <FiX aria-hidden="true" />
+                    </button>
+
+                    <button
+                      type="button"
+                      className="modal-pasajeros__accion modal-pasajeros__accion--aceptar"
+                      onClick={() => onAceptarPasajero(pasajero.id)}
+                      aria-label={`Aceptar a ${pasajero.nombre} ${pasajero.apellido}`}
+                    >
+                      <FiCheck aria-hidden="true" />
                     </button>
                   </div>
                 </li>
