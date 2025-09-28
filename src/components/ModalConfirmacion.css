@@ -44,25 +44,25 @@
   padding: 10px 16px;
   border-radius: 8px;
   font-weight: 600;
+  font-size: 12px;
   cursor: pointer;
   border: none;
   transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .modal-confirmacion__btn:focus {
-  outline: 2px solid #2563eb;
+  outline: 2px solid #fbc3bc;
   outline-offset: 2px;
 }
 
 .modal-confirmacion__btn--primario {
-  background: #2563eb;
+  background: #FF5841;
   color: #ffffff;
-  box-shadow: 0 10px 15px -10px rgba(37, 99, 235, 0.8);
 }
 
 .modal-confirmacion__btn--primario:hover {
   transform: translateY(-1px);
-  box-shadow: 0 15px 20px -15px rgba(37, 99, 235, 0.9);
+  box-shadow: 0 15px 20px -15px #fb604c;
 }
 
 .modal-confirmacion__btn--secundario {
@@ -76,7 +76,7 @@
   box-shadow: 0 15px 20px -15px rgba(82, 96, 109, 0.3);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 36px) {
   .modal-confirmacion__contenedor {
     padding: 20px;
   }
