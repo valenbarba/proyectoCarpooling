@@ -16,7 +16,6 @@ function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
     nombre,
     destino,
     fecha,
-    precio,
     comentario,
     rating = 0,
     reviewsCount = 0,
@@ -147,9 +146,7 @@ function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
             <li>
               <strong>Fecha y hora:</strong> {fecha}
             </li>
-            <li>
-              <strong>Costo por asiento:</strong> {precio}
-            </li>
+      
           </ul>
         </section>
 
