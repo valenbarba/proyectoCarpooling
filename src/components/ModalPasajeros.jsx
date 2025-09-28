@@ -1,5 +1,6 @@
 import PropTypes from "prop-types";
 import { useMemo } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { FiCheck, FiX } from "react-icons/fi";
 import "./ModalPasajeros.css";
 
@@ -18,7 +19,11 @@ function ModalPasajeros({
   fecha,
   onAceptarPasajero,
   onRechazarPasajero,
+  viajeId,
 }) {
+  const navigate = useNavigate();
+  const location = useLocation();
+
   const { aceptados, pendientes } = useMemo(() => {
     const aceptadosLista = [];
     const pendientesLista = [];
@@ -37,6 +42,42 @@ function ModalPasajeros({
   if (!abierto) {
     return null;
   }
+
+  const manejarClickPasajero = (pasajero) => {
+    navigate(`/perfil-pasajero/${pasajero.id}`, {
+      state: {
+        pasajero,
+        from: {
+          pathname: location.pathname,
+          state: {
+            viajeId,
+            reabrirModal: true,
+          },
+        },
+      },
+    });
+  };
+
+  const renderAvatarInteractivo = (pasajero) => (
+    <button
+      type="button"
+      className="modal-pasajeros__avatar-boton"
+      onClick={() => manejarClickPasajero(pasajero)}
+      aria-label={`Ver perfil de ${pasajero.nombre} ${pasajero.apellido}`}
+    >
+      {pasajero.avatar ? (
+        <img
+          className="modal-pasajeros__avatar"
+          src={pasajero.avatar}
+          alt=""
+        />
+      ) : (
+        <span className="modal-pasajeros__avatar modal-pasajeros__avatar--placeholder">
+          {obtenerIniciales(pasajero.nombre, pasajero.apellido)}
+        </span>
+      )}
+    </button>
+  );
 
   return (
     <div className="modal-pasajeros" role="dialog" aria-modal="true">
@@ -75,17 +116,7 @@ function ModalPasajeros({
             <ul className="modal-pasajeros__lista">
               {aceptados.map((pasajero) => (
                 <li key={pasajero.id} className="modal-pasajeros__item">
-                  {pasajero.avatar ? (
-                    <img
-                      className="modal-pasajeros__avatar"
-                      src={pasajero.avatar}
-                      alt={`${pasajero.nombre} ${pasajero.apellido}`}
-                    />
-                  ) : (
-                    <span className="modal-pasajeros__avatar modal-pasajeros__avatar--placeholder">
-                      {obtenerIniciales(pasajero.nombre, pasajero.apellido)}
-                    </span>
-                  )}
+                  {renderAvatarInteractivo(pasajero)}
                   <span className="modal-pasajeros__nombre">
                     {pasajero.nombre} {pasajero.apellido}
                   </span>
@@ -103,17 +134,7 @@ function ModalPasajeros({
             <ul className="modal-pasajeros__lista">
               {pendientes.map((pasajero) => (
                 <li key={pasajero.id} className="modal-pasajeros__item">
-                  {pasajero.avatar ? (
-                    <img
-                      className="modal-pasajeros__avatar"
-                      src={pasajero.avatar}
-                      alt={`${pasajero.nombre} ${pasajero.apellido}`}
-                    />
-                  ) : (
-                    <span className="modal-pasajeros__avatar modal-pasajeros__avatar--placeholder">
-                      {obtenerIniciales(pasajero.nombre, pasajero.apellido)}
-                    </span>
-                  )}
+                  {renderAvatarInteractivo(pasajero)}
                   <span className="modal-pasajeros__nombre">
                     {pasajero.nombre} {pasajero.apellido}
                   </span>
@@ -157,6 +178,16 @@ ModalPasajeros.propTypes = {
       nombre: PropTypes.string.isRequired,
       apellido: PropTypes.string.isRequired,
       avatar: PropTypes.string,
+      barrio: PropTypes.string,
+      lote: PropTypes.string,
+      telefono: PropTypes.string,
+      resenas: PropTypes.arrayOf(
+        PropTypes.shape({
+          id: PropTypes.string.isRequired,
+          autor: PropTypes.string,
+          comentario: PropTypes.string,
+        })
+      ),
       estado: PropTypes.oneOf(["aceptado", "pendiente", "rechazado"]).isRequired,
     })
   ),
@@ -164,6 +195,7 @@ ModalPasajeros.propTypes = {
   fecha: PropTypes.string,
   onAceptarPasajero: PropTypes.func.isRequired,
   onRechazarPasajero: PropTypes.func.isRequired,
+  viajeId: PropTypes.string,
 };
 
 ModalPasajeros.defaultProps = {
@@ -171,6 +203,7 @@ ModalPasajeros.defaultProps = {
   pasajeros: [],
   destino: "",
   fecha: undefined,
+  viajeId: undefined,
 };
 
 export default ModalPasajeros;

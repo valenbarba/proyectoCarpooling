@@ -21,7 +21,9 @@ const MainLayout = () => {
     "/notificaciones": "Notificaciones",
   };
 
-  const tituloHeader = titulosPorRuta[location.pathname] || "";
+  const tituloHeader = location.pathname.startsWith("/perfil-pasajero")
+    ? "Perfil del pasajero"
+    : titulosPorRuta[location.pathname] || "";
 
   const abrirMenuLateral = () => {
     setMenuVisible((prev) => !prev);

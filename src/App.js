@@ -9,6 +9,7 @@ import MainLayout from "./layouts/MainLayout";
 import Publicar from "./pages/Publicar";
 import NotificationPage from "./pages/NotificationPage";
 import MisViajes from "./pages/MisViajes";
+import PerfilPasajero from "./pages/PerfilPasajero";
 
 // ==== Datos de demostración ====
 // Se definen fuera de los componentes para que puedan reemplazarse fácilmente
@@ -78,6 +79,21 @@ const DATOS_DEMOSTRACION = {
           apellido: "Giménez",
           avatar: "https://i.pravatar.cc/120?img=32",
           estado: "aceptado",
+          barrio: "Haras Santa María",
+          lote: "1342",
+          telefono: "+54 9 11 4567-1234",
+          resenas: [
+            {
+              id: "prop-1-p1-r1",
+              autor: "Martín F.",
+              comentario: "Muy puntual y respetuosa durante los viajes.",
+            },
+            {
+              id: "prop-1-p1-r2",
+              autor: "Laura P.",
+              comentario: "Siempre avisa con tiempo si surge algún cambio.",
+            },
+          ],
         },
         {
           id: "prop-1-p2",
@@ -85,6 +101,21 @@ const DATOS_DEMOSTRACION = {
           apellido: "Bustos",
           avatar: "https://i.pravatar.cc/120?img=12",
           estado: "pendiente",
+          barrio: "Haras Santa María",
+          lote: "1180",
+          telefono: "+54 9 11 4789-6654",
+          resenas: [
+            {
+              id: "prop-1-p2-r1",
+              autor: "Gonzalo H.",
+              comentario: "Buena comunicación y siempre llega con casco para la bici plegable.",
+            },
+            {
+              id: "prop-1-p2-r2",
+              autor: "Sofía G.",
+              comentario: "Compartimos viaje a diario, muy amable.",
+            },
+          ],
         },
         {
           id: "prop-1-p3",
@@ -92,6 +123,16 @@ const DATOS_DEMOSTRACION = {
           apellido: "Nuñez",
           avatar: "https://i.pravatar.cc/120?img=45",
           estado: "pendiente",
+          barrio: "Haras Santa María",
+          lote: "1275",
+          telefono: "+54 9 11 5123-9087",
+          resenas: [
+            {
+              id: "prop-1-p3-r1",
+              autor: "Valentina R.",
+              comentario: "Siempre lleva mate y lo comparte con el grupo.",
+            },
+          ],
         },
       ],
     },
@@ -111,6 +152,21 @@ const DATOS_DEMOSTRACION = {
           apellido: "Sosa",
           avatar: "https://i.pravatar.cc/120?img=5",
           estado: "aceptado",
+          barrio: "Haras Santa María",
+          lote: "890",
+          telefono: "+54 9 11 4455-2266",
+          resenas: [
+            {
+              id: "prop-2-p1-r1",
+              autor: "Ignacio P.",
+              comentario: "Excelente compañera de viaje, muy organizada.",
+            },
+            {
+              id: "prop-2-p1-r2",
+              autor: "Carla N.",
+              comentario: "Siempre trae snacks para compartir.",
+            },
+          ],
         },
         {
           id: "prop-2-p2",
@@ -118,6 +174,16 @@ const DATOS_DEMOSTRACION = {
           apellido: "Herrera",
           avatar: "https://i.pravatar.cc/120?img=39",
           estado: "aceptado",
+          barrio: "Haras Santa María",
+          lote: "965",
+          telefono: "+54 9 11 4785-3344",
+          resenas: [
+            {
+              id: "prop-2-p2-r1",
+              autor: "Martín B.",
+              comentario: "Siempre ayuda con el equipaje pesado.",
+            },
+          ],
         },
         {
           id: "prop-2-p3",
@@ -125,6 +191,16 @@ const DATOS_DEMOSTRACION = {
           apellido: "Martínez",
           avatar: "https://i.pravatar.cc/120?img=16",
           estado: "pendiente",
+          barrio: "Haras Santa María",
+          lote: "1042",
+          telefono: "+54 9 11 4332-9090",
+          resenas: [
+            {
+              id: "prop-2-p3-r1",
+              autor: "Valentina R.",
+              comentario: "Muy amable, suele compartir playlists.",
+            },
+          ],
         },
       ],
     },
@@ -144,6 +220,16 @@ const DATOS_DEMOSTRACION = {
           apellido: "Rossi",
           avatar: "https://i.pravatar.cc/120?img=27",
           estado: "aceptado",
+          barrio: "Haras Santa María",
+          lote: "765",
+          telefono: "+54 9 11 4556-7788",
+          resenas: [
+            {
+              id: "prop-3-p1-r1",
+              autor: "Laura S.",
+              comentario: "Siempre ofrece ayuda para coordinar la logística.",
+            },
+          ],
         },
         {
           id: "prop-3-p2",
@@ -151,6 +237,16 @@ const DATOS_DEMOSTRACION = {
           apellido: "Quintana",
           avatar: "https://i.pravatar.cc/120?img=48",
           estado: "pendiente",
+          barrio: "Haras Santa María",
+          lote: "810",
+          telefono: "+54 9 11 4677-2211",
+          resenas: [
+            {
+              id: "prop-3-p2-r1",
+              autor: "Diego R.",
+              comentario: "Gran compañía, le encanta conversar de música.",
+            },
+          ],
         },
       ],
     },
@@ -272,6 +368,7 @@ function AppRoutes({
             />
           }
         />
+        <Route path="/perfil-pasajero/:id" element={<PerfilPasajero />} />
         <Route
           path="/notificaciones"
           element={

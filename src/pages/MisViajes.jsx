@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import TarjetaMiViaje from "../components/TarjetaMiViaje";
 import ModalPasajeros from "../components/ModalPasajeros";
 import "./MisViajes.css";
@@ -20,10 +21,36 @@ function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "p
   const [viajesPropiosEstado, setViajesPropiosEstado] = useState(viajesPropios);
   const [viajeSeleccionado, setViajeSeleccionado] = useState(null);
   const [modalPasajerosAbierto, setModalPasajerosAbierto] = useState(false);
+  const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setViajesPropiosEstado(viajesPropios);
   }, [viajesPropios]);
+
+  useEffect(() => {
+    const locationState = location.state;
+
+    if (locationState?.viajeId && locationState?.reabrirModal) {
+      const viaje = viajesPropiosEstado.find(
+        (item) => item.id === locationState.viajeId
+      );
+
+      if (viaje) {
+        setPestaniaActiva("propios");
+        setViajeSeleccionado(viaje);
+        setModalPasajerosAbierto(true);
+      }
+
+      const { viajeId: _viajeId, reabrirModal: _reabrirModal, ...restoEstado } =
+        locationState;
+
+      navigate(location.pathname, {
+        replace: true,
+        state: Object.keys(restoEstado).length > 0 ? restoEstado : undefined,
+      });
+    }
+  }, [location, navigate, viajesPropiosEstado]);
 
   const viajeSeleccionadoId = viajeSeleccionado?.id || null;
 
@@ -178,6 +205,7 @@ function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "p
           fecha={viajeSeleccionado.fecha}
           onAceptarPasajero={handleAceptarPasajero}
           onRechazarPasajero={handleRechazarPasajero}
+          viajeId={viajeSeleccionado.id}
         />
       )}
     </main>

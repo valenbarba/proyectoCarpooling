@@ -87,6 +87,22 @@
   gap: 12px;
 }
 
+.modal-pasajeros__avatar-boton {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-pasajeros__avatar-boton:focus-visible {
+  outline: 3px solid #1976d2;
+  outline-offset: 2px;
+  border-radius: 50%;
+}
+
 .modal-pasajeros__avatar {
   width: 44px;
   height: 44px;
@@ -101,6 +117,9 @@
   align-items: center;
   justify-content: center;
   font-weight: 600;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
 }
 
 .modal-pasajeros__nombre {
