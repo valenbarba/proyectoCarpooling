@@ -74,7 +74,6 @@ function Home({
   return (
     <FormContainer>
       <h2 className="seccion-titulo">Viajes Disponibles</h2>
-
       <LoadScript
         googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}
         libraries={["places"]}
@@ -88,7 +87,6 @@ function Home({
             >
               <FaSearch className="buscador-resumen__icono" aria-hidden="true" />
               <AutocompleteInput
-                label="Buscar un Viaje"
                 placeholder={
                   modoViaje === "hacia"
                     ? "Ingrese dirección de origen"
@@ -143,7 +141,7 @@ function Home({
                   </div>
                 </div>
 
-                <Button type="submit" className="botonBuscar">
+                <Button type="submit" className="botonBuscar" onClick={setMostrarTrayectos}>
                   Buscar
                 </Button>
               </div>
