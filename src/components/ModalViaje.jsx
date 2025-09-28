@@ -40,9 +40,14 @@ function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
         </button>
 
         <header className="modal-viaje__encabezado">
-          <div className="modal-viaje__avatar" aria-hidden="true">
+          <button
+            type="button"
+            className="modal-viaje__avatar-boton"
+            onClick={onVerPerfil}
+            aria-label={`Ver perfil de ${nombre || "conductor"}`}
+          >
             {nombre?.[0]?.toUpperCase() || "?"}
-          </div>
+          </button>
           <div>
             <h3 id={tituloId} className="modal-viaje__titulo">
               Viaje con {nombre}
