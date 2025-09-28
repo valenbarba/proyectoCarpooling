@@ -47,12 +47,7 @@ function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
     resenas,
   };
 
-  const manejarVerPerfil = () => {
-    if (onVerPerfil) {
-      onVerPerfil(viaje);
-      return;
-    }
-
+  const navegarAPerfil = () => {
     if (!datosConductor.id) {
       return;
     }
@@ -69,6 +64,29 @@ function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
         },
       },
     });
+  };
+
+  const manejarVerPerfil = () => {
+    const resultado = onVerPerfil?.(datosConductor, viaje);
+
+    if (resultado === true) {
+      return;
+    }
+
+    if (resultado instanceof Promise) {
+      resultado
+        .then((valor) => {
+          if (valor !== true) {
+            navegarAPerfil();
+          }
+        })
+        .catch(() => {
+          navegarAPerfil();
+        });
+      return;
+    }
+
+    navegarAPerfil();
   };
 
   return (

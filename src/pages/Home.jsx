@@ -78,9 +78,9 @@ function Home({
     setViajeAConfirmar(null);
   };
 
-  const handleVerPerfil = () => {
-    if (viajeSeleccionado) {
-      onVerPerfilConductor?.(viajeSeleccionado);
+  const handleVerPerfil = (datosConductor, viaje = viajeSeleccionado) => {
+    if (viaje) {
+      onVerPerfilConductor?.(datosConductor || viaje, viaje);
     }
   };
 
