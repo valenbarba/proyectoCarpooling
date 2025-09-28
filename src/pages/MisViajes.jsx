@@ -1,5 +1,6 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import TarjetaMiViaje from "../components/TarjetaMiViaje";
+import ModalPasajeros from "../components/ModalPasajeros";
 import "./MisViajes.css";
 
 const agruparPorEstado = (viajes) => {
@@ -16,11 +17,69 @@ const agruparPorEstado = (viajes) => {
 
 function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "propios" }) {
   const [pestaniaActiva, setPestaniaActiva] = useState(pestaniaInicial);
+  const [viajesPropiosEstado, setViajesPropiosEstado] = useState(viajesPropios);
+  const [viajeSeleccionado, setViajeSeleccionado] = useState(null);
+  const [modalPasajerosAbierto, setModalPasajerosAbierto] = useState(false);
+
+  useEffect(() => {
+    setViajesPropiosEstado(viajesPropios);
+  }, [viajesPropios]);
+
+  const viajeSeleccionadoId = viajeSeleccionado?.id || null;
+
+  const handleVerPasajeros = (viajeId) => {
+    const viaje = viajesPropiosEstado.find((item) => item.id === viajeId);
+    if (viaje) {
+      setViajeSeleccionado(viaje);
+      setModalPasajerosAbierto(true);
+    }
+  };
+
+  const handleCerrarModalPasajeros = () => {
+    setModalPasajerosAbierto(false);
+    setViajeSeleccionado(null);
+  };
+
+  const actualizarEstadoPasajero = (pasajeroId, nuevoEstado) => {
+    if (!viajeSeleccionadoId) return;
+
+    setViajesPropiosEstado((viajesPrevios) =>
+      viajesPrevios.map((viaje) => {
+        if (viaje.id !== viajeSeleccionadoId) return viaje;
+        const pasajerosActualizados = (viaje.pasajeros || []).map((pasajero) =>
+          pasajero.id === pasajeroId
+            ? { ...pasajero, estado: nuevoEstado }
+            : pasajero
+        );
+
+        return { ...viaje, pasajeros: pasajerosActualizados };
+      })
+    );
+
+    setViajeSeleccionado((viajePrevio) => {
+      if (!viajePrevio || viajePrevio.id !== viajeSeleccionadoId) return viajePrevio;
+      const pasajerosActualizados = (viajePrevio.pasajeros || []).map((pasajero) =>
+        pasajero.id === pasajeroId
+          ? { ...pasajero, estado: nuevoEstado }
+          : pasajero
+      );
+
+      return { ...viajePrevio, pasajeros: pasajerosActualizados };
+    });
+  };
+
+  const handleAceptarPasajero = (pasajeroId) => {
+    actualizarEstadoPasajero(pasajeroId, "aceptado");
+  };
+
+  const handleRechazarPasajero = (pasajeroId) => {
+    actualizarEstadoPasajero(pasajeroId, "rechazado");
+  };
 
   // Agrupamos los viajes recibidos según si son próximos o ya finalizaron.
   const datosPropios = useMemo(
-    () => agruparPorEstado(viajesPropios),
-    [viajesPropios]
+    () => agruparPorEstado(viajesPropiosEstado),
+    [viajesPropiosEstado]
   );
   const datosAjenos = useMemo(() => agruparPorEstado(viajesAjenos), [viajesAjenos]);
 
@@ -70,6 +129,11 @@ function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "p
                   viaje={viaje}
                   tipo={tipoActual}
                   estado="pendiente"
+                  onVerPasajeros={
+                    tipoActual === "propio"
+                      ? () => handleVerPasajeros(viaje.id)
+                      : undefined
+                  }
                 />
               ))
             ) : (
@@ -90,6 +154,11 @@ function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "p
                   viaje={viaje}
                   tipo={tipoActual}
                   estado="finalizado"
+                  onVerPasajeros={
+                    tipoActual === "propio"
+                      ? () => handleVerPasajeros(viaje.id)
+                      : undefined
+                  }
                 />
               ))
             ) : (
@@ -100,6 +169,17 @@ function MisViajes({ viajesPropios = [], viajesAjenos = [], pestaniaInicial = "p
           </div>
         </div>
       </section>
+      {viajeSeleccionado && (
+        <ModalPasajeros
+          abierto={modalPasajerosAbierto}
+          onCerrar={handleCerrarModalPasajeros}
+          pasajeros={viajeSeleccionado.pasajeros}
+          destino={viajeSeleccionado.destino}
+          fecha={viajeSeleccionado.fecha}
+          onAceptarPasajero={handleAceptarPasajero}
+          onRechazarPasajero={handleRechazarPasajero}
+        />
+      )}
     </main>
   );
 }

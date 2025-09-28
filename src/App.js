@@ -71,6 +71,29 @@ const DATOS_DEMOSTRACION = {
       pasajerosConfirmados: 2,
       capacidadTotal: 3,
       notas: "Salgo puntual, llevar cambio si necesitan pagar en efectivo.",
+      pasajeros: [
+        {
+          id: "prop-1-p1",
+          nombre: "Sofía",
+          apellido: "Giménez",
+          avatar: "https://i.pravatar.cc/120?img=32",
+          estado: "aceptado",
+        },
+        {
+          id: "prop-1-p2",
+          nombre: "Martín",
+          apellido: "Bustos",
+          avatar: "https://i.pravatar.cc/120?img=12",
+          estado: "pendiente",
+        },
+        {
+          id: "prop-1-p3",
+          nombre: "Carla",
+          apellido: "Nuñez",
+          avatar: "https://i.pravatar.cc/120?img=45",
+          estado: "pendiente",
+        },
+      ],
     },
     {
       id: "prop-2",
@@ -81,6 +104,29 @@ const DATOS_DEMOSTRACION = {
       pasajerosConfirmados: 3,
       capacidadTotal: 4,
       notas: "Gracias por avisar si se retrasan. Tengo lugar para equipaje chico.",
+      pasajeros: [
+        {
+          id: "prop-2-p1",
+          nombre: "Laura",
+          apellido: "Sosa",
+          avatar: "https://i.pravatar.cc/120?img=5",
+          estado: "aceptado",
+        },
+        {
+          id: "prop-2-p2",
+          nombre: "Gonzalo",
+          apellido: "Herrera",
+          avatar: "https://i.pravatar.cc/120?img=39",
+          estado: "aceptado",
+        },
+        {
+          id: "prop-2-p3",
+          nombre: "Elena",
+          apellido: "Martínez",
+          avatar: "https://i.pravatar.cc/120?img=16",
+          estado: "pendiente",
+        },
+      ],
     },
     {
       id: "prop-3",
@@ -91,6 +137,22 @@ const DATOS_DEMOSTRACION = {
       pasajerosConfirmados: 1,
       capacidadTotal: 3,
       notas: "Puedo desviar hasta la colectora si alguien lo necesita.",
+      pasajeros: [
+        {
+          id: "prop-3-p1",
+          nombre: "Diego",
+          apellido: "Rossi",
+          avatar: "https://i.pravatar.cc/120?img=27",
+          estado: "aceptado",
+        },
+        {
+          id: "prop-3-p2",
+          nombre: "Lucía",
+          apellido: "Quintana",
+          avatar: "https://i.pravatar.cc/120?img=48",
+          estado: "pendiente",
+        },
+      ],
     },
   ],
   viajesAjenos: [

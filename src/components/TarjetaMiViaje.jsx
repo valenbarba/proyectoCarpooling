@@ -16,7 +16,7 @@ const obtenerIniciales = (texto) => {
   return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
 };
 
-function TarjetaMiViaje({ viaje, tipo, estado }) {
+function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros }) {
   const esPropio = tipo === "propio";
   const avatarTexto = esPropio
     ? viaje.destino?.[0] || viaje.puntoEncuentro?.[0] || "?"
@@ -52,10 +52,14 @@ function TarjetaMiViaje({ viaje, tipo, estado }) {
   const acciones = [];
 
   if (esPropio && estado === "pendiente") {
-    acciones.push({ id: "editar-viaje", etiqueta: "Editar viaje"})
+    acciones.push({ id: "editar-viaje", etiqueta: "Editar viaje" });
   }
   if (esPropio) {
-    acciones.push({ id: "ver-pasajeros", etiqueta: "Ver pasajeros" }); 
+    acciones.push({
+      id: "ver-pasajeros",
+      etiqueta: "Ver pasajeros",
+      onClick: onVerPasajeros,
+    });
   }
   if (estado === "finalizado") {
     acciones.push({
@@ -63,8 +67,8 @@ function TarjetaMiViaje({ viaje, tipo, estado }) {
       etiqueta: esPropio ? "Puntuar pasajeros" : "Puntuar conductor",
     });
   }
-  if (!esPropio && estado === "pendiente"){
-    acciones.push({ id: "cancelar-asistencia", etiqueta: "Cancelar" }); 
+  if (!esPropio && estado === "pendiente") {
+    acciones.push({ id: "cancelar-asistencia", etiqueta: "Cancelar" });
   }
   
 
@@ -143,7 +147,13 @@ function TarjetaMiViaje({ viaje, tipo, estado }) {
       {acciones.length > 0 && (
         <div className="viaje-card__acciones">
           {acciones.map((accion) => (
-            <button key={accion.id} type="button" id={accion.id} className="viaje-card__boton">
+            <button
+              key={accion.id}
+              type="button"
+              id={accion.id}
+              className="viaje-card__boton"
+              onClick={accion.onClick}
+            >
               {accion.etiqueta}
             </button>
           ))}
@@ -169,6 +179,11 @@ TarjetaMiViaje.propTypes = {
   }).isRequired,
   tipo: PropTypes.oneOf(["propio", "ajeno"]).isRequired,
   estado: PropTypes.oneOf(["pendiente", "finalizado"]).isRequired,
+  onVerPasajeros: PropTypes.func,
+};
+
+TarjetaMiViaje.defaultProps = {
+  onVerPasajeros: undefined,
 };
 
 export default TarjetaMiViaje;
