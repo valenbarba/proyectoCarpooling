@@ -1,9 +1,12 @@
 import { useId } from "react";
 import { FaStar, FaTimes } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
 import "./ModalViaje.css";
 
 function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
   const tituloId = useId();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   if (!isOpen || !viaje) {
     return null;
@@ -17,10 +20,56 @@ function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
     comentario,
     rating = 0,
     reviewsCount = 0,
+    id: viajeId,
+    conductorId,
+    apellido,
+    avatar,
+    barrio,
+    lote,
+    telefono,
+    resenas,
+    conductor,
   } = viaje;
 
   const maxEstrellas = 5;
   const estrellas = Array.from({ length: maxEstrellas }, (_, index) => index + 1);
+
+  const nombreConductor = nombre || conductor || "Conductor";
+
+  const datosConductor = {
+    id: conductorId || viajeId,
+    nombre: nombreConductor,
+    apellido: apellido || "",
+    avatar,
+    barrio,
+    lote,
+    telefono,
+    resenas,
+  };
+
+  const manejarVerPerfil = () => {
+    if (onVerPerfil) {
+      onVerPerfil(viaje);
+      return;
+    }
+
+    if (!datosConductor.id) {
+      return;
+    }
+
+    navigate(`/perfil-pasajero/${datosConductor.id}`, {
+      state: {
+        pasajero: datosConductor,
+        from: {
+          pathname: location.pathname,
+          state: {
+            viajeId,
+            reabrirModal: true,
+          },
+        },
+      },
+    });
+  };
 
   return (
     <div
@@ -43,14 +92,14 @@ function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
           <button
             type="button"
             className="modal-viaje__avatar-boton"
-            onClick={onVerPerfil}
-            aria-label={`Ver perfil de ${nombre || "conductor"}`}
+            onClick={manejarVerPerfil}
+            aria-label={`Ver perfil de ${nombreConductor}`}
           >
-            {nombre?.[0]?.toUpperCase() || "?"}
+            {nombreConductor?.[0]?.toUpperCase() || "?"}
           </button>
           <div>
             <h3 id={tituloId} className="modal-viaje__titulo">
-              Viaje con {nombre}
+              Viaje con {nombreConductor}
             </h3>
             <div className="modal-viaje__estrellas" aria-label={`Puntaje ${rating} de ${maxEstrellas}`}>
               {estrellas.map((valor) => (
@@ -94,7 +143,7 @@ function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
         )}
 
         <footer className="modal-viaje__acciones">
-          <button type="button" className="modal-viaje__btn" onClick={onVerPerfil}>
+          <button type="button" className="modal-viaje__btn" onClick={manejarVerPerfil}>
             Ver perfil del conductor
           </button>
           <button type="button" className="modal-viaje__btn modal-viaje__btn--secundario" onClick={onClose}>
