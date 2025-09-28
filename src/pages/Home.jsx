@@ -5,6 +5,7 @@ import FormContainer from "../components/FormContainer";
 import Button from "../components/Button";
 import TarjetaViaje from "../components/TarjetaViaje";
 import ModalViaje from "../components/ModalViaje";
+import ModalConfirmacion from "../components/ModalConfirmacion";
 import { FaSearch, FaChevronDown } from "react-icons/fa";
 import "./Home.css";
 
@@ -25,6 +26,7 @@ function Home({
   const [seRealizoBusqueda, setSeRealizoBusqueda] = useState(false);
   const resultadosRef = useRef(null);
   const buscadorContentId = useId();
+  const [viajeAConfirmar, setViajeAConfirmar] = useState(null);
 
   useEffect(() => {
     // Al recibir nuevos viajes (por ejemplo, desde el backend) se muestran automáticamente.
@@ -62,7 +64,18 @@ function Home({
   };
 
   const handleSumarse = (trayecto) => {
-    onSumarseViaje?.(trayecto);
+    setViajeAConfirmar(trayecto);
+  };
+
+  const cerrarConfirmacion = () => {
+    setViajeAConfirmar(null);
+  };
+
+  const confirmarSumarse = () => {
+    if (viajeAConfirmar) {
+      onSumarseViaje?.(viajeAConfirmar);
+    }
+    setViajeAConfirmar(null);
   };
 
   const handleVerPerfil = () => {
@@ -177,6 +190,22 @@ function Home({
         viaje={viajeSeleccionado}
         onClose={cerrarModalViaje}
         onVerPerfil={handleVerPerfil}
+      />
+
+      <ModalConfirmacion
+        isOpen={Boolean(viajeAConfirmar)}
+        titulo="Confirmar solicitud"
+        descripcion={
+          viajeAConfirmar
+            ? `¿Desea enviar una solicitud a ${
+                viajeAConfirmar.nombre || "el conductor"
+              } para sumarse al viaje?`
+            : ""
+        }
+        confirmText="Enviar solicitud"
+        cancelText="Cancelar"
+        onConfirm={confirmarSumarse}
+        onCancel={cerrarConfirmacion}
       />
     </FormContainer>
   );
