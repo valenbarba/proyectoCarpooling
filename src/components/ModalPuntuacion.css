@@ -13,6 +13,7 @@
   inset: 0;
   background: rgba(17, 24, 39, 0.55);
   pointer-events: auto;
+  z-index: 1;
 }
 
 .modal-puntuacion__contenedor {
@@ -26,6 +27,7 @@
   display: flex;
   flex-direction: column;
   pointer-events: auto;
+  z-index: 2;
 }
 
 .modal-puntuacion__encabezado {
