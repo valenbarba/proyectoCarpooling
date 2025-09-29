@@ -8,6 +8,7 @@
   gap: 0.85rem;
   box-shadow: 0 10px 20px rgba(47, 42, 45, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+  position: relative;
 }
 
 .viaje-card:hover {
@@ -25,6 +26,43 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
+}
+
+.viaje-card__header--con-estado {
+  padding-right: 2.5rem;
+}
+
+.viaje-card__estado {
+  position: absolute;
+  top: 0.85rem;
+  right: 0.85rem;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.1rem;
+  border: 2px solid transparent;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+}
+
+.viaje-card__estado svg {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+.viaje-card__estado--pendiente {
+  color: #d58b01;
+  border-color: rgba(213, 139, 1, 0.35);
+  background-color: rgba(247, 224, 182, 0.35);
+}
+
+.viaje-card__estado--aceptada {
+  color: #1f9d55;
+  border-color: rgba(31, 157, 85, 0.35);
+  background-color: rgba(192, 237, 211, 0.35);
 }
 
 .viaje-card__header-principal {

@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import "./TarjetaMiViaje.css";
 import { FaCar } from "react-icons/fa";
+import { FiCheck, FiClock } from "react-icons/fi";
 
 const formatFecha = (fechaISO, opciones) => {
   const fecha = new Date(fechaISO);
@@ -75,11 +76,41 @@ function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros, onPuntuar }) {
   }
   
 
+  const estadoSolicitudCrudo = (viaje.estadoSolicitud || viaje.estadoReserva || "")
+    .toString()
+    .toLowerCase();
+  const estadoSolicitud =
+    estadoSolicitudCrudo === "aceptada" || estadoSolicitudCrudo === "aceptado"
+      ? "aceptada"
+      : estadoSolicitudCrudo === "confirmada" || estadoSolicitudCrudo === "confirmado"
+      ? "aceptada"
+      : "pendiente";
+
+  const estadoSolicitudEtiqueta =
+    estadoSolicitud === "aceptada" ? "Solicitud aceptada" : "Solicitud pendiente";
+
   return (
     <article
       className={`viaje-card${estado === "finalizado" ? " viaje-card--finalizado" : ""}`}
     >
-      <header className="viaje-card__header">
+      <header
+        className={`viaje-card__header${
+          !esPropio ? " viaje-card__header--con-estado" : ""
+        }`}
+      >
+        {!esPropio && (
+          <div
+            className={`viaje-card__estado viaje-card__estado--${estadoSolicitud}`}
+            role="img"
+            aria-label={estadoSolicitudEtiqueta}
+          >
+            {estadoSolicitud === "aceptada" ? (
+              <FiCheck aria-hidden="true" />
+            ) : (
+              <FiClock aria-hidden="true" />
+            )}
+          </div>
+        )}
         <div className="viaje-card__header-principal">
           <div className="viaje-card__avatar" aria-hidden="true">
             {avatarTexto}
@@ -176,6 +207,8 @@ TarjetaMiViaje.propTypes = {
     notas: PropTypes.string,
     direccion: PropTypes.string,
     contactoConductor: PropTypes.string,
+    estadoSolicitud: PropTypes.string,
+    estadoReserva: PropTypes.string,
   }).isRequired,
   tipo: PropTypes.oneOf(["propio", "ajeno"]).isRequired,
   estado: PropTypes.oneOf(["pendiente", "finalizado"]).isRequired,
