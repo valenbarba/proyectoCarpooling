@@ -294,7 +294,7 @@
   transform: translateY(-1px);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 780px) {
   .viaje-card {
     padding: 0.9rem;
     border-radius: 14px;
@@ -345,9 +345,7 @@
     flex-wrap: wrap;
   }
 
-  .viaje-card__acciones {
-    justify-content: flex-start;
-  }
+  
 }
 
 #editar-viaje {
