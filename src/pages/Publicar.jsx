@@ -163,8 +163,15 @@ function Publicar() {
         {success && <div className="mensajeExito">{success}</div>}
 
         <form onSubmit={handleSubmit} className="form-publicar">
+
           <div className="input-group">
+            
+            <div className="campo-label">
+              <label className="etiqueta">Tipo de viaje:</label>
+            </div>
+
             <div className="radio-viaje">
+              
               <label>
                 <input
                   type="radio"

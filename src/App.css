@@ -16,6 +16,9 @@ h1, h2, h3, .titulo, button, label, p, :placeholder-shown{
 
 }
 
+label {
+  font-weight: 600;
+}
 
 
 
