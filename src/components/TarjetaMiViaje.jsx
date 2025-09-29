@@ -1,9 +1,7 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import "./TarjetaMiViaje.css";
 import { FaCar } from "react-icons/fa";
 import { FiCheck, FiClock } from "react-icons/fi";
-import ModalConfirmacion from "./ModalConfirmacion";
 
 const formatFecha = (fechaISO, opciones) => {
   const fecha = new Date(fechaISO);
@@ -28,20 +26,6 @@ function TarjetaMiViaje({
   onCancelar,
 }) {
   const esPropio = tipo === "propio";
-  const [mostrarModalCancelacion, setMostrarModalCancelacion] = useState(false);
-
-  const abrirModalCancelacion = () => {
-    setMostrarModalCancelacion(true);
-  };
-
-  const cerrarModalCancelacion = () => {
-    setMostrarModalCancelacion(false);
-  };
-
-  const confirmarCancelacion = () => {
-    setMostrarModalCancelacion(false);
-    onCancelar?.(viaje);
-  };
   const avatarTexto = esPropio
     ? viaje.destino?.[0] || viaje.puntoEncuentro?.[0] || "?"
     : obtenerIniciales(viaje.conductor);
@@ -98,7 +82,7 @@ function TarjetaMiViaje({
     acciones.push({
       id: "cancelar-asistencia",
       etiqueta: "Cancelar",
-      onClick: abrirModalCancelacion,
+      onClick: () => onCancelar?.(viaje),
     });
   }
   
@@ -217,16 +201,6 @@ function TarjetaMiViaje({
           ))}
         </div>
       )}
-
-      <ModalConfirmacion
-        isOpen={mostrarModalCancelacion}
-        titulo="Cancelar solicitud"
-        descripcion="¿Estás seguro de que deseas cancelar la solicitud del viaje?"
-        confirmText="Sí, cancelar"
-        cancelText="No, volver"
-        onConfirm={confirmarCancelacion}
-        onCancel={cerrarModalCancelacion}
-      />
     </article>
   );
 }

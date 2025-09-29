@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import TarjetaMiViaje from "../components/TarjetaMiViaje";
 import ModalPasajeros from "../components/ModalPasajeros";
 import ModalPuntuacion from "../components/ModalPuntuacion";
+import ModalConfirmacion from "../components/ModalConfirmacion";
 import "./MisViajes.css";
 
 const agruparPorEstado = (viajes) => {
@@ -22,6 +23,7 @@ function MisViajes({
   viajesAjenos = [],
   pestaniaInicial = "propios",
   onEnviarPuntuacion,
+  onCancelarSolicitud,
 }) {
   const [pestaniaActiva, setPestaniaActiva] = useState(pestaniaInicial);
   const [viajesPropiosEstado, setViajesPropiosEstado] = useState(viajesPropios);
@@ -32,6 +34,7 @@ function MisViajes({
     tipo: null,
     viaje: null,
   });
+  const [viajeACancelar, setViajeACancelar] = useState(null);
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -92,6 +95,22 @@ function MisViajes({
     }
 
     handleCerrarModalPuntuacion();
+  };
+
+  const handleAbrirModalCancelacion = (viaje) => {
+    setViajeACancelar(viaje);
+  };
+
+  const handleCerrarModalCancelacion = () => {
+    setViajeACancelar(null);
+  };
+
+  const handleConfirmarCancelacion = () => {
+    if (viajeACancelar && typeof onCancelarSolicitud === "function") {
+      onCancelarSolicitud(viajeACancelar);
+    }
+
+    setViajeACancelar(null);
   };
 
   const actualizarEstadoPasajero = (pasajeroId, nuevoEstado) => {
@@ -188,6 +207,7 @@ function MisViajes({
                       ? () => handleVerPasajeros(viaje.id)
                       : undefined
                   }
+                  onCancelar={() => handleAbrirModalCancelacion(viaje)}
                 />
               ))
             ) : (
@@ -242,6 +262,15 @@ function MisViajes({
         viaje={modalPuntuacion.viaje}
         onCerrar={handleCerrarModalPuntuacion}
         onConfirmar={handleConfirmarPuntuacion}
+      />
+      <ModalConfirmacion
+        isOpen={Boolean(viajeACancelar)}
+        titulo="Cancelar solicitud"
+        descripcion="¿Estás seguro de que deseas cancelar la solicitud del viaje?"
+        confirmText="Sí, cancelar"
+        cancelText="No, volver"
+        onConfirm={handleConfirmarCancelacion}
+        onCancel={handleCerrarModalCancelacion}
       />
     </main>
   );
