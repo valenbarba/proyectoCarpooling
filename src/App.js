@@ -260,7 +260,7 @@ const DATOS_DEMOSTRACION = {
       conductor: "Martín Fernández",
       asientoReservado: "Asiento 2 de 3",
       notas: "El viaje incluye peaje, llevar SUBE si quieren combinar.",
-      estadoSolicitud: "confirmada",
+      estadoSolicitud: "pendiente",
     },
     {
       id: "aj-2",
@@ -271,7 +271,7 @@ const DATOS_DEMOSTRACION = {
       conductor: "Valentina Ruiz",
       asientoReservado: "Asiento 1 de 4",
       notas: "Gran viaje, conducción muy segura.",
-      estadoSolicitud: "pendiente",
+      estadoSolicitud: "confirmada",
     },
     {
       id: "aj-3",
