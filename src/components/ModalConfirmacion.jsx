@@ -1,4 +1,5 @@
 import { useId } from "react";
+import { createPortal } from "react-dom";
 import "./ModalConfirmacion.css";
 
 function ModalConfirmacion({
@@ -17,13 +18,17 @@ function ModalConfirmacion({
     return null;
   }
 
+  if (typeof document === "undefined") {
+    return null;
+  }
+
   const handleOverlayClick = (event) => {
     if (event.target === event.currentTarget) {
       onCancel?.();
     }
   };
 
-  return (
+  return createPortal(
     <div
       className="modal-confirmacion__overlay"
       role="dialog"
@@ -59,7 +64,8 @@ function ModalConfirmacion({
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 

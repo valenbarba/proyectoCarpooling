@@ -17,7 +17,14 @@ const obtenerIniciales = (texto) => {
   return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
 };
 
-function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros, onPuntuar }) {
+function TarjetaMiViaje({
+  viaje,
+  tipo,
+  estado,
+  onVerPasajeros,
+  onPuntuar,
+  onCancelar,
+}) {
   const esPropio = tipo === "propio";
   const avatarTexto = esPropio
     ? viaje.destino?.[0] || viaje.puntoEncuentro?.[0] || "?"
@@ -72,7 +79,11 @@ function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros, onPuntuar }) {
     });
   }
   if (!esPropio && estado === "pendiente") {
-    acciones.push({ id: "cancelar-asistencia", etiqueta: "Cancelar" });
+    acciones.push({
+      id: "cancelar-asistencia",
+      etiqueta: "Cancelar",
+      onClick: () => onCancelar?.(viaje),
+    });
   }
   
 
@@ -214,11 +225,13 @@ TarjetaMiViaje.propTypes = {
   estado: PropTypes.oneOf(["pendiente", "finalizado"]).isRequired,
   onVerPasajeros: PropTypes.func,
   onPuntuar: PropTypes.func,
+  onCancelar: PropTypes.func,
 };
 
 TarjetaMiViaje.defaultProps = {
   onVerPasajeros: undefined,
   onPuntuar: undefined,
+  onCancelar: undefined,
 };
 
 export default TarjetaMiViaje;
