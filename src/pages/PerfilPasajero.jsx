@@ -69,7 +69,6 @@ function PerfilPasajero() {
             </h1>
             <p className="perfil-pasajero__dato">{ubicacionTexto}</p>
             <p className="perfil-pasajero__dato">{telefonoTexto}</p>
-            <p className="perfil-pasajero__identificador">ID del pasajero: {pasajero.id || id}</p>
           </section>
 
           <section className="perfil-pasajero__resenas" aria-labelledby="perfil-pasajero-resenas">

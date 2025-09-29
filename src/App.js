@@ -136,10 +136,10 @@ const DATOS_DEMOSTRACION = {
     },
     {
       id: "prop-2",
-      destino: "Centro de Escobar",
+      destino: "Escobar Centro",
       fecha: crearFechaRelativa(-4, 17, 30),
       puntoEncuentro: "Club House - Estacionamiento",
-      direccion: "Club House - Camino Central 450",
+      direccion: "Tapia de Cruz 376, Escobar",
       pasajerosConfirmados: 3,
       capacidadTotal: 4,
       notas: "Gracias por avisar si se retrasan. Tengo lugar para equipaje chico.",
