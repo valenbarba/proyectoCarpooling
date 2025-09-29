@@ -311,7 +311,7 @@ const DATOS_DEMOSTRACION = {
   solicitudes: [
     {
       id: "sol-1",
-      titulo: "Solicitud de grupo",
+      titulo: "Solicitud de viaje",
       descripcion:
         "Valentina solicitó unirse a tu viaje hacia USAL Pilar el 7 de Octubre a las 18:00 hrs.",
       icono: FiUsers,
@@ -320,7 +320,7 @@ const DATOS_DEMOSTRACION = {
         id: "pas-987",
         nombre: "Valentina",
         apellido: "Ruiz",
-        avatar: "https://i.pravatar.cc/120?img=45",
+        
         barrio: "Haras Santa María",
         lote: "1275",
         telefono: "+54 9 11 4899-1188",
