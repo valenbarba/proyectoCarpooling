@@ -1,3 +1,71 @@
+
+.notificacion-card__icono--avatar {
+  padding: 0;
+  background: transparent;
+}
+
+.notificacion-card__icono--avatar .request-notificacion__avatar-boton {
+  width: 44px;
+  height: 44px;
+}
+
+.request-notificacion__avatar-boton {
+  border-radius: 12px;
+  border: none;
+  padding: 0;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #fce2df;
+  color: #ff5841;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.request-notificacion__avatar-boton:hover,
+.request-notificacion__avatar-boton:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 0 0 3px rgba(197, 54, 120, 0.15);
+}
+
+.request-notificacion__avatar {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.request-notificacion__avatar--placeholder {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  background: #fce2df;
+  color: #ff5841;
+}
+
+.request-notificacion__info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  margin-bottom: 0.65rem;
+}
+
+.request-notificacion__nombre {
+  font-weight: 600;
+  color: #27272a;
+}
+
+.request-notificacion__detalle {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
 .notificacion-card__acciones {
   margin-top: 0.75rem;
   display: flex;
