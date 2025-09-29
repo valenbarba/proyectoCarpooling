@@ -1,7 +1,9 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import "./TarjetaMiViaje.css";
 import { FaCar } from "react-icons/fa";
 import { FiCheck, FiClock } from "react-icons/fi";
+import ModalConfirmacion from "./ModalConfirmacion";
 
 const formatFecha = (fechaISO, opciones) => {
   const fecha = new Date(fechaISO);
@@ -17,8 +19,29 @@ const obtenerIniciales = (texto) => {
   return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
 };
 
-function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros, onPuntuar }) {
+function TarjetaMiViaje({
+  viaje,
+  tipo,
+  estado,
+  onVerPasajeros,
+  onPuntuar,
+  onCancelar,
+}) {
   const esPropio = tipo === "propio";
+  const [mostrarModalCancelacion, setMostrarModalCancelacion] = useState(false);
+
+  const abrirModalCancelacion = () => {
+    setMostrarModalCancelacion(true);
+  };
+
+  const cerrarModalCancelacion = () => {
+    setMostrarModalCancelacion(false);
+  };
+
+  const confirmarCancelacion = () => {
+    setMostrarModalCancelacion(false);
+    onCancelar?.(viaje);
+  };
   const avatarTexto = esPropio
     ? viaje.destino?.[0] || viaje.puntoEncuentro?.[0] || "?"
     : obtenerIniciales(viaje.conductor);
@@ -72,7 +95,11 @@ function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros, onPuntuar }) {
     });
   }
   if (!esPropio && estado === "pendiente") {
-    acciones.push({ id: "cancelar-asistencia", etiqueta: "Cancelar" });
+    acciones.push({
+      id: "cancelar-asistencia",
+      etiqueta: "Cancelar",
+      onClick: abrirModalCancelacion,
+    });
   }
   
 
@@ -190,6 +217,16 @@ function TarjetaMiViaje({ viaje, tipo, estado, onVerPasajeros, onPuntuar }) {
           ))}
         </div>
       )}
+
+      <ModalConfirmacion
+        isOpen={mostrarModalCancelacion}
+        titulo="Cancelar solicitud"
+        descripcion="¿Estás seguro de que deseas cancelar la solicitud del viaje?"
+        confirmText="Sí, cancelar"
+        cancelText="No, volver"
+        onConfirm={confirmarCancelacion}
+        onCancel={cerrarModalCancelacion}
+      />
     </article>
   );
 }
@@ -214,11 +251,13 @@ TarjetaMiViaje.propTypes = {
   estado: PropTypes.oneOf(["pendiente", "finalizado"]).isRequired,
   onVerPasajeros: PropTypes.func,
   onPuntuar: PropTypes.func,
+  onCancelar: PropTypes.func,
 };
 
 TarjetaMiViaje.defaultProps = {
   onVerPasajeros: undefined,
   onPuntuar: undefined,
+  onCancelar: undefined,
 };
 
 export default TarjetaMiViaje;
