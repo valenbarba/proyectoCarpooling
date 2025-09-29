@@ -30,14 +30,10 @@
   gap: 1rem;
 }
 
-.viaje-card__header--con-estado {
-  padding-right: 2.5rem;
-}
-
 .viaje-card__estado {
   position: absolute;
   top: 0.85rem;
-  right: 0.85rem;
+  right: 1rem;
   width: 2rem;
   height: 2rem;
   border-radius: 50%;
@@ -71,7 +67,9 @@
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  padding-right: 1.4rem;
   min-width: 0;
+  
 }
 
 .viaje-card__avatar {
