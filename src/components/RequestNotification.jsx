@@ -40,6 +40,36 @@ const RequestNotification = ({
     .filter(Boolean)
     .join(" · ");
 
+  const iconoContenido = pasajero ? (
+    <button
+      type="button"
+      className="request-notificacion__avatar-boton"
+      onClick={manejarVerPerfil}
+      aria-label={`Ver perfil de ${pasajero.nombre} ${pasajero.apellido}`}
+    >
+      {pasajero.avatar ? (
+        <img
+          className="request-notificacion__avatar"
+          src={pasajero.avatar}
+          alt=""
+        />
+      ) : (
+        <span className="request-notificacion__avatar request-notificacion__avatar--placeholder">
+          {obtenerIniciales(pasajero.nombre, pasajero.apellido)}
+        </span>
+      )}
+    </button>
+  ) : (
+    <Icono />
+  );
+
+  const iconoClase = [
+    "notificacion-card__icono",
+    pasajero ? "notificacion-card__icono--avatar" : null,
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
     <Tag
       className={`notificacion-card notificacion-card--con-acciones${
@@ -47,38 +77,18 @@ const RequestNotification = ({
       } ${className}`.trim()}
       role={Tag === "li" ? undefined : "listitem"}
     >
-      <span className="notificacion-card__icono" aria-hidden="true">
-        <Icono />
+      <span className={iconoClase} {...(pasajero ? {} : { "aria-hidden": "true" })}>
+        {iconoContenido}
       </span>
       <div className="notificacion-card__contenido">
         {pasajero && (
-          <div className="request-notificacion__pasajero">
-            <button
-              type="button"
-              className="request-notificacion__avatar-boton"
-              onClick={manejarVerPerfil}
-              aria-label={`Ver perfil de ${pasajero.nombre} ${pasajero.apellido}`}
-            >
-              {pasajero.avatar ? (
-                <img
-                  className="request-notificacion__avatar"
-                  src={pasajero.avatar}
-                  alt=""
-                />
-              ) : (
-                <span className="request-notificacion__avatar request-notificacion__avatar--placeholder">
-                  {obtenerIniciales(pasajero.nombre, pasajero.apellido)}
-                </span>
-              )}
-            </button>
-            <div className="request-notificacion__info">
-              <span className="request-notificacion__nombre">
-                {pasajero.nombre} {pasajero.apellido}
-              </span>
-              {detalleUbicacion && (
-                <span className="request-notificacion__detalle">{detalleUbicacion}</span>
-              )}
-            </div>
+          <div className="request-notificacion__info">
+            <span className="request-notificacion__nombre">
+              {pasajero.nombre} {pasajero.apellido}
+            </span>
+            {detalleUbicacion && (
+              <span className="request-notificacion__detalle">{detalleUbicacion}</span>
+            )}
           </div>
         )}
 
