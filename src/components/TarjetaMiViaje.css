@@ -9,6 +9,8 @@
   box-shadow: 0 10px 20px rgba(47, 42, 45, 0.04);
   transition: transform 0.2s ease, box-shadow 0.2s ease;
   position: relative;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 .viaje-card:hover {
@@ -296,20 +298,57 @@
 
 @media (max-width: 768px) {
   .viaje-card {
-    padding: 1rem;
+    padding: 0.9rem;
+    border-radius: 14px;
+    gap: 0.75rem;
   }
 
   .viaje-card__header {
     flex-direction: column;
     align-items: stretch;
+    gap: 0.75rem;
   }
 
   .viaje-card__header-principal {
     justify-content: flex-start;
+    gap: 0.65rem;
   }
 
   .viaje-card__horario {
+    width: 100%;
     align-items: flex-start;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 0.35rem;
+  }
+
+  .viaje-card__horario-fecha,
+  .viaje-card__horario-hora {
+    font-size: 0.9rem;
+  }
+
+  .viaje-card__titulo {
+    font-size: 1rem;
+    white-space: normal;
+  }
+
+  .viaje-card__direccion {
+    font-size: 0.75rem;
+    white-space: normal;
+  }
+
+  .viaje-card__conductor {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .viaje-card__conductor-identidad {
+    flex-wrap: wrap;
+  }
+
+  .viaje-card__acciones {
+    justify-content: flex-start;
   }
 }
 
