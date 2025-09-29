@@ -4,11 +4,17 @@ import Notification from "../components/Notification";
 import RequestNotification from "../components/RequestNotification";
 
 export default function NotificationPage({
-  solicitudes = [],
   notificaciones = [],
-  onAcceptSolicitud,
-  onRejectSolicitud,
+  onAceptarSolicitud,
+  onRechazarSolicitud,
 }) {
+  const solicitudes = notificaciones.filter(
+    (notificacion) => notificacion.tipo === "solicitud"
+  );
+  const avisos = notificaciones.filter(
+    (notificacion) => notificacion.tipo === "aviso"
+  );
+
   return (
     <section className="notificaciones-page">
       <ul className="notificaciones-lista">
@@ -20,13 +26,13 @@ export default function NotificationPage({
             descripcion={solicitud.descripcion}
             icono={solicitud.icono}
             destacada={solicitud.destacada}
-            onAccept={() => onAcceptSolicitud?.(solicitud)}
-            onReject={() => onRejectSolicitud?.(solicitud)}
+            onAccept={() => onAceptarSolicitud?.(solicitud)}
+            onReject={() => onRechazarSolicitud?.(solicitud)}
           />
         ))}
 
         {/* Luego se muestran las notificaciones informativas. */}
-        {notificaciones.map((notificacion) => (
+        {avisos.map((notificacion) => (
           <Notification
             key={notificacion.id}
             titulo={notificacion.titulo}
@@ -38,7 +44,7 @@ export default function NotificationPage({
         ))}
 
         {/* Mensaje auxiliar cuando no hay notificaciones pendientes. */}
-        {solicitudes.length === 0 && notificaciones.length === 0 && (
+        {solicitudes.length === 0 && avisos.length === 0 && (
           <li className="notificaciones-vacias">No tenés notificaciones nuevas.</li>
         )}
       </ul>

@@ -288,6 +288,7 @@ const DATOS_DEMOSTRACION = {
   notificaciones: [
     {
       id: 1,
+      tipo: "aviso",
       titulo: "Reserva confirmada",
       descripcion:
         "Sofía confirmó tu reserva para el viaje hacia Nordelta del 28 de mayo a las 18:30 hs.",
@@ -295,6 +296,7 @@ const DATOS_DEMOSTRACION = {
     },
     {
       id: 2,
+      tipo: "aviso",
       titulo: "Nuevo viaje cerca tuyo",
       descripcion:
         "Martín publicó un viaje desde Haras Santa María hacia Capital Federal mañana a las 07:15 hs.",
@@ -302,15 +304,15 @@ const DATOS_DEMOSTRACION = {
     },
     {
       id: 3,
+      tipo: "aviso",
       titulo: "Recordatorio de salida",
       descripcion:
         "Tu viaje compartido con Laura hacia USAL Pilar parte hoy a las 16:45 hs. Recordá ser puntual.",
       icono: FiBell,
     },
-  ],
-  solicitudes: [
     {
       id: "sol-1",
+      tipo: "solicitud",
       titulo: "Solicitud de grupo",
       descripcion:
         "Valentina solicitó unirse a tu viaje hacia USAL Pilar el 7 de Octubre a las 18:00 hrs.",
@@ -328,7 +330,6 @@ function AppRoutes({
   viajesPropios,
   viajesAjenos,
   notificaciones,
-  solicitudes,
   onBuscarViajes,
   onSumarseViaje,
   onVerDetalleViaje,
@@ -375,10 +376,9 @@ function AppRoutes({
           path="/notificaciones"
           element={
             <NotificationPage
-              solicitudes={solicitudes}
               notificaciones={notificaciones}
-              onAcceptSolicitud={onAceptarSolicitud}
-              onRejectSolicitud={onRechazarSolicitud}
+              onAceptarSolicitud={onAceptarSolicitud}
+              onRechazarSolicitud={onRechazarSolicitud}
             />
           }
         />
@@ -407,7 +407,6 @@ function App() {
         viajesPropios={DATOS_DEMOSTRACION.viajesPropios}
         viajesAjenos={DATOS_DEMOSTRACION.viajesAjenos}
         notificaciones={DATOS_DEMOSTRACION.notificaciones}
-        solicitudes={DATOS_DEMOSTRACION.solicitudes}
         onBuscarViajes={manejarBusquedaViajes}
         onSumarseViaje={manejarSumarseViaje}
         onVerDetalleViaje={manejarVerDetalleViaje}
