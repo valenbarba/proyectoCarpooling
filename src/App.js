@@ -317,6 +317,28 @@ const DATOS_DEMOSTRACION = {
       descripcion:
         "Valentina solicitó unirse a tu viaje hacia USAL Pilar el 7 de Octubre a las 18:00 hrs.",
       icono: FiUsers,
+      viajeId: "prop-1",
+      pasajero: {
+        id: "pas-987",
+        nombre: "Valentina",
+        apellido: "Ruiz",
+        avatar: "https://i.pravatar.cc/120?img=45",
+        barrio: "Haras Santa María",
+        lote: "1275",
+        telefono: "+54 9 11 4899-1188",
+        resenas: [
+          {
+            id: "pas-987-r1",
+            autor: "Laura S.",
+            comentario: "Excelente compañera de viaje, siempre avisa si se retrasa.",
+          },
+          {
+            id: "pas-987-r2",
+            autor: "Ignacio P.",
+            comentario: "Muy buena onda y respeta los horarios.",
+          },
+        ],
+      },
     },
   ],
 };
