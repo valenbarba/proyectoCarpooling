@@ -61,14 +61,14 @@ function TarjetaMiViaje({
 
   if (esPropio && estado === "pendiente") {
     acciones.push({ id: "editar-viaje", etiqueta: "Editar viaje" });
-  }
-  if (esPropio) {
     acciones.push({
       id: "ver-pasajeros",
       etiqueta: "Ver pasajeros",
       onClick: onVerPasajeros,
     });
   }
+
+
   if (estado === "finalizado") {
     acciones.push({
       id: "puntuar",

@@ -120,8 +120,6 @@
 }
 
 .modal-puntuacion__avatar {
-  width: 48px;
-  height: 48px;
   border-radius: 50%;
   object-fit: cover;
   background: #f1f5f9;
@@ -132,10 +130,14 @@
   font-weight: 600;
   font-size: 1.1rem;
   text-transform: uppercase;
+  width: 44px;
+  height: 44px;
 }
 
 .modal-puntuacion__avatar--placeholder {
   border: 1px solid rgba(148, 163, 184, 0.5);
+  
+  
 }
 
 .modal-puntuacion__campos {
@@ -171,7 +173,7 @@
   border: none;
   cursor: pointer;
   background: transparent;
-  color: inherit;
+  color: #C53678;
   transition: transform 0.2s ease;
 }
 

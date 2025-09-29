@@ -183,9 +183,7 @@ function ModalPuntuacion({ abierto, tipo, viaje, onCerrar, onConfirmar }) {
                           <h3 className="modal-puntuacion__tarjeta-titulo">
                             {pasajero.nombre} {pasajero.apellido}
                           </h3>
-                          <p className="modal-puntuacion__tarjeta-detalle">
-                            Puntualidad, amabilidad y experiencia general del viaje.
-                          </p>
+                          
                         </div>
                       </header>
 
