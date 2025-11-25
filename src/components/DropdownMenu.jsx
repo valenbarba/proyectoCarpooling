@@ -1,4 +1,5 @@
 import React, { useRef, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import "./DropdownMenu.css";
 
 /*
@@ -7,6 +8,12 @@ import "./DropdownMenu.css";
  */
 const DropdownMenu = ({ onClose }) => {
   const menuRef = useRef(null);
+  const navigate = useNavigate();
+
+  const irAMiPerfil = () => {
+    navigate("/mi-perfil");
+    onClose();
+  };
 
   useEffect(() => {
     const handleClickOutside = (e) => {
@@ -22,7 +29,7 @@ const DropdownMenu = ({ onClose }) => {
   return (
     <div ref={menuRef} className="dropdown-menu">
       <ul>
-        <li>Mi perfil</li>
+        <li onClick={irAMiPerfil}>Mi perfil</li>
         <li>Configuración</li>
         <li onClick={onClose}>Cerrar sesión</li>
       </ul>

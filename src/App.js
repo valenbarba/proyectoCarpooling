@@ -10,6 +10,7 @@ import Publicar from "./pages/Publicar";
 import NotificationPage from "./pages/NotificationPage";
 import MisViajes from "./pages/MisViajes";
 import PerfilPasajero from "./pages/PerfilPasajero";
+import MyProfile from "./pages/MyProfile";
 
 // ==== Datos de demostración ====
 // Se definen fuera de los componentes para que puedan reemplazarse fácilmente
@@ -537,6 +538,7 @@ function AppRoutes({
             />
           }
         />
+        <Route path="/mi-perfil" element={<MyProfile />} />
         <Route path="/perfil-pasajero/:id" element={<PerfilPasajero />} />
         <Route
           path="/notificaciones"

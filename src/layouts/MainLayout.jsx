@@ -19,6 +19,7 @@ const MainLayout = () => {
     "/mis-viajes": "Mis viajes",
     "/publicar": "Publicar Viaje",
     "/notificaciones": "Notificaciones",
+    "/mi-perfil": "Mi perfil",
   };
 
   const tituloHeader = location.pathname.startsWith("/perfil-pasajero")
