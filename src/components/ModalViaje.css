@@ -44,31 +44,9 @@
 }
 
 .modal-viaje__avatar-boton {
-  width: 56px;
-  height: 56px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #f1e4fb, #f9d9eb);
-  color: #a12a63;
-  display: grid;
-  place-items: center;
-  font-weight: 700;
-  font-size: 1.5rem;
-  border: none;
   padding: 0;
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, outline-color 0.2s ease;
-  outline: 2px solid transparent;
-  outline-offset: 3px;
-}
-
-.modal-viaje__avatar-boton:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(17, 24, 39, 0.2);
-}
-
-.modal-viaje__avatar-boton:focus-visible {
-  outline-color: #111827;
-  box-shadow: 0 0 0 4px rgba(255, 88, 65, 0.35);
+  border: none;
+  background: transparent;
 }
 
 .modal-viaje__titulo {

@@ -170,11 +170,14 @@ function Home({
               key={viaje.id}
               sigla={viaje.sigla}
               nombre={viaje.nombre}
+              apellido={viaje.apellido}
+              avatar={viaje.avatar}
               destino={viaje.destino}
               fecha={viaje.fecha}
               precio={viaje.precio}
               onSumarse={() => handleSumarse(viaje)}
               onVerMas={() => abrirModalViaje(viaje)}
+              onVerPerfil={() => handleVerPerfil(viaje)}
             />
           ))}
 

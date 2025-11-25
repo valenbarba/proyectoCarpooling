@@ -462,6 +462,12 @@ const viajesAjenos = VIAJES_AJENOS_BASE.map((viaje) => {
   return {
     ...viaje,
     conductor: nombreConductor,
+    conductorNombre: conductor?.nombre,
+    conductorApellido: conductor?.apellido,
+    conductorAvatar: conductor?.avatar,
+    conductorBarrio: conductor?.barrio,
+    conductorLote: conductor?.lote,
+    conductorResenas: conductor?.resenas,
     contactoConductor: conductor?.telefono,
   };
 });

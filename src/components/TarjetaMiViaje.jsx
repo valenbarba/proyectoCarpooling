@@ -2,19 +2,12 @@ import PropTypes from "prop-types";
 import "./TarjetaMiViaje.css";
 import { FaCar } from "react-icons/fa";
 import { FiCheck, FiClock } from "react-icons/fi";
+import { useLocation, useNavigate } from "react-router-dom";
+import AvatarInteractivo from "./AvatarInteractivo";
 
 const formatFecha = (fechaISO, opciones) => {
   const fecha = new Date(fechaISO);
   return new Intl.DateTimeFormat("es-AR", opciones).format(fecha);
-};
-
-const obtenerIniciales = (texto) => {
-  if (!texto) return "?";
-  const partes = texto.trim().split(/\s+/);
-  if (partes.length === 1) {
-    return partes[0][0]?.toUpperCase() || "?";
-  }
-  return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
 };
 
 function TarjetaMiViaje({
@@ -25,10 +18,36 @@ function TarjetaMiViaje({
   onPuntuar,
   onCancelar,
 }) {
+  const navigate = useNavigate();
+  const location = useLocation();
   const esPropio = tipo === "propio";
-  const avatarTexto = esPropio
-    ? viaje.destino?.[0] || viaje.puntoEncuentro?.[0] || "?"
-    : obtenerIniciales(viaje.conductor);
+  const conductorNombre = viaje.conductorNombre || viaje.conductor || "Conductor";
+  const conductorApellido = viaje.conductorApellido || "";
+  const avatarNombre = esPropio ? viaje.destino : conductorNombre;
+  const avatarApellido = esPropio ? viaje.puntoEncuentro : conductorApellido;
+  const avatarImagen = esPropio ? viaje.avatar : viaje.conductorAvatar;
+
+  const manejarVerConductor = () => {
+    if (esPropio || !viaje.conductorId) return;
+
+    const pasajero = {
+      id: viaje.conductorId,
+      nombre: conductorNombre,
+      apellido: conductorApellido,
+      avatar: viaje.conductorAvatar,
+      barrio: viaje.conductorBarrio,
+      lote: viaje.conductorLote,
+      telefono: viaje.contactoConductor,
+      resenas: viaje.conductorResenas,
+    };
+
+    navigate(`/perfil-pasajero/${pasajero.id}`, {
+      state: {
+        pasajero,
+        from: { pathname: location.pathname },
+      },
+    });
+  };
   const direccionTexto = viaje.direccion?.trim() || "Dirección no especificada";
   const fechaTexto = viaje.fecha
     ? formatFecha(viaje.fecha, {
@@ -123,9 +142,16 @@ function TarjetaMiViaje({
           </div>
         )}
         <div className="viaje-card__header-principal">
-          <div className="viaje-card__avatar" aria-hidden="true">
-            {avatarTexto}
-          </div>
+          <AvatarInteractivo
+            nombre={avatarNombre}
+            apellido={avatarApellido}
+            avatar={avatarImagen}
+            onClick={esPropio ? undefined : manejarVerConductor}
+            ariaLabel={
+              esPropio ? undefined : `Ver perfil de ${conductorNombre} ${conductorApellido}`.trim()
+            }
+            className="viaje-card__avatar"
+          />
           <div className="viaje-card__encabezado">
             <h4 className="viaje-card__titulo">{viaje.destino}</h4>
             <p className="viaje-card__direccion">{direccionTexto}</p>
@@ -214,6 +240,14 @@ TarjetaMiViaje.propTypes = {
     pasajerosConfirmados: PropTypes.number,
     capacidadTotal: PropTypes.number,
     conductor: PropTypes.string,
+    conductorId: PropTypes.string,
+    conductorNombre: PropTypes.string,
+    conductorApellido: PropTypes.string,
+    conductorAvatar: PropTypes.string,
+    conductorBarrio: PropTypes.string,
+    conductorLote: PropTypes.string,
+    conductorResenas: PropTypes.arrayOf(PropTypes.object),
+    avatar: PropTypes.string,
     asientoReservado: PropTypes.string,
     notas: PropTypes.string,
     direccion: PropTypes.string,
