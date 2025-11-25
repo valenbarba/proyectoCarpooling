@@ -15,6 +15,12 @@ const DropdownMenu = ({ onClose }) => {
     onClose();
   };
 
+  const cerrarSesion = () => {
+    navigate("/login");
+    onClose();
+  }
+
+
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -31,7 +37,7 @@ const DropdownMenu = ({ onClose }) => {
       <ul>
         <li onClick={irAMiPerfil}>Mi perfil</li>
         <li>Configuración</li>
-        <li onClick={onClose}>Cerrar sesión</li>
+        <li onClick={cerrarSesion}>Cerrar sesión</li>
       </ul>
     </div>
   );

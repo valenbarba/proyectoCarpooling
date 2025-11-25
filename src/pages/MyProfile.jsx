@@ -10,12 +10,12 @@ const obtenerIniciales = (nombre = "", apellido = "") => {
 
 const PERFIL_INICIAL = {
   nombre: "Valentina",
-  apellido: "Rossi",
-  avatar: "https://i.pravatar.cc/120?img=47",
+  apellido: "Barbagelatta",
+  avatar: "/IMG_2178 (1).JPG",
   barrio: "Haras Santa María",
-  lote: "1120",
-  telefono: "+54 9 11 5566-7890",
-  email: "valentina.rossi@email.com",
+  lote: "1260",
+  telefono: "+54 1130938482",
+  email: "vbarbagelatta@gmail.com",
   bio: "Vecina del barrio que usa la bici plegable y le gusta compartir música en los viajes.",
   resenas: [
     {
@@ -87,7 +87,6 @@ function MyProfile() {
         )}
 
         <div className="my-profile__datos">
-          <p className="my-profile__identificador">Mi perfil</p>
           <h1 id="mi-perfil-nombre" className="my-profile__nombre">
             {nombreCompleto}
           </h1>
@@ -181,17 +180,7 @@ function MyProfile() {
               disabled={!modoEdicion}
             />
           </div>
-          <div className="my-profile__campo my-profile__campo--full">
-            <label htmlFor="avatar">URL de foto de perfil</label>
-            <input
-              id="avatar"
-              type="url"
-              placeholder="https://"
-              value={borradorPerfil.avatar}
-              onChange={handleChange("avatar")}
-              disabled={!modoEdicion}
-            />
-          </div>
+    
           <div className="my-profile__campo my-profile__campo--full">
             <label htmlFor="bio">Sobre mí</label>
             <textarea
@@ -207,7 +196,7 @@ function MyProfile() {
 
       <section className="my-profile__resenas" aria-labelledby="mi-perfil-resenas">
         <h2 id="mi-perfil-resenas" className="my-profile__subtitulo">
-          Lo que otros dicen de vos
+          Opiniones de otros usuarios
         </h2>
         {perfilGuardado.resenas?.length ? (
           <ul className="my-profile__lista-resenas">

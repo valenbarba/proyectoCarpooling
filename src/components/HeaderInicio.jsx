@@ -37,7 +37,7 @@ const HeaderInicio = ({ titulo, onAvatarClick }) => {
         {/* Avatar clickeable que despliega el menú */}
         <button onClick={onAvatarClick} className="header-avatar-btn">
           <img
-            src="/IMG_3977.JPG" // Reemplazar por la ruta real del avatar del usuario.
+            src="/IMG_2178 (1).JPG" // Reemplazar por la ruta real del avatar del usuario.
             alt="Perfil"
             className="header-avatar-img"
           />
