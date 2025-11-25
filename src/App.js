@@ -171,6 +171,7 @@ const PASAJEROS = {
     id: "pas-pilar",
     nombre: "Pilar",
     apellido: "Gonzalez",
+    avatar: "https://i.pravatar.cc/120?img=9",
     barrio: "Haras Santa María",
     lote: "1275",
     telefono: "+54 9 11 4899-1188",
