@@ -23,321 +23,415 @@ const crearFechaRelativa = (diasDesdeHoy, horas, minutos) => {
   return fecha.toISOString();
 };
 
-const DATOS_DEMOSTRACION = {
-  barrio: {
-    nombre: "Haras Santa María",
-  },
-  viajesDisponibles: [
-    {
-      id: 1,
-      nombre: "Lautaro",
-      sigla: "M",
-      destino: "USAL Pilar",
-      fecha: "9 de Diciembre · 8:00 hrs",
-      comentario: "Punto de encuentro en la entrada principal del barrio.",
-      rating: 4.8,
-      reviewsCount: 26,
-    },
-    {
-      id: 2,
-      nombre: "Ana",
-      sigla: "A",
-      destino: "Plaza Italia",
-      fecha: "8 de Diciembre · 17:00 hrs",
-      precio: "$1800 / asiento",
-      comentario: "Nos encontramos en el lote 1260 a las 16:45 en punto.",
-      rating: 4.6,
-      reviewsCount: 18,
-    },
-    {
-      id: 3,
-      nombre: "Valentina",
-      sigla: "V",
-      destino: "Escobar centro",
-      fecha: "6 de Diciembre · 9:00",
-      precio: "$1500 / asiento",
-      comentario: "Puedo pasar por el Club House si les queda cómodo.",
-      rating: 5,
-      reviewsCount: 32,
-    },
-  ],
-  viajesPropios: [
-    {
-      id: "prop-1",
-      destino: "USAL Pilar",
-      fecha: crearFechaRelativa(2, 8, 15),
-      puntoEncuentro: "Garita Norte - Lote 1260",
-      direccion: "Champagnat 1599",
-      pasajerosConfirmados: 2,
-      capacidadTotal: 3,
-      notas: "Salgo puntual, llevar cambio si necesitan pagar en efectivo.",
-      pasajeros: [
-        {
-          id: "prop-1-p1",
-          nombre: "Sofía",
-          apellido: "Giménez",
-          avatar: "https://i.pravatar.cc/120?img=32",
-          estado: "aceptado",
-          barrio: "Haras Santa María",
-          lote: "1342",
-          telefono: "+54 9 11 4567-1234",
-          resenas: [
-            {
-              id: "prop-1-p1-r1",
-              autor: "Martín F.",
-              comentario: "Muy puntual y respetuosa durante los viajes.",
-            },
-            {
-              id: "prop-1-p1-r2",
-              autor: "Laura P.",
-              comentario: "Siempre avisa con tiempo si surge algún cambio.",
-            },
-          ],
-        },
-        {
-          id: "prop-1-p2",
-          nombre: "Martín",
-          apellido: "Bustos",
-          avatar: "https://i.pravatar.cc/120?img=12",
-          estado: "pendiente",
-          barrio: "Haras Santa María",
-          lote: "1180",
-          telefono: "+54 9 11 4789-6654",
-          resenas: [
-            {
-              id: "prop-1-p2-r1",
-              autor: "Gonzalo H.",
-              comentario: "Buena comunicación y siempre llega con casco para la bici plegable.",
-            },
-            {
-              id: "prop-1-p2-r2",
-              autor: "Sofía G.",
-              comentario: "Compartimos viaje a diario, muy amable.",
-            },
-          ],
-        },
-        {
-          id: "prop-1-p3",
-          nombre: "Carla",
-          apellido: "Nuñez",
-          estado: "pendiente",
-          barrio: "Haras Santa María",
-          lote: "1275",
-          telefono: "+54 9 11 5123-9087",
-          resenas: [
-            {
-              id: "prop-1-p3-r1",
-              autor: "Valentina R.",
-              comentario: "Siempre lleva mate y lo comparte con el grupo.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "prop-2",
-      destino: "Escobar Centro",
-      fecha: crearFechaRelativa(-4, 17, 30),
-      puntoEncuentro: "Club House - Estacionamiento",
-      direccion: "Tapia de Cruz 376, Escobar",
-      pasajerosConfirmados: 3,
-      capacidadTotal: 4,
-      notas: "Gracias por avisar si se retrasan. Tengo lugar para equipaje chico.",
-      pasajeros: [
-        {
-          id: "prop-2-p1",
-          nombre: "Laura",
-          apellido: "Sosa",
-          avatar: "https://i.pravatar.cc/120?img=5",
-          estado: "aceptado",
-          barrio: "Haras Santa María",
-          lote: "890",
-          telefono: "+54 9 11 4455-2266",
-          resenas: [
-            {
-              id: "prop-2-p1-r1",
-              autor: "Ignacio P.",
-              comentario: "Excelente compañera de viaje, muy organizada.",
-            },
-            {
-              id: "prop-2-p1-r2",
-              autor: "Carla N.",
-              comentario: "Siempre trae snacks para compartir.",
-            },
-          ],
-        },
-        {
-          id: "prop-2-p2",
-          nombre: "Gonzalo",
-          apellido: "Herrera",
-          avatar: "https://i.pravatar.cc/120?img=39",
-          estado: "aceptado",
-          barrio: "Haras Santa María",
-          lote: "965",
-          telefono: "+54 9 11 4785-3344",
-          resenas: [
-            {
-              id: "prop-2-p2-r1",
-              autor: "Martín B.",
-              comentario: "Siempre ayuda con el equipaje pesado.",
-            },
-          ],
-        },
-        {
-          id: "prop-2-p3",
-          nombre: "Elena",
-          apellido: "Martínez",
-          avatar: "https://i.pravatar.cc/120?img=16",
-          estado: "pendiente",
-          barrio: "Haras Santa María",
-          lote: "1042",
-          telefono: "+54 9 11 4332-9090",
-          resenas: [
-            {
-              id: "prop-2-p3-r1",
-              autor: "Valentina R.",
-              comentario: "Muy amable, suele compartir playlists.",
-            },
-          ],
-        },
-      ],
-    },
-    {
-      id: "prop-3",
-      destino: "BBVA CABA",
-      fecha: crearFechaRelativa(4, 6, 45),
-      puntoEncuentro: "Entrada principal - Portón Sur",
-      direccion: "Reconquista 199, C1003 Cdad. Autónoma de Buenos Aires",
-      pasajerosConfirmados: 1,
-      capacidadTotal: 3,
-      notas: "Puedo desviar hasta la colectora si alguien lo necesita.",
-      pasajeros: [
-        {
-          id: "prop-3-p1",
-          nombre: "Diego",
-          apellido: "Rossi",
-          avatar: "https://i.pravatar.cc/120?img=27",
-          estado: "aceptado",
-          barrio: "Haras Santa María",
-          lote: "765",
-          telefono: "+54 9 11 4556-7788",
-          resenas: [
-            {
-              id: "prop-3-p1-r1",
-              autor: "Laura S.",
-              comentario: "Siempre ofrece ayuda para coordinar la logística.",
-            },
-          ],
-        },
-        {
-          id: "prop-3-p2",
-          nombre: "Lucía",
-          apellido: "Quintana",
-          avatar: "https://i.pravatar.cc/120?img=48",
-          estado: "pendiente",
-          barrio: "Haras Santa María",
-          lote: "810",
-          telefono: "+54 9 11 4677-2211",
-          resenas: [
-            {
-              id: "prop-3-p2-r1",
-              autor: "Diego R.",
-              comentario: "Gran compañía, le encanta conversar de música.",
-            },
-          ],
-        },
-      ],
-    },
-  ],
-  viajesAjenos: [
-    {
-      id: "aj-1",
-      destino: "CABA - Obelisco",
-      fecha: crearFechaRelativa(7, 7, 0),
-      puntoEncuentro: "Rotonda Principal",
-      direccion: "Av. Corrientes, C1035 Cdad. Autónoma de Buenos Aires",
-      conductor: "Martín Fernández",
-      asientoReservado: "Asiento 2 de 3",
-      notas: "Paso por la entrada 6:50 hrs. Porfavor sean puntuales",
-      estadoSolicitud: "pendiente",
-    },
-    {
-      id: "aj-2",
-      destino: "Pilar Centro",
-      fecha: crearFechaRelativa(-2, 19, 10),
-      puntoEncuentro: "Garita Sur",
-      direccion: "Estanislao López 525, Pilar",
-      conductor: "Valentina Ruiz",
-      asientoReservado: "Asiento 1 de 4",
-      notas: "Gran viaje, conducción muy segura.",
-      estadoSolicitud: "confirmada",
-    },
-    {
-      id: "aj-3",
-      destino: "Colegio Belgrano Escobar",
-      fecha: crearFechaRelativa(4, 7, 30),
-      puntoEncuentro: "Playón Deportivo",
-      direccion: "Juan P. Asborno, Belén de Escobar.",
-      conductor: "Laura Gimenez",
-      asientoReservado: "Asiento 3 de 3",
-      notas: "Dejo a los chicos en la entrada y espero a que entren.",
-      estadoSolicitud: "confirmada",
-    },
-  ],
-  notificaciones: [
-    {
-      id: 1,
-      titulo: "Reserva confirmada",
-      descripcion:
-        "Sofía confirmó tu reserva para el viaje hacia Nordelta del 28 de Septiembre a las 18:30 hs.",
-      icono: FiCheckCircle,
-    },
-    {
-      id: 2,
-      titulo: "Nuevo viaje cerca tuyo",
-      descripcion:
-        "Martín publicó un viaje desde Haras Santa María hacia Capital Federal mañana a las 07:15 hs.",
-      icono: FiCalendar,
-    },
-    {
-      id: 3,
-      titulo: "Recordatorio de salida",
-      descripcion:
-        "Tu viaje compartido con Laura hacia USAL Pilar parte hoy a las 16:45 hs. Recordá ser puntual.",
-      icono: FiBell,
-    },
-  ],
-  solicitudes: [
-    {
-      id: "sol-1",
-      titulo: "Solicitud de viaje",
-      descripcion:
-        "Pilar solicitó unirse a tu viaje hacia USAL Pilar el 5 de Diciembre a las 8:10 hrs.",
-      icono: FiUsers,
-      viajeId: "prop-1",
-      pasajero: {
-        id: "pas-987",
-        nombre: "Pilar",
-        apellido: "Gonzalez",
-        
-        
-        lote: "1275",
-        telefono: "+54 9 11 4899-1188",
-        resenas: [
-          {
-            id: "pas-987-r1",
-            autor: "Laura S.",
-            comentario: "Excelente compañera de viaje, siempre avisa si se retrasa.",
-          },
-          {
-            id: "pas-987-r2",
-            autor: "Ignacio P.",
-            comentario: "Muy buena onda y respeta los horarios.",
-          },
-        ],
+const PASAJEROS = {
+  sofiaGimenez: {
+    id: "pas-sofia",
+    nombre: "Sofía",
+    apellido: "Giménez",
+    avatar: "https://i.pravatar.cc/120?img=32",
+    barrio: "Haras Santa María",
+    lote: "1342",
+    telefono: "+54 9 11 4567-1234",
+    resenas: [
+      {
+        id: "res-sofia-1",
+        autor: "Martín F.",
+        comentario: "Muy puntual y respetuosa durante los viajes.",
       },
-    },
-  ],
+      {
+        id: "res-sofia-2",
+        autor: "Laura P.",
+        comentario: "Siempre avisa con tiempo si surge algún cambio.",
+      },
+    ],
+  },
+  martinBustos: {
+    id: "pas-martin",
+    nombre: "Martín",
+    apellido: "Bustos",
+    avatar: "https://i.pravatar.cc/120?img=12",
+    barrio: "Haras Santa María",
+    lote: "1180",
+    telefono: "+54 9 11 4789-6654",
+    resenas: [
+      {
+        id: "res-martin-1",
+        autor: "Gonzalo H.",
+        comentario: "Buena comunicación y siempre llega con casco para la bici plegable.",
+      },
+      {
+        id: "res-martin-2",
+        autor: "Sofía G.",
+        comentario: "Compartimos viaje a diario, muy amable.",
+      },
+    ],
+  },
+  carlaNunez: {
+    id: "pas-carla",
+    nombre: "Carla",
+    apellido: "Nuñez",
+    barrio: "Haras Santa María",
+    lote: "1275",
+    telefono: "+54 9 11 5123-9087",
+    resenas: [
+      {
+        id: "res-carla-1",
+        autor: "Valentina R.",
+        comentario: "Siempre lleva mate y lo comparte con el grupo.",
+      },
+    ],
+  },
+  lauraSosa: {
+    id: "pas-laura",
+    nombre: "Laura",
+    apellido: "Sosa",
+    avatar: "https://i.pravatar.cc/120?img=5",
+    barrio: "Haras Santa María",
+    lote: "890",
+    telefono: "+54 9 11 4455-2266",
+    resenas: [
+      {
+        id: "res-laura-1",
+        autor: "Ignacio P.",
+        comentario: "Excelente compañera de viaje, muy organizada.",
+      },
+      {
+        id: "res-laura-2",
+        autor: "Carla N.",
+        comentario: "Siempre trae snacks para compartir.",
+      },
+    ],
+  },
+  gonzaloHerrera: {
+    id: "pas-gonzalo",
+    nombre: "Gonzalo",
+    apellido: "Herrera",
+    avatar: "https://i.pravatar.cc/120?img=39",
+    barrio: "Haras Santa María",
+    lote: "965",
+    telefono: "+54 9 11 4785-3344",
+    resenas: [
+      {
+        id: "res-gonzalo-1",
+        autor: "Martín B.",
+        comentario: "Siempre ayuda con el equipaje pesado.",
+      },
+    ],
+  },
+  elenaMartinez: {
+    id: "pas-elena",
+    nombre: "Elena",
+    apellido: "Martínez",
+    avatar: "https://i.pravatar.cc/120?img=16",
+    barrio: "Haras Santa María",
+    lote: "1042",
+    telefono: "+54 9 11 4332-9090",
+    resenas: [
+      {
+        id: "res-elena-1",
+        autor: "Valentina R.",
+        comentario: "Muy amable, suele compartir playlists.",
+      },
+    ],
+  },
+  diegoRossi: {
+    id: "pas-diego",
+    nombre: "Diego",
+    apellido: "Rossi",
+    avatar: "https://i.pravatar.cc/120?img=27",
+    barrio: "Haras Santa María",
+    lote: "765",
+    telefono: "+54 9 11 4556-7788",
+    resenas: [
+      {
+        id: "res-diego-1",
+        autor: "Laura S.",
+        comentario: "Siempre ofrece ayuda para coordinar la logística.",
+      },
+    ],
+  },
+  luciaQuintana: {
+    id: "pas-lucia",
+    nombre: "Lucía",
+    apellido: "Quintana",
+    avatar: "https://i.pravatar.cc/120?img=48",
+    barrio: "Haras Santa María",
+    lote: "810",
+    telefono: "+54 9 11 4677-2211",
+    resenas: [
+      {
+        id: "res-lucia-1",
+        autor: "Diego R.",
+        comentario: "Gran compañía, le encanta conversar de música.",
+      },
+    ],
+  },
+  pilarGonzalez: {
+    id: "pas-pilar",
+    nombre: "Pilar",
+    apellido: "Gonzalez",
+    barrio: "Haras Santa María",
+    lote: "1275",
+    telefono: "+54 9 11 4899-1188",
+    resenas: [
+      {
+        id: "res-pilar-1",
+        autor: "Laura S.",
+        comentario: "Excelente compañera de viaje, siempre avisa si se retrasa.",
+      },
+      {
+        id: "res-pilar-2",
+        autor: "Ignacio P.",
+        comentario: "Muy buena onda y respeta los horarios.",
+      },
+    ],
+  },
+  lautarMartinez: {
+    id: "cond-lautaro",
+    nombre: "Lautaro",
+    apellido: "Martínez",
+    barrio: "Haras Santa María",
+    lote: "1190",
+    telefono: "+54 9 11 5012-8899",
+  },
+  anaSuarez: {
+    id: "cond-ana",
+    nombre: "Ana",
+    apellido: "Suarez",
+    barrio: "Haras Santa María",
+    lote: "1260",
+    telefono: "+54 9 11 4455-8899",
+  },
+  valentinaRuiz: {
+    id: "cond-valentina",
+    nombre: "Valentina",
+    apellido: "Ruiz",
+    barrio: "Haras Santa María",
+    lote: "1345",
+    telefono: "+54 9 11 4000-7788",
+  },
+  martinFernandez: {
+    id: "cond-martin",
+    nombre: "Martín",
+    apellido: "Fernández",
+    barrio: "Haras Santa María",
+    lote: "1080",
+    telefono: "+54 9 11 4789-1122",
+  },
+  lauraGimenez: {
+    id: "cond-laura-g",
+    nombre: "Laura",
+    apellido: "Gimenez",
+    barrio: "Haras Santa María",
+    lote: "990",
+    telefono: "+54 9 11 4111-2000",
+  },
+};
+
+const obtenerSigla = (persona) => persona?.nombre?.[0]?.toUpperCase() || "?";
+
+const VIAJES_DISPONIBLES_BASE = [
+  {
+    id: "disp-1",
+    conductorId: "lautarMartinez",
+    destino: "USAL Pilar",
+    fecha: "9 de Diciembre · 8:00 hrs",
+    comentario: "Punto de encuentro en la entrada principal del barrio.",
+    rating: 4.8,
+    reviewsCount: 26,
+  },
+  {
+    id: "disp-2",
+    conductorId: "anaSuarez",
+    destino: "Plaza Italia",
+    fecha: "8 de Diciembre · 17:00 hrs",
+    precio: "$1800 / asiento",
+    comentario: "Nos encontramos en el lote 1260 a las 16:45 en punto.",
+    rating: 4.6,
+    reviewsCount: 18,
+  },
+  {
+    id: "disp-3",
+    conductorId: "valentinaRuiz",
+    destino: "Escobar centro",
+    fecha: "6 de Diciembre · 9:00",
+    precio: "$1500 / asiento",
+    comentario: "Puedo pasar por el Club House si les queda cómodo.",
+    rating: 5,
+    reviewsCount: 32,
+  },
+];
+
+const VIAJES_PROPIOS_BASE = [
+  {
+    id: "prop-1",
+    destino: "USAL Pilar",
+    fecha: crearFechaRelativa(2, 8, 15),
+    puntoEncuentro: "Garita Norte - Lote 1260",
+    direccion: "Champagnat 1599",
+    capacidadTotal: 3,
+    notas: "Salgo puntual, llevar cambio si necesitan pagar en efectivo.",
+    pasajeros: [
+      { id: "sofiaGimenez", estado: "aceptado" },
+      { id: "martinBustos", estado: "pendiente" },
+      { id: "carlaNunez", estado: "pendiente" },
+    ],
+  },
+  {
+    id: "prop-2",
+    destino: "Escobar Centro",
+    fecha: crearFechaRelativa(-4, 17, 30),
+    puntoEncuentro: "Club House - Estacionamiento",
+    direccion: "Tapia de Cruz 376, Escobar",
+    capacidadTotal: 4,
+    notas: "Gracias por avisar si se retrasan. Tengo lugar para equipaje chico.",
+    pasajeros: [
+      { id: "lauraSosa", estado: "aceptado" },
+      { id: "gonzaloHerrera", estado: "aceptado" },
+      { id: "elenaMartinez", estado: "pendiente" },
+    ],
+  },
+  {
+    id: "prop-3",
+    destino: "BBVA CABA",
+    fecha: crearFechaRelativa(4, 6, 45),
+    puntoEncuentro: "Entrada principal - Portón Sur",
+    direccion: "Reconquista 199, C1003 Cdad. Autónoma de Buenos Aires",
+    capacidadTotal: 3,
+    notas: "Puedo desviar hasta la colectora si alguien lo necesita.",
+    pasajeros: [
+      { id: "diegoRossi", estado: "aceptado" },
+      { id: "luciaQuintana", estado: "pendiente" },
+    ],
+  },
+];
+
+const VIAJES_AJENOS_BASE = [
+  {
+    id: "aj-1",
+    conductorId: "martinFernandez",
+    destino: "CABA - Obelisco",
+    fecha: crearFechaRelativa(7, 7, 0),
+    puntoEncuentro: "Rotonda Principal",
+    direccion: "Av. Corrientes, C1035 Cdad. Autónoma de Buenos Aires",
+    asientoReservado: "Asiento 2 de 3",
+    notas: "Paso por la entrada 6:50 hrs. Porfavor sean puntuales",
+    estadoSolicitud: "pendiente",
+  },
+  {
+    id: "aj-2",
+    conductorId: "valentinaRuiz",
+    destino: "Pilar Centro",
+    fecha: crearFechaRelativa(-2, 19, 10),
+    puntoEncuentro: "Garita Sur",
+    direccion: "Estanislao López 525, Pilar",
+    asientoReservado: "Asiento 1 de 4",
+    notas: "Gran viaje, conducción muy segura.",
+    estadoSolicitud: "confirmada",
+  },
+  {
+    id: "aj-3",
+    conductorId: "lauraGimenez",
+    destino: "Colegio Belgrano Escobar",
+    fecha: crearFechaRelativa(4, 7, 30),
+    puntoEncuentro: "Playón Deportivo",
+    direccion: "Juan P. Asborno, Belén de Escobar.",
+    asientoReservado: "Asiento 3 de 3",
+    notas: "Dejo a los chicos en la entrada y espero a que entren.",
+    estadoSolicitud: "confirmada",
+  },
+];
+
+const SOLICITUDES_BASE = [
+  {
+    id: "sol-1",
+    titulo: "Solicitud de viaje",
+    descripcion:
+      "Pilar solicitó unirse a tu viaje hacia USAL Pilar el 5 de Diciembre a las 8:10 hrs.",
+    icono: FiUsers,
+    viajeId: "prop-1",
+    pasajeroId: "pilarGonzalez",
+  },
+];
+
+const NOTIFICACIONES_BASE = [
+  {
+    id: 1,
+    titulo: "Reserva confirmada",
+    descripcion:
+      "Sofía confirmó tu reserva para el viaje hacia Nordelta del 28 de Septiembre a las 18:30 hs.",
+    icono: FiCheckCircle,
+  },
+  {
+    id: 2,
+    titulo: "Nuevo viaje cerca tuyo",
+    descripcion:
+      "Martín publicó un viaje desde Haras Santa María hacia Capital Federal mañana a las 07:15 hs.",
+    icono: FiCalendar,
+  },
+  {
+    id: 3,
+    titulo: "Recordatorio de salida",
+    descripcion:
+      "Tu viaje compartido con Laura hacia USAL Pilar parte hoy a las 16:45 hs. Recordá ser puntual.",
+    icono: FiBell,
+  },
+];
+
+const mapPasajeros = (pasajeros) =>
+  pasajeros.map(({ id, estado }) => ({ ...PASAJEROS[id], estado }));
+
+const viajesDisponibles = VIAJES_DISPONIBLES_BASE.map((viaje) => {
+  const conductor = PASAJEROS[viaje.conductorId];
+  return {
+    ...viaje,
+    nombre: conductor?.nombre,
+    apellido: conductor?.apellido,
+    sigla: obtenerSigla(conductor),
+    avatar: conductor?.avatar,
+    barrio: conductor?.barrio,
+    lote: conductor?.lote,
+    telefono: conductor?.telefono,
+    resenas: conductor?.resenas,
+  };
+});
+
+const viajesPropios = VIAJES_PROPIOS_BASE.map((viaje) => {
+  const pasajeros = mapPasajeros(viaje.pasajeros);
+  const pasajerosConfirmados = pasajeros.filter((p) => p.estado === "aceptado").length;
+
+  return {
+    ...viaje,
+    pasajeros,
+    pasajerosConfirmados,
+  };
+});
+
+const viajesAjenos = VIAJES_AJENOS_BASE.map((viaje) => {
+  const conductor = PASAJEROS[viaje.conductorId];
+  const nombreConductor = conductor
+    ? `${conductor.nombre} ${conductor.apellido || ""}`.trim()
+    : "Conductor";
+
+  return {
+    ...viaje,
+    conductor: nombreConductor,
+    contactoConductor: conductor?.telefono,
+  };
+});
+
+const solicitudes = SOLICITUDES_BASE.map((solicitud) => ({
+  ...solicitud,
+  pasajero: PASAJEROS[solicitud.pasajeroId],
+}));
+
+const DATOS_DEMOSTRACION = {
+  barrio: { nombre: "Haras Santa María" },
+  viajesDisponibles,
+  viajesPropios,
+  viajesAjenos,
+  notificaciones: NOTIFICACIONES_BASE,
+  solicitudes,
 };
 
 // Componente interno que contiene la definición de todas las rutas de la aplicación.
