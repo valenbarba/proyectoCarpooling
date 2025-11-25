@@ -193,6 +193,18 @@ const PASAJEROS = {
     barrio: "Haras Santa María",
     lote: "1190",
     telefono: "+54 9 11 5012-8899",
+    resenas: [
+      {
+        id: "res-lautaro-1",
+        autor: "Mario H.",
+        comentario: "Muy puntual y confiable.",
+      },
+      {
+        id: "res-lautaro-2",
+        autor: "Mariana P.",
+        comentario: "Siempre prende el aire acondicionado.",
+      },
+    ],
   },
   anaSuarez: {
     id: "cond-ana",
@@ -201,6 +213,13 @@ const PASAJEROS = {
     barrio: "Haras Santa María",
     lote: "1260",
     telefono: "+54 9 11 4455-8899",
+    resenas: [
+      {
+        id: "res-ana-1",
+        autor: "Claudia M.",
+        comentario: "Muy amable. Nos hicimos amigas!.",
+      },
+    ],
   },
   valentinaRuiz: {
     id: "cond-valentina",
@@ -209,6 +228,13 @@ const PASAJEROS = {
     barrio: "Haras Santa María",
     lote: "1345",
     telefono: "+54 9 11 4000-7788",
+    resenas: [
+      {
+        id: "res-valentina-1",
+        autor: "Paula L.",
+        comentario: "Siempre viajo con ella y mi hija tambien. Ningun problema",
+      },
+    ],
   },
   martinFernandez: {
     id: "cond-martin",
@@ -217,6 +243,13 @@ const PASAJEROS = {
     barrio: "Haras Santa María",
     lote: "1080",
     telefono: "+54 9 11 4789-1122",
+    resenas: [
+      {
+        id: "res-ana-1",
+        autor: "Sofia G.",
+        comentario: "Muy buen conductor",
+      },
+    ],
   },
   lauraGimenez: {
     id: "cond-laura-g",
@@ -225,6 +258,13 @@ const PASAJEROS = {
     barrio: "Haras Santa María",
     lote: "990",
     telefono: "+54 9 11 4111-2000",
+    resenas: [
+      {
+        id: "res-ana-1",
+        autor: "Fernando B",
+        comentario: "Destaco la puntualidad y amabilidad",
+      },
+    ],
   },
 };
 
