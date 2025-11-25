@@ -33,6 +33,7 @@ function Publicar() {
   const [precioPorAsiento, setPrecio] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const [comentario, setComentario] = useState("");
 
   const minDate = useMemo(() => {
     const today = new Date();
@@ -237,6 +238,18 @@ function Publicar() {
                 value={hora}
                 onChange={(e) => {
                   setHora(e.target.value);
+                  setError("");
+                }}
+              />
+            </div>
+
+            <div className="campo-comentarios">
+              <Input
+                type="text"
+                label="Comentarios adicionales"
+                value={comentario}
+                onChange={(e) => {
+                  setComentario(e.target.value);
                   setError("");
                 }}
               />
