@@ -1,6 +1,7 @@
 import { useId } from "react";
 import { FaStar, FaTimes } from "react-icons/fa";
 import { useLocation, useNavigate } from "react-router-dom";
+import AvatarInteractivo from "./AvatarInteractivo";
 import "./ModalViaje.css";
 
 function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
@@ -106,14 +107,15 @@ function ModalViaje({ isOpen, viaje, onClose, onVerPerfil }) {
         </button>
 
         <header className="modal-viaje__encabezado">
-          <button
-            type="button"
-            className="modal-viaje__avatar-boton"
+          <AvatarInteractivo
+            nombre={nombreConductor}
+            apellido={apellido}
+            avatar={avatar}
             onClick={manejarVerPerfil}
-            aria-label={`Ver perfil de ${nombreConductor}`}
-          >
-            {nombreConductor?.[0]?.toUpperCase() || "?"}
-          </button>
+            ariaLabel={`Ver perfil de ${nombreConductor}`}
+            className="modal-viaje__avatar-boton"
+            size="lg"
+          />
           <div>
             <h3 id={tituloId} className="modal-viaje__titulo">
               Viaje con {nombreConductor}

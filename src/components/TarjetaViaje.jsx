@@ -1,3 +1,4 @@
+import AvatarInteractivo from "./AvatarInteractivo";
 import "./TarjetaViaje.css";
 
 /*
@@ -8,6 +9,8 @@ import "./TarjetaViaje.css";
 function TarjetaViaje({
   sigla,
   nombre,
+  apellido,
+  avatar,
   destino,
   fecha,
   precio,
@@ -17,9 +20,8 @@ function TarjetaViaje({
   detalle,
   onAgregar,
   onOpciones,
+  onVerPerfil,
 }) {
-  // Calculamos una inicial de respaldo para mostrar en el avatar cuando falte información.
-  const inicial = (sigla || nombre?.[0] || titulo?.[0] || destino?.[0] || "?").toUpperCase();
   const nombreMostrar = nombre || titulo || destino || "Conductor";
   const destinoMostrar = destino || titulo || nombre || "Punto de encuentro";
   const fechaMostrar = fecha || detalle || "";
@@ -27,13 +29,19 @@ function TarjetaViaje({
   // Se permiten nombres alternativos para los handlers para facilitar la reutilización.
   const handleSumarse = onSumarse || onAgregar;
   const handleVerMas = onVerMas || onOpciones;
+  const avatarLabel = `Ver perfil de ${nombreMostrar}`;
 
   return (
     <article className="tarjeta-viaje">
       <div className="tarjeta-viaje__contenido">
-        <div className="tarjeta-viaje__avatar" aria-hidden="true">
-          {inicial}
-        </div>
+        <AvatarInteractivo
+          nombre={nombreMostrar}
+          apellido={apellido || sigla}
+          avatar={avatar}
+          onClick={onVerPerfil}
+          ariaLabel={onVerPerfil ? avatarLabel : undefined}
+          className="tarjeta-viaje__avatar"
+        />
         <div className="tarjeta-viaje__texto">
           <span className="tarjeta-viaje__nombre">{nombreMostrar}</span>
           <div className="tarjeta-viaje__fila-principal">
