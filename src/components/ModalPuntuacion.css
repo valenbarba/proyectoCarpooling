@@ -172,13 +172,25 @@
   border-radius: 50%;
   border: none;
   cursor: pointer;
-  background: transparent;
-  color: #C53678;
-  transition: transform 0.2s ease;
+  background: #f4f6fb;
+  color: #cbd5e1;
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.35);
+  transition: transform 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
+    background 0.2s ease, filter 0.2s ease;
 }
 
 .modal-puntuacion__estrella-boton:hover {
-  transform: scale(1.05);
+  transform: scale(1.08);
+  box-shadow: inset 0 0 0 1px rgba(148, 163, 184, 0.45),
+    0 6px 12px rgba(0, 0, 0, 0.08);
+}
+
+.modal-puntuacion__estrella-boton.modal-viaje__estrella--activa {
+  background: radial-gradient(circle at 50% 40%, #ffd166 0%, #ff8a5c 70%, #ff6b6b 100%);
+  color: #ffffff;
+  box-shadow: 0 10px 18px rgba(255, 107, 107, 0.3),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.55);
+  transform: translateY(-2px) scale(1.04);
 }
 
 .modal-puntuacion__valor {
