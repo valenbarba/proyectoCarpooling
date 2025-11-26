@@ -124,7 +124,7 @@ const PASAJEROS = {
     id: "pas-elena",
     nombre: "Elena",
     apellido: "Martínez",
-    avatar: "https://i.pravatar.cc/120?img=16",
+    avatar: "https://i.pravatar.cc/120?img=20",
     barrio: "Haras Santa María",
     lote: "1042",
     telefono: "+54 9 11 4332-9090",
