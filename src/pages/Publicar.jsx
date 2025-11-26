@@ -28,9 +28,9 @@ function Publicar() {
   const [modoViaje, setModoViaje] = useState("hacia");
   const [lugar, setLugar] = useState(null); // Lugar seleccionado en el autocomplete.
   const [fecha, setFecha] = useState("");
+  const [comentario, setComentario] = useState("");
   const [hora, setHora] = useState("");
   const [asientos, setAsientos] = useState("");
-  const [precioPorAsiento, setPrecio] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
 
@@ -57,10 +57,6 @@ function Publicar() {
       return "No podés publicar un viaje en el pasado.";
     }
 
-    if (!precioPorAsiento) {
-      return "Indicá el precio por asiento.";
-    }
-
     if (!lugarBarrioUsuario) {
       return "No se encontró la información de tu barrio. Iniciá sesión nuevamente.";
     }
@@ -73,86 +69,21 @@ function Publicar() {
     setFecha("");
     setHora("");
     setAsientos("");
-    setPrecio("");
   };
 
-  // Maneja el envío del formulario; envía los datos al backend una vez validados.
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Maneja el envío del formulario; enviaria los datos al backend una vez validados.
+ const handleSubmit = (e) => {
+  e.preventDefault();
 
-    const mensajeError = validarFormulario();
-    if (mensajeError) {
-      setError(mensajeError);
-      setSuccess("");
-      return;
-    }
+  setError("");
+  setSuccess("¡Viaje Publicado!");
+  limpiarCampos();
 
-    const email = localStorage.getItem("email");
-    if (!email) {
-      setError("No se encontró el usuario autenticado. Iniciá sesión nuevamente.");
-      setSuccess("");
-      return;
-    }
+  setTimeout(() => {
+    setSuccess("");
+  }, 3000);
+};
 
-    const url = process.env.REACT_APP_API_URL;
-
-    const lugarSeleccionado = {
-      id: lugar.place_id,
-      nombre: lugar.name || lugar.formatted_address,
-      direccionCompleta: lugar.formatted_address,
-      ciudad:
-        lugar.address_components?.find((c) => c.types.includes("locality"))?.long_name || "",
-      provincia:
-        lugar.address_components?.find((c) =>
-          c.types.includes("administrative_area_level_1")
-        )?.long_name || "",
-      latitud: lugar.geometry.location.lat(),
-      longitud: lugar.geometry.location.lng(),
-    };
-
-    const origen = modoViaje === "desde" ? lugarBarrioUsuario : lugarSeleccionado;
-    const destino = modoViaje === "hacia" ? lugarBarrioUsuario : lugarSeleccionado;
-
-    const fechaHora = new Date(`${fecha}T${hora}`);
-    const viaje = {
-      origen,
-      destino,
-      fechaOcurrencia: fechaHora.toISOString(),
-      asientosDisponibles: Number(asientos),
-      precioPorAsiento: Number(precioPorAsiento),
-    };
-
-    try {
-      const response = await fetch(`${url}/viajes`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "user-email": email,
-        },
-        body: JSON.stringify(viaje),
-      });
-
-      if (!response.ok) {
-        const errorText = await response.text();
-        throw new Error(errorText || "No se pudo publicar el viaje.");
-      }
-
-      setError("");
-      setSuccess("¡Viaje publicado!");
-      limpiarCampos();
-
-      setTimeout(() => {
-        setSuccess("");
-      }, 3000);
-    } catch (err) {
-      if (err.message === "Failed to fetch" || err.message.includes("NetworkError")) {
-        setError("No se pudo conectar con el servidor. Intente nuevamente más tarde.");
-      } else {
-        setError(err.message || "Ocurrió un error inesperado.");
-      }
-      setSuccess("");
-    }
-  };
 
   return (
     <FormContainer titulo="Publicar un viaje">
@@ -237,6 +168,18 @@ function Publicar() {
                 value={hora}
                 onChange={(e) => {
                   setHora(e.target.value);
+                  setError("");
+                }}
+              />
+            </div>
+
+            <div className="campo-comentario">
+              <Input
+                type="text"
+                label="Comentarios adicionales"
+                value={comentario}
+                onChange={(e) => {
+                  setComentario(e.target.value);
                   setError("");
                 }}
               />
