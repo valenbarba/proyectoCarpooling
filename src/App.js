@@ -292,7 +292,6 @@ const VIAJES_DISPONIBLES_BASE = [
     conductorId: "anaSuarez",
     destino: "Plaza Italia",
     fecha: "8 de Diciembre · 17:00 hrs",
-    precio: "$1800 / asiento",
     comentario: "Nos encontramos en el lote 1260 a las 16:45 en punto.",
     rating: 4.6,
     reviewsCount: 18,
@@ -301,12 +300,28 @@ const VIAJES_DISPONIBLES_BASE = [
     id: "disp-3",
     conductorId: "valentinaRuiz",
     destino: "Escobar centro",
-    fecha: "6 de Diciembre · 9:00",
-    precio: "$1500 / asiento",
+    fecha: "6 de Diciembre · 9:00 hrs",
     comentario: "Puedo pasar por el Club House si les queda cómodo.",
-    rating: 5,
+    rating: 3,
     reviewsCount: 32,
   },
+  {
+    id: "disp-4",
+    conductorId: "martinFernandez",
+    destino: "Champagnat Shopping",
+    fecha: "2 de Diciembre · 17:00 hrs",
+    rating: 4,
+    reviewsCount: 20,
+  },
+  {
+    id: "disp-5",
+    conductorId: "elenaMartinez",
+    destino: "McDonalds Ruta 25",
+    fecha: "1 de Diciembre · 15:00 hrs",
+    rating: 5,
+    reviewsCount: 4,
+  }
+
 ];
 
 const VIAJES_PROPIOS_BASE = [
