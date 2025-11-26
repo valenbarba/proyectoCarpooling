@@ -24,6 +24,7 @@ function Home({
   const [viajeSeleccionado, setViajeSeleccionado] = useState(null);
   const [mostrarTrayectos, setMostrarTrayectos] = useState(viajesDisponibles.length > 0);
   const [seRealizoBusqueda, setSeRealizoBusqueda] = useState(false);
+  const [viajesFiltrados, setViajesFiltrados] = useState(viajesDisponibles);
   const resultadosRef = useRef(null);
   const buscadorContentId = useId();
   const [viajeAConfirmar, setViajeAConfirmar] = useState(null);
@@ -33,6 +34,7 @@ function Home({
     if (viajesDisponibles.length > 0) {
       setMostrarTrayectos(true);
     }
+    setViajesFiltrados(viajesDisponibles);
   }, [viajesDisponibles]);
 
   useEffect(() => {
@@ -45,6 +47,12 @@ function Home({
     e.preventDefault();
     setSeRealizoBusqueda(true);
     setMostrarTrayectos(true);
+
+    const idsPermitidos = ["disp-1", "disp-4", "disp-5"];
+    const viajesFiltradosPorBusqueda = viajesDisponibles.filter((viaje) =>
+      idsPermitidos.includes(viaje.id)
+    );
+    setViajesFiltrados(viajesFiltradosPorBusqueda);
 
     // Se envían los filtros seleccionados para que el componente padre pueda consultar al backend.
     onBuscarViajes?.({ modo: modoViaje, lugarSeleccionado: lugar });
@@ -164,8 +172,8 @@ function Home({
       </LoadScript>
 
       <section ref={resultadosRef} className="seccion-trayectos">
-        {mostrarTrayectos && viajesDisponibles.length > 0 &&
-          viajesDisponibles.map((viaje) => (
+        {mostrarTrayectos && viajesFiltrados.length > 0 &&
+          viajesFiltrados.map((viaje) => (
             <TarjetaViaje
               key={viaje.id}
               sigla={viaje.sigla}
@@ -181,7 +189,7 @@ function Home({
             />
           ))}
 
-        {mostrarTrayectos && viajesDisponibles.length === 0 && seRealizoBusqueda && (
+        {mostrarTrayectos && viajesFiltrados.length === 0 && seRealizoBusqueda && (
           <p className="seccion-trayectos__mensaje-vacio">
             No encontramos viajes con los filtros seleccionados. Probá con otros criterios.
           </p>
