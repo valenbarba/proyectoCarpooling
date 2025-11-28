@@ -8,6 +8,7 @@ import ModalViaje from "../components/ModalViaje";
 import ModalConfirmacion from "../components/ModalConfirmacion";
 import { FaSearch, FaChevronDown } from "react-icons/fa";
 import "./Home.css";
+import ErrorMessage from "../components/ErrorMessage";
 
 function Home({
   nombreBarrio,
@@ -28,6 +29,8 @@ function Home({
   const resultadosRef = useRef(null);
   const buscadorContentId = useId();
   const [viajeAConfirmar, setViajeAConfirmar] = useState(null);
+  const [errorBusqueda, setErrorBusqueda] = useState("");
+
 
   useEffect(() => {
     // Al recibir nuevos viajes (por ejemplo, desde el backend) se muestran automáticamente.
@@ -37,14 +40,16 @@ function Home({
     setViajesFiltrados(viajesDisponibles);
   }, [viajesDisponibles]);
 
-  useEffect(() => {
-    if (mostrarTrayectos && resultadosRef.current) {
-      resultadosRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  }, [mostrarTrayectos]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    if (!lugar) {
+    setErrorBusqueda("Por favor ingresá una dirección para buscar.");
+    return;
+    }
+
+    setErrorBusqueda("");
     setSeRealizoBusqueda(true);
     setMostrarTrayectos(true);
 
@@ -56,6 +61,10 @@ function Home({
 
     // Se envían los filtros seleccionados para que el componente padre pueda consultar al backend.
     onBuscarViajes?.({ modo: modoViaje, lugarSeleccionado: lugar });
+
+    if (resultadosRef.current) {
+    resultadosRef.current.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   const toggleBuscador = () => {
@@ -162,13 +171,16 @@ function Home({
                   </div>
                 </div>
 
-                <Button type="submit" className="botonBuscar" onClick={setMostrarTrayectos}>
+                <Button type="submit" className="botonBuscar">
                   Buscar
                 </Button>
               </div>
             )}
           </div>
         </form>
+
+        <ErrorMessage message={errorBusqueda} />
+
       </LoadScript>
 
       <section ref={resultadosRef} className="seccion-trayectos">

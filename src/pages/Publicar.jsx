@@ -40,8 +40,10 @@ function Publicar() {
   }, []);
 
   const validarFormulario = () => {
+
+   
     if (!lugar) {
-      return "Por favor ingresá una dirección.";
+      return"Por favor ingresá una dirección.";
     }
 
     if (!asientos) {
@@ -57,9 +59,6 @@ function Publicar() {
       return "No podés publicar un viaje en el pasado.";
     }
 
-    if (!lugarBarrioUsuario) {
-      return "No se encontró la información de tu barrio. Iniciá sesión nuevamente.";
-    }
 
     return null;
   };
@@ -75,6 +74,14 @@ function Publicar() {
  const handleSubmit = (e) => {
   e.preventDefault();
 
+  const errorValidacion = validarFormulario();
+  
+  if (errorValidacion) {
+    setError(errorValidacion);
+    setSuccess(""); // por si quedó un success previo
+    return; // detenemos acá
+  }
+  
   setError("");
   setSuccess("¡Viaje Publicado!");
   limpiarCampos();
