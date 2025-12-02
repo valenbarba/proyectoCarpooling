@@ -79,7 +79,7 @@ function TarjetaMiViaje({
   const acciones = [];
 
   if (esPropio && estado === "pendiente") {
-    acciones.push({ id: "editar-viaje", etiqueta: "Editar viaje" });
+    
     acciones.push({
       id: "ver-pasajeros",
       etiqueta: "Ver pasajeros",
